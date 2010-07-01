@@ -33,8 +33,14 @@ public class StaxGraphWriter implements GraphWriter {
 		writer.writeAttribute("version", "1.1");
 		writer.writeAttribute("xmlns", "http://www.gexf.net/1.1draft");
 
+		writer.writeStartElement("graph");
+		writer.writeAttribute("defaultedgetype", graph.getDefaultEdgeType().toString().toLowerCase());
+		writer.writeAttribute("mode", graph.getMode().toString().toLowerCase());
+		
 		writeAllNodes(writer, graph);
 		writeAllEdges(writer, graph);
+		
+		writer.writeEndElement();
 		
 		writer.writeEndElement();
 	}
