@@ -31,7 +31,7 @@ public abstract class GraphWriterTest {
 		
 		GraphWriter gw = newInstance();
 		
-		File f = new File(getFilename());
+		File f = new File("target/" + getFilename());
 		FileOutputStream fos = new FileOutputStream(f);
 		
 		gw.write(g, fos);
