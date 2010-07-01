@@ -29,7 +29,7 @@ public abstract class GraphWriterTest {
 		g.addNode(n2);
 		g.addNode(n3);
 		
-		GraphWriter gw = new DOMGraphWriter();
+		GraphWriter gw = newInstance();
 		
 		File f = new File(getFilename());
 		FileOutputStream fos = new FileOutputStream(f);
