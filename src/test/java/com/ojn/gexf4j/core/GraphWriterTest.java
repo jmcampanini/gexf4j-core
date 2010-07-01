@@ -6,13 +6,11 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import com.ojn.gexf4j.core.Edge;
-import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.GraphWriter;
-import com.ojn.gexf4j.core.Node;
+public abstract class GraphWriterTest {
 
-public class GraphWriterTest {
-
+	protected abstract GraphWriter newInstance();
+	protected abstract String getFilename();
+	
 	@Test
 	public void useCase() throws IOException {
 		Graph g = new Graph();
@@ -31,9 +29,9 @@ public class GraphWriterTest {
 		g.addNode(n2);
 		g.addNode(n3);
 		
-		GraphWriter gw = new GraphWriter();
+		GraphWriter gw = new DOMGraphWriter();
 		
-		File f = new File("textout.gexf");
+		File f = new File(getFilename());
 		FileOutputStream fos = new FileOutputStream(f);
 		
 		gw.write(g, fos);
