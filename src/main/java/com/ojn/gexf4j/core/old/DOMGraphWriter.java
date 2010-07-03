@@ -1,4 +1,4 @@
-package com.ojn.gexf4j.core;
+package com.ojn.gexf4j.core.old;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -9,10 +9,12 @@ import org.apache.xml.serialize.XMLSerializer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.ojn.gexf4j.core.GraphWriter;
+
 public class DOMGraphWriter implements GraphWriter {
 
 	@Override
-	public void write(Graph graph, OutputStream out) throws IOException {
+	public void writeToStream(GraphImpl graph, OutputStream out) throws IOException {
 		Document doc = new DocumentImpl();
 		
 		Element root = doc.createElement("gexf");
@@ -34,13 +36,13 @@ public class DOMGraphWriter implements GraphWriter {
 		Element nodeElement = null;
 		Element edgeElement = null;
 		
-		for (Node node : graph.getNodes().values()) {
+		for (NodeImpl node : graph.getNodes().values()) {
 			nodeElement = doc.createElement("node");
 			nodeElement.setAttribute("id", node.getId());
 			nodeElement.setAttribute("label", node.getLabel());
 			nodeParent.appendChild(nodeElement);
 			
-			for (Edge edge : node.getEdges()) {
+			for (EdgeImpl edge : node.getEdges()) {
 				edgeElement = doc.createElement("edge");
 				edgeElement.setAttribute("id", edge.getId());
 				edgeElement.setAttribute("label", edge.getLabel());

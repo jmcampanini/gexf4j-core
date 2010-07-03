@@ -5,4 +5,5 @@ public enum EdgeType {
 	Directed,
 	Undirected,
 	Mutual,
+	NotSet,
 }

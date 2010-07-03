@@ -1,4 +1,4 @@
-package com.ojn.gexf4j.core;
+package com.ojn.gexf4j.core.old;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,17 +15,19 @@ import javax.xml.validation.Validator;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import com.ojn.gexf4j.core.GraphWriter;
+
 public abstract class GraphWriterTest {
 
 	protected abstract GraphWriter newInstance();
 	protected abstract String getFilename();
 	
-	protected Graph generateGraph() {
-		Graph g = new Graph();
+	protected GraphImpl generateGraph() {
+		GraphImpl g = new GraphImpl();
 		
-		Node n1 = g.createNode();
-		Node n2 = g.createNode();
-		Node n3 = g.createNode();
+		NodeImpl n1 = g.createNode();
+		NodeImpl n2 = g.createNode();
+		NodeImpl n3 = g.createNode();
 
 		n1.connectTo(n2);
 		n2.connectTo(n3);

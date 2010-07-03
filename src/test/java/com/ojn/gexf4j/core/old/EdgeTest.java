@@ -1,4 +1,4 @@
-package com.ojn.gexf4j.core;
+package com.ojn.gexf4j.core.old;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -8,72 +8,74 @@ import java.util.UUID;
 
 import org.junit.Test;
 
+import com.ojn.gexf4j.core.EdgeType;
+
 public class EdgeTest {
 
 	@Test
 	public void construtorValid() {
-		new Edge(new Node(), new Node());
-		new Edge(UUID.randomUUID().toString(), new Node(), new Node());
+		new EdgeImpl(new NodeImpl(), new NodeImpl());
+		new EdgeImpl(UUID.randomUUID().toString(), new NodeImpl(), new NodeImpl());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void construtorSourceNull() {
-		new Edge(null, new Node());
+		new EdgeImpl(null, new NodeImpl());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void construtorTargetNull() {
-		new Edge(new Node(), null);
+		new EdgeImpl(new NodeImpl(), null);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void construtorIdNull() {
-		new Edge(null, new Node(), new Node());
+		new EdgeImpl(null, new NodeImpl(), new NodeImpl());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void construtorIdBlank() {
-		new Edge("", new Node(), new Node());
+		new EdgeImpl("", new NodeImpl(), new NodeImpl());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void construtorIdSourceNull() {
-		new Edge(UUID.randomUUID().toString(), null, new Node());
+		new EdgeImpl(UUID.randomUUID().toString(), null, new NodeImpl());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void construtorIdTargetNull() {
-		new Edge(UUID.randomUUID().toString(), new Node(), null);
+		new EdgeImpl(UUID.randomUUID().toString(), new NodeImpl(), null);
 	}
 	
 	@Test
 	public void getSource() {
-		Node n1 = new Node();
-		Node n2 = new Node();
-		Edge e1 = new Edge(n1, n2);
+		NodeImpl n1 = new NodeImpl();
+		NodeImpl n2 = new NodeImpl();
+		EdgeImpl e1 = new EdgeImpl(n1, n2);
 		assertThat(e1.getSource(), is(equalTo(n1)));
 	}
 	
 	@Test
 	public void setTarget() {
-		Node n1 = new Node();
-		Node n2 = new Node();
-		Node n3 = new Node();
+		NodeImpl n1 = new NodeImpl();
+		NodeImpl n2 = new NodeImpl();
+		NodeImpl n3 = new NodeImpl();
 		
-		Edge e1 = new Edge(n1, n2);
+		EdgeImpl e1 = new EdgeImpl(n1, n2);
 		e1.setTarget(n3);
 		assertThat(e1.getTarget(), is(equalTo(n3)));
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void setTargetNull() {
-		Edge e = new Edge(new Node(), new Node());
+		EdgeImpl e = new EdgeImpl(new NodeImpl(), new NodeImpl());
 		e.setTarget(null);
 	}
 	
 	@Test
 	public void setLabel() {
-		Edge e = new Edge(new Node(), new Node());
+		EdgeImpl e = new EdgeImpl(new NodeImpl(), new NodeImpl());
 		String label = UUID.randomUUID().toString();
 		e.setLabel(label);
 		assertThat(e.getLabel(), is(equalTo(label)));
@@ -81,13 +83,13 @@ public class EdgeTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void setLabelNull() {
-		Edge e = new Edge(new Node(), new Node());
+		EdgeImpl e = new EdgeImpl(new NodeImpl(), new NodeImpl());
 		e.setLabel(null);
 	}
 	
 	@Test
 	public void setWeight() {
-		Edge e = new Edge(new Node(), new Node());
+		EdgeImpl e = new EdgeImpl(new NodeImpl(), new NodeImpl());
 		Random rnd = new Random();
 		float weight = rnd.nextFloat();
 		
@@ -97,7 +99,7 @@ public class EdgeTest {
 	
 	@Test
 	public void setEdgeType() {
-		Edge e = new Edge(new Node(), new Node());
+		EdgeImpl e = new EdgeImpl(new NodeImpl(), new NodeImpl());
 		
 		for (EdgeType type : EdgeType.values()) {
 			e.setType(type);

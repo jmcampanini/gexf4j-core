@@ -1,4 +1,4 @@
-package com.ojn.gexf4j.core;
+package com.ojn.gexf4j.core.old;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -7,28 +7,29 @@ import java.util.UUID;
 
 import org.junit.Test;
 
+
 public class NodeTest {
 
 	@Test(expected=IllegalArgumentException.class)
 	public void constructorIdBlank() {
-		new Node("");
+		new NodeImpl("");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void constructorIdNull() {
-		new Node(null);
+		new NodeImpl(null);
 	}
 	
 	@Test
 	public void constructorIdValid() {
 		String id = UUID.randomUUID().toString();
-		Node n = new Node(id);
+		NodeImpl n = new NodeImpl(id);
 		assertThat(n.getId(), is(equalTo(id)));
 	}
 	
 	@Test
 	public void getLabel() {
-		Node n = new Node();
+		NodeImpl n = new NodeImpl();
 		String label = UUID.randomUUID().toString();
 		n.setLabel(label);
 		assertThat(n.getLabel(), is(equalTo(label)));
@@ -36,25 +37,25 @@ public class NodeTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void setLabelNull() {
-		Node n = new Node();
+		NodeImpl n = new NodeImpl();
 		n.setLabel(null);
 	}
 	
 	@Test
 	public void getEdges() {
-		Node n = new Node();
+		NodeImpl n = new NodeImpl();
 		assertThat(n.getEdges(), is(notNullValue()));
 	}
 	
 	@Test
 	public void connectToValid() {
-		Node n = new Node();
-		Node n2 = new Node();
-		Node n3 = new Node();
+		NodeImpl n = new NodeImpl();
+		NodeImpl n2 = new NodeImpl();
+		NodeImpl n3 = new NodeImpl();
 		String id = UUID.randomUUID().toString();
 		
-		Edge e1 = n.connectTo(n2);
-		Edge e2 = n.connectTo(id, n3);
+		EdgeImpl e1 = n.connectTo(n2);
+		EdgeImpl e2 = n.connectTo(id, n3);
 		
 		assertThat(n.getEdges().size(), is(equalTo(2)));
 		assertThat(n.getEdges().contains(e1), is(true));
@@ -68,28 +69,28 @@ public class NodeTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void connectToIdTargetNull() {
-		Node n = new Node();
+		NodeImpl n = new NodeImpl();
 		n.connectTo(null);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void connectToTargetNull() {
-		Node n = new Node();
+		NodeImpl n = new NodeImpl();
 		n.connectTo(UUID.randomUUID().toString(), null);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void connectToIdNull() {
-		Node n = new Node();
-		n.connectTo(null, new Node());
+		NodeImpl n = new NodeImpl();
+		n.connectTo(null, new NodeImpl());
 	}
 	
 	@Test
 	public void hasEdgeTo() {
-		Graph g = new Graph();
-		Node n1 = g.createNode();
-		Node n2 = g.createNode();
-		Node n3 = g.createNode();
+		GraphImpl g = new GraphImpl();
+		NodeImpl n1 = g.createNode();
+		NodeImpl n2 = g.createNode();
+		NodeImpl n3 = g.createNode();
 		n1.connectTo(n2);
 		
 		assertThat(n1.hasEdgeTo(n2.getId()), is(true));

@@ -1,4 +1,4 @@
-package com.ojn.gexf4j.core;
+package com.ojn.gexf4j.core.old;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -7,16 +7,18 @@ import java.util.UUID;
 
 import org.junit.Test;
 
+import com.ojn.gexf4j.core.EdgeType;
+
 public class GraphTest {
 
 	@Test
 	public void constructorValid() {
-		new Graph();
+		new GraphImpl();
 	}
 	
 	@Test
 	public void setDefaultEdgeType() {
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		for (EdgeType edgeType : EdgeType.values()) {
 			g.setDefaultEdgeType(edgeType);
 			assertThat(g.getDefaultEdgeType(), is(equalTo(edgeType)));
@@ -25,26 +27,26 @@ public class GraphTest {
 	
 	@Test
 	public void getNodes() {
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		assertThat(g.getNodes(), is(notNullValue()));
 	}
 	
 	@Test
 	public void getMode() {
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		assertThat(g.getMode(), is(notNullValue()));
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void hasNodeByIdNull() {
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		g.hasNodeById(null);
 	}
 	
 	@Test
 	public void hasNodeById() {
 		String id = UUID.randomUUID().toString();
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		g.createNode(id);
 		
 		assertThat(g.hasNodeById(id), is(true));
@@ -52,16 +54,16 @@ public class GraphTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void getNodeByIdNull() {
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		g.getNodeById(null);
 	}
 	
 	@Test
 	public void getNodeById() {
 		String id = UUID.randomUUID().toString();
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		g.createNode(id);
-		Node nfound = g.getNodeById(id);
+		NodeImpl nfound = g.getNodeById(id);
 		
 		assertThat(nfound, is(notNullValue()));
 		assertThat(nfound.getId(), is(equalTo(id)));
@@ -69,23 +71,23 @@ public class GraphTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void addNodeIdNull() {
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		String id = null;
 		g.createNode(id);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void addNodeIdBlank() {
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		g.createNode("");
 	}
 	
 	@Test
 	public void addNodeValid() {
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		String id = UUID.randomUUID().toString();
-		Node n1 = g.createNode(id);
-		Node n2 = g.createNode();
+		NodeImpl n1 = g.createNode(id);
+		NodeImpl n2 = g.createNode();
 		
 		assertThat(n1.getId(), is(equalTo(id)));
 		assertThat(g.hasNodeById(n2.getId()), is(equalTo(true)));
@@ -93,7 +95,7 @@ public class GraphTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void addNodeDuplicateId() {
-		Graph g = new Graph();
+		GraphImpl g = new GraphImpl();
 		String id = UUID.randomUUID().toString();
 		g.createNode(id);
 		g.createNode(id);

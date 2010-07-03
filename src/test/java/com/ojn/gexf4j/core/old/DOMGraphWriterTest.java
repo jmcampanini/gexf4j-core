@@ -1,4 +1,6 @@
-package com.ojn.gexf4j.core;
+package com.ojn.gexf4j.core.old;
+
+import com.ojn.gexf4j.core.GraphWriter;
 
 public class DOMGraphWriterTest extends GraphWriterTest {
 
