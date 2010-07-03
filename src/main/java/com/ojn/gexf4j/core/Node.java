@@ -62,4 +62,13 @@ public class Node {
 		edges.add(rv);
 		return rv;
 	}
+	
+	public boolean hasEdgeTo(String nodeId) {
+		for (Edge e : edges) {
+			if (e.getTarget().getId().equals(nodeId)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

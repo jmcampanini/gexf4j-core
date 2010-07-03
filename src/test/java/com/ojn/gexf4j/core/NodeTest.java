@@ -83,4 +83,16 @@ public class NodeTest {
 		Node n = new Node();
 		n.connectTo(null, new Node());
 	}
+	
+	@Test
+	public void hasEdgeTo() {
+		Graph g = new Graph();
+		Node n1 = g.createNode();
+		Node n2 = g.createNode();
+		Node n3 = g.createNode();
+		n1.connectTo(n2);
+		
+		assertThat(n1.hasEdgeTo(n2.getId()), is(true));
+		assertThat(n1.hasEdgeTo(n3.getId()), is(false));
+	}
 }
