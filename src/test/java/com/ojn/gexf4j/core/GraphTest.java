@@ -44,9 +44,8 @@ public class GraphTest {
 	@Test
 	public void hasNodeById() {
 		String id = UUID.randomUUID().toString();
-		Node n = new Node(id);
 		Graph g = new Graph();
-		g.addNode(n);
+		g.createNode(id);
 		
 		assertThat(g.hasNodeById(id), is(true));
 	}
@@ -60,9 +59,8 @@ public class GraphTest {
 	@Test
 	public void getNodeById() {
 		String id = UUID.randomUUID().toString();
-		Node n = new Node(id);
 		Graph g = new Graph();
-		g.addNode(n);
+		g.createNode(id);
 		Node nfound = g.getNodeById(id);
 		
 		assertThat(nfound, is(notNullValue()));
@@ -70,54 +68,34 @@ public class GraphTest {
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
-	public void addNodeNull() {
-		Graph g = new Graph();
-		Node n = null;
-		g.addNode(n);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
 	public void addNodeIdNull() {
 		Graph g = new Graph();
 		String id = null;
-		g.addNode(id);
+		g.createNode(id);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void addNodeIdBlank() {
 		Graph g = new Graph();
-		g.addNode("");
+		g.createNode("");
 	}
 	
 	@Test
 	public void addNodeValid() {
 		Graph g = new Graph();
 		String id = UUID.randomUUID().toString();
-		Node n1 = g.addNode(id);
-		Node n2 = new Node();
-		
-		g.addNode(n2);
+		Node n1 = g.createNode(id);
+		Node n2 = g.createNode();
 		
 		assertThat(n1.getId(), is(equalTo(id)));
 		assertThat(g.hasNodeById(n2.getId()), is(equalTo(true)));
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
-	public void addNodeDuplicateNode() {
-		Graph g = new Graph();
-		String id = UUID.randomUUID().toString();
-		Node n1 = new Node(id);
-		Node n2 = new Node(id);
-		
-		g.addNode(n1);
-		g.addNode(n2);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
 	public void addNodeDuplicateId() {
 		Graph g = new Graph();
 		String id = UUID.randomUUID().toString();
-		g.addNode(id);
-		g.addNode(id);
+		g.createNode(id);
+		g.createNode(id);
 	}
 }

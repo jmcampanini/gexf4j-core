@@ -10,11 +10,11 @@ public class Node {
 	private String label = "";
 	private List<Edge> edges = new ArrayList<Edge>();
 	
-	public Node() {
+	Node() {
 		this(UUID.randomUUID().toString());
 	}
 	
-	public Node(String id) {
+	Node(String id) {
 		if (id == null) {
 			throw new IllegalArgumentException("Label cannot be null.");
 		} else if (id.trim() == "") {

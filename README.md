@@ -1,30 +1,25 @@
 gexf4j-core - java library for the .gexf file format
 =================
 
-sample code. more to come:
+Version 0.01
+------------------
+The API *WILL* change
+
+Sample Code
+-----------------
 
 	// create a graph and 3 nodes
 	Graph g = new Graph();
-	Node n1 = new Node();
-	Node n2 = new Node();
-	Node n3 = new Node();
+	Node n1 = g.createNode();
+	Node n2 = g.createNode();
+	Node n3 = g.createNode();
 
-	// create 2 edges and add them manually
-	Edge e1 = new Edge(n1, n2);
-	Edge e2 = new Edge(n2, n3);
-	n1.getEdges().add(e1);
-	n2.getEdges().add(e2);
-
-	// connect n3 to n1
-	n3.connectTo(n1);
-
-	// add all 3 nodes to the graph
-	g.addNode(n1);
-	g.addNode(n2);
-	g.addNode(n3);
+	// connect the nodes
+	n1.connectTo(n2);
+	n2.connectTo(n3);
 
 	// create a graphWriter and file output stream
-	GraphWriter gw = new GraphWriter();
+	GraphWriter gw = new StaxGraphWriter();
 	File f = new File("textout.gexf");
 	FileOutputStream fos = new FileOutputStream(f);
 

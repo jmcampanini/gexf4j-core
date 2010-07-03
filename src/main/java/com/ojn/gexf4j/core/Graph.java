@@ -2,6 +2,7 @@ package com.ojn.gexf4j.core;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class Graph {
 
@@ -25,17 +26,11 @@ public class Graph {
 		return nodeMap;
 	}
 
-	public Node addNode(Node node) {
-		if (node == null) {
-			throw new IllegalArgumentException("Node cannot be null.");
-		} else if (nodeMap.containsKey(node.getId())) {
-			throw new IllegalArgumentException("Node already exists.");
-		}
-		nodeMap.put(node.getId(), node);
-		return node;
+	public Node createNode() {
+		return createNode(UUID.randomUUID().toString());
 	}
 	
-	public Node addNode(String id) {
+	public Node createNode(String id) {
 		if (id == null) {
 			throw new IllegalArgumentException("ID cannot be null.");
 		} else if (id.trim() == "") {

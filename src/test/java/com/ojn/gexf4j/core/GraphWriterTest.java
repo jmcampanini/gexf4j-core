@@ -23,19 +23,12 @@ public abstract class GraphWriterTest {
 	protected Graph generateGraph() {
 		Graph g = new Graph();
 		
-		Node n1 = new Node();
-		Node n2 = new Node();
-		Node n3 = new Node();
+		Node n1 = g.createNode();
+		Node n2 = g.createNode();
+		Node n3 = g.createNode();
 
-		Edge e1 = new Edge(n1, n2);
-		Edge e2 = new Edge(n2, n3);
-		
-		n1.getEdges().add(e1);
-		n2.getEdges().add(e2);
-		
-		g.addNode(n1);
-		g.addNode(n2);
-		g.addNode(n3);
+		n1.connectTo(n2);
+		n2.connectTo(n3);
 		
 		return g;
 	}
