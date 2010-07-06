@@ -1,12 +1,20 @@
 gexf4j-core - java library for the .gexf file format
 =================
 
-Version 0.01
+Version 0.02
 ------------------
 The API *WILL* change
 
+Roadmap (subject to change!)
+------------------
+1. First release of gexf4j
+2. Streaming Graph Writer (using StAX)
+3. Data Support & Implementations
+4. Dynamic Support
+5. neo4j Support
+
 Sample Code
------------------
+------------------
 
 	// create a graph and 3 nodes
 	Graph g = new Graph();

@@ -1,16 +1,19 @@
-package com.ojn.gexf4j.core.old;
+package com.ojn.gexf4j.core.impl;
 
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.xml.stream.*;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 
+import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.GraphWriter;
 
 public class StaxGraphWriter implements GraphWriter {
 
 	@Override
-	public void writeToStream(GraphImpl graph, OutputStream out) throws IOException {
+	public void writeToStream(Graph graph, OutputStream out) throws IOException {
 		XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 		
 		try {
@@ -18,7 +21,7 @@ public class StaxGraphWriter implements GraphWriter {
 			
 			writer.writeStartDocument("1.0");
 			
-			writeGraph(writer, graph);
+			// writeGraph(writer, graph);
 			
 			writer.writeEndDocument();
 			
@@ -30,7 +33,8 @@ public class StaxGraphWriter implements GraphWriter {
 		}
 	}
 	
-	private void writeGraph(XMLStreamWriter writer, GraphImpl graph) throws XMLStreamException {
+	/*
+	private void writeGraph(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
 		writer.writeStartElement("gexf");
 		writer.writeAttribute("version", "1.1");
 		writer.writeAttribute("xmlns", "http://www.gexf.net/1.1draft");
@@ -47,7 +51,7 @@ public class StaxGraphWriter implements GraphWriter {
 		writer.writeEndElement();
 	}
 	
-	private void writeAllNodes(XMLStreamWriter writer, GraphImpl graph) throws XMLStreamException {
+	private void writeAllNodes(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
 		writer.writeStartElement("nodes");
 		
 		for (NodeImpl n : graph.getNodes().values()) {
@@ -57,7 +61,7 @@ public class StaxGraphWriter implements GraphWriter {
 		writer.writeEndElement();
 	}
 	
-	private void writeNode(XMLStreamWriter writer, NodeImpl node) throws XMLStreamException {
+	private void writeNode(XMLStreamWriter writer, Node node) throws XMLStreamException {
 		writer.writeStartElement("node");
 		
 		writer.writeAttribute("id", node.getId());
@@ -66,7 +70,7 @@ public class StaxGraphWriter implements GraphWriter {
 		writer.writeEndElement();
 	}
 	
-	private void writeAllEdges(XMLStreamWriter writer, GraphImpl graph) throws XMLStreamException {
+	private void writeAllEdges(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
 		writer.writeStartElement("edges");
 		
 		for (NodeImpl n : graph.getNodes().values()) {
@@ -78,7 +82,7 @@ public class StaxGraphWriter implements GraphWriter {
 		writer.writeEndElement();
 	}
 	
-	private void writeEdge(XMLStreamWriter writer, EdgeImpl edge) throws XMLStreamException {
+	private void writeEdge(XMLStreamWriter writer, Edge edge) throws XMLStreamException {
 		writer.writeStartElement("edge");
 		
 		writer.writeAttribute("id", edge.getId());
@@ -90,4 +94,5 @@ public class StaxGraphWriter implements GraphWriter {
 		
 		writer.writeEndElement();
 	}
+	*/
 }

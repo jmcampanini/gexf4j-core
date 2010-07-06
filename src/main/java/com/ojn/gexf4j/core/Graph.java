@@ -3,10 +3,10 @@ package com.ojn.gexf4j.core;
 import java.util.List;
 import java.util.Map;
 
+import com.ojn.gexf4j.core.data.Attribute;
+
 public interface Graph {
 
-	Map<String, Node> getNodeMap();
-	
 	EdgeType getDefaultEdgeType();
 	void setDefaultEdgeType(EdgeType edgeType);
 	
@@ -17,4 +17,5 @@ public interface Graph {
 	Node createNode(String id);
 	
 	List<Attribute> getAttributes();
+	Map<String, Node> getNodeMap();
 }
