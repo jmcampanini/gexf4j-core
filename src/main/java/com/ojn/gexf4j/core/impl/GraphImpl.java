@@ -16,11 +16,11 @@ public class GraphImpl implements Graph {
 
 	private EdgeType defaultEdgeType = EdgeType.Directed;
 	private GraphMode graphMode = GraphMode.Static;
-	private List<Attribute> attributes = new ArrayList<Attribute>();
+	private List<Attribute<? extends Object>> attributes = new ArrayList<Attribute<? extends Object>>();
 	private Map<String, Node> nodeMap = new HashMap<String, Node>();
 	
 	@Override
-	public List<Attribute> getAttributes() {
+	public List<Attribute<? extends Object>> getAttributes() {
 		return attributes;
 	}
 
@@ -63,6 +63,6 @@ public class GraphImpl implements Graph {
 		if (nodeMap.containsKey(id)) {
 			throw new IllegalArgumentException("Node cannot be created with a duplicate ID.");
 		}
-		return new NodeImpl(this, id);
+		return new NodeImpl(id);
 	}
 }

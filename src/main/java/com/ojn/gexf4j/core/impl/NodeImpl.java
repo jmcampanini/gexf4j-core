@@ -1,21 +1,21 @@
 package com.ojn.gexf4j.core.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import com.ojn.gexf4j.core.Edge;
-import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.Node;
 import com.ojn.gexf4j.core.data.AttributeValue;
 
 public class NodeImpl implements Node {
 
-	private Graph graph = null;
 	private String id = "";
 	private String label = "";
+	private List<AttributeValue<? extends Object>> attributeValues = new ArrayList<AttributeValue<? extends Object>>();
+	private List<Edge> edges = new ArrayList<Edge>();
 	
-	NodeImpl(Graph graph, String id) {
-		this.graph = graph;
+	NodeImpl(String id) {
 		this.id = id;
 	}
 	
@@ -48,26 +48,22 @@ public class NodeImpl implements Node {
 	}
 
 	@Override
-	public List<AttributeValue> getAttributeValues() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<AttributeValue<? extends Object>> getAttributeValues() {
+		return attributeValues;
 	}
 
 	@Override
 	public List<Edge> getEdges() {
-		// TODO Auto-generated method stub
-		return null;
+		return edges;
 	}
 
 	@Override
-	public boolean hasEdgeTo(String id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean hasEdgeTo(Node node) {
-		// TODO Auto-generated method stub
+	public boolean hasEdgeTo(String nodeId) {
+		for (Edge e : edges) {
+			if (e.getTarget().getId().equals(nodeId)) {
+				return true;
+			}
+		}
 		return false;
 	}
 }

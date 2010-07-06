@@ -16,6 +16,6 @@ public interface Graph {
 	Node createNode();
 	Node createNode(String id);
 	
-	List<Attribute> getAttributes();
+	List<Attribute<? extends Object>> getAttributes();
 	Map<String, Node> getNodeMap();
 }

@@ -22,5 +22,5 @@ public interface Edge {
 	EdgeType getEdgeType();
 	void setEdgeType(EdgeType edgeType);
 	
-	List<AttributeValue> getAttributeValues();
+	List<AttributeValue<? extends Object>> getAttributeValues();
 }

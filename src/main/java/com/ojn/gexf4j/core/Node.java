@@ -11,13 +11,12 @@ public interface Node {
 	String getLabel();
 	void setLabel(String label);
 	
-	List<AttributeValue> getAttributeValues();
+	List<AttributeValue<? extends Object>> getAttributeValues();
 	
 	List<Edge> getEdges();
 	
 	Edge connectTo(Node target);
 	Edge connectTo(String id, Node target);
 	
-	boolean hasEdgeTo(String id);
-	boolean hasEdgeTo(Node node);
+	boolean hasEdgeTo(String nodeId);
 }
