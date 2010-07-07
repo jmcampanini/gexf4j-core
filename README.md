@@ -8,8 +8,8 @@ The API *WILL* change
 Roadmap (subject to change!)
 ------------------
 1. First release of gexf4j
-2. *Streaming Graph Writer (using StAX)*
-3. Data Support & Implementations - _Working On_
+2. Streaming Graph Writer (using StAX)
+3. *Data Support & Implementations*
 4. Dynamic Support
 5. neo4j Support
 

@@ -36,6 +36,9 @@ public class EdgeImpl implements Edge {
 	
 	@Override
 	public void setLabel(String label) {
+		if (label == null) {
+			throw new IllegalArgumentException("Label cannot be null.");
+		}
 		this.label = label;
 	}
 	
@@ -71,6 +74,9 @@ public class EdgeImpl implements Edge {
 
 	@Override
 	public void setTarget(Node target) {
+		if (target == null) {
+			throw new IllegalArgumentException("Target cannot be null.");
+		}
 		this.target = target;
 	}
 

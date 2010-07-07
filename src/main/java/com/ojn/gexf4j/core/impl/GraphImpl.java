@@ -59,10 +59,15 @@ public class GraphImpl implements Graph {
 
 	@Override
 	public Node createNode(String id) {
-		// check for a duplicate id
-		if (nodeMap.containsKey(id)) {
+		if (id == null) {
+			throw new IllegalArgumentException("Node ID cannot be null.");
+		} else if (id.trim().equals("")) {
+			throw new IllegalArgumentException("Node ID cannot be blank.");
+		} else if (nodeMap.containsKey(id)) {
 			throw new IllegalArgumentException("Node cannot be created with a duplicate ID.");
 		}
-		return new NodeImpl(id);
+		Node rv = new NodeImpl(id);
+		nodeMap.put(id, rv);
+		return rv; 
 	}
 }

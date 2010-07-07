@@ -15,14 +15,14 @@ public class AttributeValueImpl implements AttributeValue {
 	
 	@Override
 	public String getValue() {
-		if (value == null) {
-			return attribute.getDefaultValue();
-		}
-		return null;
+		return value;
 	}
 
 	@Override
 	public void setValue(String value) {
+		if (value == null) {
+			throw new IllegalArgumentException("Value cannot be null.");
+		}
 		this.value = value;
 	}
 

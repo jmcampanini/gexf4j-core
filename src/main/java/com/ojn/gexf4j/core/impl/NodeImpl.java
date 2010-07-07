@@ -44,7 +44,25 @@ public class NodeImpl implements Node {
 
 	@Override
 	public Edge connectTo(String id, Node target) {
-		return null;
+		if (id == null) {
+			throw new IllegalArgumentException("ID cannot be null.");
+			
+		} else if (id.trim().equals("")) {
+			throw new IllegalArgumentException("ID cannot be blank.");
+			
+		} else if (target == null) {
+			throw new IllegalArgumentException("Target cannot be null.");
+		}
+		
+		for (Edge e : edges) {
+			if (e.getId().equals(id)) {
+				throw new IllegalArgumentException("Cannot use duplicate Edge ID.");
+			}
+		}
+		
+		Edge rv = new EdgeImpl(id, this, target);
+		edges.add(rv);
+		return rv;
 	}
 
 	@Override
@@ -59,6 +77,10 @@ public class NodeImpl implements Node {
 
 	@Override
 	public boolean hasEdgeTo(String nodeId) {
+		if (nodeId == null) {
+			throw new IllegalArgumentException("ID cannot be null.");
+		}
+		
 		for (Edge e : edges) {
 			if (e.getTarget().getId().equals(nodeId)) {
 				return true;
