@@ -16,11 +16,11 @@ public class GraphImpl implements Graph {
 
 	private EdgeType defaultEdgeType = EdgeType.Directed;
 	private GraphMode graphMode = GraphMode.Static;
-	private List<Attribute<? extends Object>> attributes = new ArrayList<Attribute<? extends Object>>();
+	private List<Attribute> attributes = new ArrayList<Attribute>();
 	private Map<String, Node> nodeMap = new HashMap<String, Node>();
 	
 	@Override
-	public List<Attribute<? extends Object>> getAttributes() {
+	public List<Attribute> getAttributes() {
 		return attributes;
 	}
 

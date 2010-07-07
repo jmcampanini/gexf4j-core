@@ -12,7 +12,7 @@ public class NodeImpl implements Node {
 
 	private String id = "";
 	private String label = "";
-	private List<AttributeValue<? extends Object>> attributeValues = new ArrayList<AttributeValue<? extends Object>>();
+	private List<AttributeValue> attributeValues = new ArrayList<AttributeValue>();
 	private List<Edge> edges = new ArrayList<Edge>();
 	
 	NodeImpl(String id) {
@@ -48,7 +48,7 @@ public class NodeImpl implements Node {
 	}
 
 	@Override
-	public List<AttributeValue<? extends Object>> getAttributeValues() {
+	public List<AttributeValue> getAttributeValues() {
 		return attributeValues;
 	}
 

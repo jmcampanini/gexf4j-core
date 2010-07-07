@@ -16,7 +16,7 @@ public class EdgeImpl implements Edge {
 	private EdgeType edgeType = EdgeType.NotSet;
 	private Node source = null;
 	private Node target = null;
-	private List<AttributeValue<? extends Object>> attributeValues = new ArrayList<AttributeValue<? extends Object>>();
+	private List<AttributeValue> attributeValues = new ArrayList<AttributeValue>();
 
 	public EdgeImpl(String id, Node source, Node target) {
 		this.id = id;
@@ -75,7 +75,7 @@ public class EdgeImpl implements Edge {
 	}
 
 	@Override
-	public List<AttributeValue<? extends Object>> getAttributeValues() {
+	public List<AttributeValue> getAttributeValues() {
 		return attributeValues;
 	}
 }

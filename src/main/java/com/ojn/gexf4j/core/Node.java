@@ -11,7 +11,7 @@ public interface Node {
 	String getLabel();
 	void setLabel(String label);
 	
-	List<AttributeValue<? extends Object>> getAttributeValues();
+	List<AttributeValue> getAttributeValues();
 	
 	List<Edge> getEdges();
 	

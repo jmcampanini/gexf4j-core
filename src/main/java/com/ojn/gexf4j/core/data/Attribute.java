@@ -1,6 +1,6 @@
 package com.ojn.gexf4j.core.data;
 
-public interface Attribute<T extends Object> {
+public interface Attribute {
 
 	String getId();
 	AttributeType getAttributeType();
@@ -8,8 +8,8 @@ public interface Attribute<T extends Object> {
 	String getTitle();
 	void setTitle(String title);
 	
-	AttributeValue<T> createValue(T value);
+	AttributeValue createValue(String value);
 	
-	T getDefaultValue();
-	void setDefaultValue(T defaultValue);
+	String getDefaultValue();
+	void setDefaultValue(String defaultValue);
 }
