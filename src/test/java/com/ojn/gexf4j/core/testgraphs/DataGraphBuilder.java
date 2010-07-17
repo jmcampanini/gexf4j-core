@@ -62,6 +62,8 @@ public class DataGraphBuilder implements GraphBuilder {
 		nRTGI.connectTo("3", nWebatlas);
 		nGephi.connectTo("4", nBar);
 		
+		nGephi.getEdges().get(0).getAttributeValues().add(attribFrog.createValue("true"));
+		
 		return rv;
 	}
 }

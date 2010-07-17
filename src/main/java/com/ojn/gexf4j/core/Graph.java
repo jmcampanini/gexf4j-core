@@ -7,6 +7,8 @@ import com.ojn.gexf4j.core.data.Attribute;
 
 public interface Graph {
 
+	GraphMetadata getMetadata();
+	
 	EdgeType getDefaultEdgeType();
 	void setDefaultEdgeType(EdgeType edgeType);
 	

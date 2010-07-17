@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Graph;
+import com.ojn.gexf4j.core.GraphMetadata;
 import com.ojn.gexf4j.core.GraphMode;
 import com.ojn.gexf4j.core.Node;
 import com.ojn.gexf4j.core.data.Attribute;
@@ -18,6 +19,7 @@ public class GraphImpl implements Graph {
 	private GraphMode graphMode = GraphMode.Static;
 	private List<Attribute> attributes = new ArrayList<Attribute>();
 	private Map<String, Node> nodeMap = new HashMap<String, Node>();
+	private GraphMetadata metadata = new GraphMetadataImpl();
 	
 	@Override
 	public List<Attribute> getAttributes() {
@@ -69,5 +71,10 @@ public class GraphImpl implements Graph {
 		Node rv = new NodeImpl(id);
 		nodeMap.put(id, rv);
 		return rv; 
+	}
+
+	@Override
+	public GraphMetadata getMetadata() {
+		return metadata;
 	}
 }
