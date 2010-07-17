@@ -226,6 +226,16 @@ public class StaxGraphWriter implements GraphWriter {
 			writer.writeAttribute("type", edge.getEdgeType().toString().toLowerCase());
 		}
 		
+		if (edge.getAttributeValues().size() > 0) {
+			writer.writeStartElement("attvalues");
+			
+			for (AttributeValue av : edge.getAttributeValues()) {
+				writeAttributeValue(writer, av);
+			}
+			
+			writer.writeEndElement();
+		}
+		
 		writer.writeEndElement();
 	}
 }
