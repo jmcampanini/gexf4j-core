@@ -1,6 +1,7 @@
 package com.ojn.gexf4j.core.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.ojn.gexf4j.core.Edge;
@@ -17,7 +18,9 @@ public class EdgeImpl implements Edge {
 	private Node source = null;
 	private Node target = null;
 	private List<AttributeValue> attributeValues = new ArrayList<AttributeValue>();
-
+	private Date startDate = null;
+	private Date endDate = null;
+	
 	public EdgeImpl(String id, Node source, Node target) {
 		this.id = id;
 		this.source = source;
@@ -83,5 +86,23 @@ public class EdgeImpl implements Edge {
 	@Override
 	public List<AttributeValue> getAttributeValues() {
 		return attributeValues;
+	}
+
+	@Override
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@Override
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 }

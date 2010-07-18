@@ -1,5 +1,6 @@
 package com.ojn.gexf4j.core;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,4 +21,7 @@ public interface Graph {
 	
 	List<Attribute> getAttributes();
 	Map<String, Node> getNodeMap();
+	
+	Date getStartDate();
+	Date getEndDate();
 }

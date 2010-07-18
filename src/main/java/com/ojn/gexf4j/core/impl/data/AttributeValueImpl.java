@@ -1,5 +1,7 @@
 package com.ojn.gexf4j.core.impl.data;
 
+import java.util.Date;
+
 import com.ojn.gexf4j.core.data.Attribute;
 import com.ojn.gexf4j.core.data.AttributeValue;
 
@@ -7,6 +9,8 @@ public class AttributeValueImpl implements AttributeValue {
 
 	private Attribute attribute = null;
 	private String value = null;
+	private Date startDate = null;
+	private Date endDate = null;
 	
 	AttributeValueImpl(Attribute attribute, String value) {
 		this.attribute = attribute;
@@ -29,5 +33,23 @@ public class AttributeValueImpl implements AttributeValue {
 	@Override
 	public Attribute valueFor() {
 		return attribute;
+	}
+
+	@Override
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@Override
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 }

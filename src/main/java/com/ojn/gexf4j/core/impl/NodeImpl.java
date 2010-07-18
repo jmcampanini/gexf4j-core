@@ -1,6 +1,7 @@
 package com.ojn.gexf4j.core.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +15,8 @@ public class NodeImpl implements Node {
 	private String label = "";
 	private List<AttributeValue> attributeValues = new ArrayList<AttributeValue>();
 	private List<Edge> edges = new ArrayList<Edge>();
+	private Date startDate = null;
+	private Date endDate = null;
 	
 	NodeImpl(String id) {
 		this.id = id;
@@ -87,5 +90,23 @@ public class NodeImpl implements Node {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@Override
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 }

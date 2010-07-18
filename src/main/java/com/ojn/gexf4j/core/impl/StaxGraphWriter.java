@@ -21,6 +21,8 @@ import com.ojn.gexf4j.core.data.AttributeValue;
 
 public class StaxGraphWriter implements GraphWriter {
 
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
 	@Override
 	public void writeToStream(Graph graph, OutputStream out) throws IOException {
 		XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
@@ -98,6 +100,14 @@ public class StaxGraphWriter implements GraphWriter {
 		writer.writeStartElement("graph");
 		writer.writeAttribute("defaultedgetype", graph.getDefaultEdgeType().toString().toLowerCase());
 		writer.writeAttribute("mode", graph.getGraphMode().toString().toLowerCase());
+		
+		if (graph.getStartDate() != null) {
+			writer.writeAttribute("start", sdf.format(graph.getStartDate()));
+		}
+		
+		if (graph.getEndDate() != null) {
+			writer.writeAttribute("end", sdf.format(graph.getEndDate()));
+		}
 		
 		writeAllAttributes(writer, graph);
 		writeAllNodes(writer, graph);
@@ -181,6 +191,14 @@ public class StaxGraphWriter implements GraphWriter {
 		writer.writeAttribute("id", node.getId());
 		writer.writeAttribute("label", node.getLabel());
 		
+		if (node.getStartDate() != null) {
+			writer.writeAttribute("start", sdf.format(node.getStartDate()));
+		}
+		
+		if (node.getEndDate() != null) {
+			writer.writeAttribute("end", sdf.format(node.getEndDate()));
+		}
+		
 		if (node.getAttributeValues().size() > 0) {
 			writer.writeStartElement("attvalues");
 			
@@ -198,6 +216,15 @@ public class StaxGraphWriter implements GraphWriter {
 		writer.writeStartElement("attvalue");
 		writer.writeAttribute("for", av.valueFor().getId());
 		writer.writeAttribute("value", av.getValue());
+		
+		if (av.getStartDate() != null) {
+			writer.writeAttribute("start", sdf.format(av.getStartDate()));
+		}
+		
+		if (av.getEndDate() != null) {
+			writer.writeAttribute("end", sdf.format(av.getEndDate()));
+		}
+		
 		writer.writeEndElement();
 	}
 	
@@ -221,6 +248,14 @@ public class StaxGraphWriter implements GraphWriter {
 		writer.writeAttribute("source", edge.getSource().getId());
 		writer.writeAttribute("target", edge.getTarget().getId());
 		writer.writeAttribute("weight", edge.getWeight() + "");
+		
+		if (edge.getStartDate() != null) {
+			writer.writeAttribute("start", sdf.format(edge.getStartDate()));
+		}
+		
+		if (edge.getEndDate() != null) {
+			writer.writeAttribute("end", sdf.format(edge.getEndDate()));
+		}
 		
 		if (edge.getEdgeType() != EdgeType.NotSet) {
 			writer.writeAttribute("type", edge.getEdgeType().toString().toLowerCase());

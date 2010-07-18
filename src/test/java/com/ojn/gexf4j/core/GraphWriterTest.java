@@ -22,6 +22,7 @@ import org.xml.sax.SAXException;
 
 import com.ojn.gexf4j.core.testgraphs.BasicGraphBuilder;
 import com.ojn.gexf4j.core.testgraphs.DataGraphBuilder;
+import com.ojn.gexf4j.core.testgraphs.DynamicGraphBuilder;
 import com.ojn.gexf4j.core.testgraphs.GraphBuilder;
 import com.ojn.gexf4j.core.testgraphs.MetaDataGraphBuilder;
 
@@ -40,6 +41,7 @@ public abstract class GraphWriterTest {
 		rv.add(new GraphBuilder[] { new BasicGraphBuilder() });
 		rv.add(new GraphBuilder[] { new DataGraphBuilder() });
 		rv.add(new GraphBuilder[] { new MetaDataGraphBuilder() });
+		rv.add(new GraphBuilder[] { new DynamicGraphBuilder() });
 		
 		return rv;
 	}

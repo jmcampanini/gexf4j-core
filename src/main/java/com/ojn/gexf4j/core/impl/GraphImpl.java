@@ -1,6 +1,7 @@
 package com.ojn.gexf4j.core.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ public class GraphImpl implements Graph {
 	private List<Attribute> attributes = new ArrayList<Attribute>();
 	private Map<String, Node> nodeMap = new HashMap<String, Node>();
 	private GraphMetadata metadata = new GraphMetadataImpl();
+	private Date startDate = null;
+	private Date endDate = null;
 	
 	@Override
 	public List<Attribute> getAttributes() {
@@ -76,5 +79,23 @@ public class GraphImpl implements Graph {
 	@Override
 	public GraphMetadata getMetadata() {
 		return metadata;
+	}
+
+	@Override
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@Override
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 }
