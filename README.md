@@ -1,19 +1,32 @@
 gexf4j-core - java library for the .gexf file format
 =================
 
-Version 0.02
+About
 ------------------
-The API *WILL* change
+GEXF File Format Java Library. Supports [GEXF 1.1](http://gexf.net/format/index.html). Used to create and write GEXF Files for visualizing graphs using Gephi and any other GEXF-supporting application.
 
-Roadmap (subject to change!)
+License
 ------------------
-1. First release of gexf4j
-2. Streaming Graph Writer (using StAX)
-3. **Data Support & Implementations**
-4. Dynamic Support
-5. neo4j Support
+Copyright [2010] [Javier Campanini]
 
-Planned Feature Set
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+Version 0.1
+------------------
+The underlying API will most likely not change.
+
+Roadmap
+------------------
+* 0.1 - Basic Implementation of GEXF File Format (including data + dynamics)
+* 0.2 - Read GEXF Files
+* 0.3 - Data Validation & Integerity
+* 0.4 - Helper Functionality for Dynamic Timelines
+
+Moving to gexf4j-util
 -----------------
 * in-java graph creation
 * neo4j graph exporting
@@ -21,6 +34,13 @@ Planned Feature Set
 * file structure graphing
 * site-mapping
 * facebook graphing *(eventually)*
+
+Installing
+------------------
+You have two options:
+
+1. Download the latest JAR files from the download page OR
+2. Download the source, and compile/install using maven2
 
 Sample Code
 ------------------

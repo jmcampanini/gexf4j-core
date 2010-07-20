@@ -12,6 +12,7 @@ import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.GraphMetadata;
 import com.ojn.gexf4j.core.GraphMode;
 import com.ojn.gexf4j.core.Node;
+import com.ojn.gexf4j.core.Slice;
 import com.ojn.gexf4j.core.data.Attribute;
 
 public class GraphImpl implements Graph {
@@ -23,6 +24,7 @@ public class GraphImpl implements Graph {
 	private GraphMetadata metadata = new GraphMetadataImpl();
 	private Date startDate = null;
 	private Date endDate = null;
+	private List<Slice> slices = new ArrayList<Slice>();
 	
 	@Override
 	public List<Attribute> getAttributes() {
@@ -97,5 +99,10 @@ public class GraphImpl implements Graph {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	@Override
+	public List<Slice> getSlices() {
+		return slices;
 	}
 }

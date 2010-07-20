@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.Node;
+import com.ojn.gexf4j.core.Slice;
 import com.ojn.gexf4j.core.data.AttributeValue;
 
 public class NodeImpl implements Node {
@@ -17,6 +18,7 @@ public class NodeImpl implements Node {
 	private List<Edge> edges = new ArrayList<Edge>();
 	private Date startDate = null;
 	private Date endDate = null;
+	private List<Slice> slices = new ArrayList<Slice>();
 	
 	NodeImpl(String id) {
 		this.id = id;
@@ -108,5 +110,10 @@ public class NodeImpl implements Node {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	@Override
+	public List<Slice> getSlices() {
+		return slices;
 	}
 }

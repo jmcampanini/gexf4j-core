@@ -16,6 +16,7 @@ import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.GraphMetadata;
 import com.ojn.gexf4j.core.GraphWriter;
 import com.ojn.gexf4j.core.Node;
+import com.ojn.gexf4j.core.Slice;
 import com.ojn.gexf4j.core.data.Attribute;
 import com.ojn.gexf4j.core.data.AttributeValue;
 
@@ -109,9 +110,36 @@ public class StaxGraphWriter implements GraphWriter {
 			writer.writeAttribute("end", sdf.format(graph.getEndDate()));
 		}
 		
+		writeAllSlices(writer, graph.getSlices());
 		writeAllAttributes(writer, graph);
 		writeAllNodes(writer, graph);
 		writeAllEdges(writer, graph);
+		
+		writer.writeEndElement();
+	}
+	
+	private void writeAllSlices(XMLStreamWriter writer, List<Slice> slices) throws XMLStreamException {
+		if (slices != null && slices.size() > 0) {
+			writer.writeStartElement("slices");
+			
+			for (Slice s : slices) {
+				writeSlice(writer, s);
+			}
+			
+			writer.writeEndElement();
+		}
+	}
+	
+	private void writeSlice(XMLStreamWriter writer, Slice slice) throws XMLStreamException {
+		writer.writeStartElement("slice");
+		
+		if (slice.getStartDate() != null) {
+			writer.writeAttribute("start", sdf.format(slice.getStartDate()));
+		}
+		
+		if (slice.getEndDate() != null) {
+			writer.writeAttribute("end", sdf.format(slice.getEndDate()));
+		}
 		
 		writer.writeEndElement();
 	}
@@ -209,6 +237,8 @@ public class StaxGraphWriter implements GraphWriter {
 			writer.writeEndElement();
 		}
 		
+		writeAllSlices(writer, node.getSlices());
+		
 		writer.writeEndElement();
 	}
 
@@ -270,6 +300,8 @@ public class StaxGraphWriter implements GraphWriter {
 			
 			writer.writeEndElement();
 		}
+		
+		writeAllSlices(writer, edge.getSlices());
 		
 		writer.writeEndElement();
 	}

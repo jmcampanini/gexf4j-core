@@ -24,4 +24,6 @@ public interface Graph {
 	
 	Date getStartDate();
 	Date getEndDate();
+	
+	List<Slice> getSlices();
 }

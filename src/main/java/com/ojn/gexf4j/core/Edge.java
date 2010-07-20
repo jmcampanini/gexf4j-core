@@ -27,4 +27,6 @@ public interface Edge {
 	
 	Date getStartDate();
 	Date getEndDate();
+	
+	List<Slice> getSlices();
 }

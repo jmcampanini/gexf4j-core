@@ -23,4 +23,6 @@ public interface Node {
 	
 	Date getStartDate();
 	Date getEndDate();
+	
+	List<Slice> getSlices();
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Node;
+import com.ojn.gexf4j.core.Slice;
 import com.ojn.gexf4j.core.data.AttributeValue;
 
 public class EdgeImpl implements Edge {
@@ -20,6 +21,7 @@ public class EdgeImpl implements Edge {
 	private List<AttributeValue> attributeValues = new ArrayList<AttributeValue>();
 	private Date startDate = null;
 	private Date endDate = null;
+	private List<Slice> slices = new ArrayList<Slice>();
 	
 	public EdgeImpl(String id, Node source, Node target) {
 		this.id = id;
@@ -104,5 +106,10 @@ public class EdgeImpl implements Edge {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	@Override
+	public List<Slice> getSlices() {
+		return slices;
 	}
 }
