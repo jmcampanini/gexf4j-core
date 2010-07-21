@@ -22,6 +22,7 @@ public class GraphMetadataImpl implements GraphMetadata {
 		return creator;
 	}
 	
+	@Override
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
@@ -31,6 +32,7 @@ public class GraphMetadataImpl implements GraphMetadata {
 		return description;
 	}
 	
+	@Override
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -45,6 +47,7 @@ public class GraphMetadataImpl implements GraphMetadata {
 		return lastModified;
 	}
 	
+	@Override
 	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
 	}	

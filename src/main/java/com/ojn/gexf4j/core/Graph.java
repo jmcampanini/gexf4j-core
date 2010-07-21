@@ -23,7 +23,10 @@ public interface Graph {
 	Map<String, Node> getNodeMap();
 	
 	Date getStartDate();
+	void setStartDate(Date startDate);
+	
 	Date getEndDate();
+	void setEndDate(Date endDate);
 	
 	List<Slice> getSlices();
 }

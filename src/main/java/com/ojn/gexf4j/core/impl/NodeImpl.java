@@ -99,6 +99,7 @@ public class NodeImpl implements Node {
 		return startDate;
 	}
 
+	@Override
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
@@ -108,6 +109,7 @@ public class NodeImpl implements Node {
 		return endDate;
 	}
 
+	@Override
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}

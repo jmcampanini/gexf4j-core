@@ -3,6 +3,7 @@ package com.ojn.gexf4j.core.data;
 public interface Attribute {
 
 	String getId();
+	
 	AttributeType getAttributeType();
 	AttributeClass getAttributeClass();
 	

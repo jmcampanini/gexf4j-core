@@ -40,6 +40,7 @@ public class AttributeValueImpl implements AttributeValue {
 		return startDate;
 	}
 
+	@Override
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
@@ -49,6 +50,7 @@ public class AttributeValueImpl implements AttributeValue {
 		return endDate;
 	}
 
+	@Override
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}

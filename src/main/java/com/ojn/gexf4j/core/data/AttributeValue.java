@@ -10,5 +10,8 @@ public interface AttributeValue {
 	void setValue(String value);
 	
 	Date getStartDate();
+	void setStartDate(Date startDate);
+	
 	Date getEndDate();
+	void setEndDate(Date endDate);
 }

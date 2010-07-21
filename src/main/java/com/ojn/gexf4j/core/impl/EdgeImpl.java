@@ -95,6 +95,7 @@ public class EdgeImpl implements Edge {
 		return startDate;
 	}
 
+	@Override
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
@@ -104,6 +105,7 @@ public class EdgeImpl implements Edge {
 		return endDate;
 	}
 
+	@Override
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}

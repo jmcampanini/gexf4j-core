@@ -26,7 +26,10 @@ public interface Edge {
 	List<AttributeValue> getAttributeValues();
 	
 	Date getStartDate();
+	void setStartDate(Date startDate);
+	
 	Date getEndDate();
+	void setEndDate(Date endDate);
 	
 	List<Slice> getSlices();
 }
