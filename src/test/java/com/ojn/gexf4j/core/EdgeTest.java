@@ -87,7 +87,7 @@ public abstract class EdgeTest {
 	
 	@Test
 	public void getAttributeValues() {
-		Attribute attrib = new AttributeImpl(AttributeType.String, "test", AttributeClass.Edge);
+		Attribute attrib = new AttributeImpl(AttributeType.STRING, "test", AttributeClass.EDGE);
 		AttributeValue av = attrib.createValue("testing");
 		
 		int a = e.getAttributeValues().size();

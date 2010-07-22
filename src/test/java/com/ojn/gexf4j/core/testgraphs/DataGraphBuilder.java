@@ -23,9 +23,9 @@ public class DataGraphBuilder implements GraphBuilder {
 	public Graph buildGraph() {
 		Graph rv = new GraphImpl();
 		
-		Attribute attribUrl = new AttributeImpl(AttributeType.String, "0", AttributeClass.Node);
-		Attribute attribInDegree = new AttributeImpl(AttributeType.String, "1", AttributeClass.Node);
-		Attribute attribFrog = new AttributeImpl(AttributeType.String, "2", AttributeClass.Node);
+		Attribute attribUrl = new AttributeImpl(AttributeType.STRING, "0", AttributeClass.NODE);
+		Attribute attribInDegree = new AttributeImpl(AttributeType.STRING, "1", AttributeClass.NODE);
+		Attribute attribFrog = new AttributeImpl(AttributeType.STRING, "2", AttributeClass.NODE);
 		
 		attribUrl.setTitle("url");
 		attribInDegree.setTitle("indegree");

@@ -18,7 +18,7 @@ public abstract class AttributeTest {
 	@Before
 	public void before() {
 		id = UUID.randomUUID().toString();
-		attrib = newAttribute(AttributeType.String, id, AttributeClass.Node);
+		attrib = newAttribute(AttributeType.STRING, id, AttributeClass.NODE);
 	}
 	
 	@Test
@@ -30,7 +30,7 @@ public abstract class AttributeTest {
 	public void getAttributeType() {
 		Attribute curAttrib = null;
 		for (AttributeType at : AttributeType.values()) {
-			curAttrib = newAttribute(at, UUID.randomUUID().toString(), AttributeClass.Node);
+			curAttrib = newAttribute(at, UUID.randomUUID().toString(), AttributeClass.NODE);
 			assertThat(curAttrib.getAttributeType(), is(equalTo(at)));
 		}
 	}

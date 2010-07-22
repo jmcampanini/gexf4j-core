@@ -17,8 +17,8 @@ import com.ojn.gexf4j.core.data.Attribute;
 
 public class GraphImpl implements Graph {
 
-	private EdgeType defaultEdgeType = EdgeType.Directed;
-	private GraphMode graphMode = GraphMode.Static;
+	private EdgeType defaultEdgeType = EdgeType.DIRECTED;
+	private GraphMode graphMode = GraphMode.STATIC;
 	private List<Attribute> attributes = new ArrayList<Attribute>();
 	private Map<String, Node> nodeMap = new HashMap<String, Node>();
 	private GraphMetadata metadata = new GraphMetadataImpl();
@@ -38,7 +38,7 @@ public class GraphImpl implements Graph {
 
 	@Override
 	public void setDefaultEdgeType(EdgeType edgeType) {
-		if (edgeType == EdgeType.NotSet) {
+		if (edgeType == EdgeType.NOTSET) {
 			throw new IllegalArgumentException("Cannot set a graph's default EdgeType to NotSet.");
 		}
 		defaultEdgeType = edgeType;

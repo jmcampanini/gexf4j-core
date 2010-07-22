@@ -12,7 +12,7 @@ public class AttributeValueImplTest extends AttributeValueTest {
 
 	@Override
 	protected Attribute newAttribute() {
-		return new AttributeImpl(AttributeType.String, UUID.randomUUID().toString(), AttributeClass.Node);
+		return new AttributeImpl(AttributeType.STRING, UUID.randomUUID().toString(), AttributeClass.NODE);
 	}
 
 	@Override

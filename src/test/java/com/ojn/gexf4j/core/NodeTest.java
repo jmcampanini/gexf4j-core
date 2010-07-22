@@ -42,7 +42,7 @@ public abstract class NodeTest {
 	
 	@Test
 	public void getAttributeValues() {
-		Attribute attrib = new AttributeImpl(AttributeType.String, "test", AttributeClass.Node);
+		Attribute attrib = new AttributeImpl(AttributeType.STRING, "test", AttributeClass.NODE);
 		AttributeValue av = attrib.createValue("testing");
 		Node n = newNode(UUID.randomUUID().toString());
 		

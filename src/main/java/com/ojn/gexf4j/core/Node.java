@@ -16,11 +16,6 @@ public interface Node {
 	
 	List<Edge> getEdges();
 	
-	Edge connectTo(Node target);
-	Edge connectTo(String id, Node target);
-	
-	boolean hasEdgeTo(String nodeId);
-	
 	Date getStartDate();
 	void setStartDate(Date startDate);
 	
@@ -28,4 +23,9 @@ public interface Node {
 	void setEndDate(Date endDate);
 	
 	List<Slice> getSlices();
+	
+	Edge connectTo(Node target);
+	Edge connectTo(String id, Node target);
+	
+	boolean hasEdgeTo(String nodeId);
 }

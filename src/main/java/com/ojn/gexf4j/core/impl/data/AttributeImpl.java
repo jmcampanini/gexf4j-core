@@ -9,9 +9,9 @@ public class AttributeImpl implements Attribute {
 
 	private String id = "";
 	private String title = "";
-	private AttributeType type = AttributeType.String;
+	private AttributeType type = AttributeType.STRING;
 	private String defaultValue = null;
-	private AttributeClass attribClass = AttributeClass.Node;
+	private AttributeClass attribClass = AttributeClass.NODE;
 	
 	public AttributeImpl(AttributeType type, String id, AttributeClass attribClass) {
 		this.type = type;

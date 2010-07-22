@@ -21,7 +21,7 @@ public abstract class GraphTest {
 	public void defaultEdgeTypeValid() {
 		Graph g = newGraph();
 		for (EdgeType edgeType : EdgeType.values()) {
-			if (edgeType != EdgeType.NotSet) {
+			if (edgeType != EdgeType.NOTSET) {
 				g.setDefaultEdgeType(edgeType);
 				assertThat(g.getDefaultEdgeType(), is(equalTo(edgeType)));
 			}
@@ -31,7 +31,7 @@ public abstract class GraphTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void defaultEdgeTypeNotSet() {
 		Graph g = newGraph();
-		g.setDefaultEdgeType(EdgeType.NotSet);
+		g.setDefaultEdgeType(EdgeType.NOTSET);
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ public abstract class GraphTest {
 	@Test
 	public void getAttributes() {
 		Graph g = newGraph();
-		Attribute attrib = new AttributeImpl(AttributeType.String, "test", AttributeClass.Node);
+		Attribute attrib = new AttributeImpl(AttributeType.STRING, "test", AttributeClass.NODE);
 		
 		int a = g.getAttributes().size();
 		g.getAttributes().add(attrib);

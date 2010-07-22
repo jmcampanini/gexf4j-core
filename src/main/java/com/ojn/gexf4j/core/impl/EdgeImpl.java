@@ -15,7 +15,7 @@ public class EdgeImpl implements Edge {
 	private String id = "";
 	private String label = "";
 	private float weight = 1.0f;
-	private EdgeType edgeType = EdgeType.NotSet;
+	private EdgeType edgeType = EdgeType.NOTSET;
 	private Node source = null;
 	private Node target = null;
 	private List<AttributeValue> attributeValues = new ArrayList<AttributeValue>();

@@ -57,7 +57,6 @@ public class StaxGraphWriter implements GraphWriter {
 	}
 	
 	private void writeMeta(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		GraphMetadata meta = graph.getMetadata();
 		
 		if (meta != null) {
@@ -152,11 +151,11 @@ public class StaxGraphWriter implements GraphWriter {
 			
 			for (Attribute attrib : graph.getAttributes()) {
 				switch (attrib.getAttributeClass()) {
-					case Edge:
+					case EDGE:
 						attribEdges.add(attrib);
 						break;
 						
-					case Node:
+					case NODE:
 						attribNodes.add(attrib);
 						break;
 				}
@@ -287,7 +286,7 @@ public class StaxGraphWriter implements GraphWriter {
 			writer.writeAttribute("end", sdf.format(edge.getEndDate()));
 		}
 		
-		if (edge.getEdgeType() != EdgeType.NotSet) {
+		if (edge.getEdgeType() != EdgeType.NOTSET) {
 			writer.writeAttribute("type", edge.getEdgeType().toString().toLowerCase());
 		}
 		
