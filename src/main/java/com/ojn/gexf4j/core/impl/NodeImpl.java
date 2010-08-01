@@ -35,11 +35,12 @@ public class NodeImpl implements Node {
 	}
 	
 	@Override
-	public void setLabel(String label) {
+	public Node setLabel(String label) {
 		if (label == null) {
 			throw new IllegalArgumentException("Label cannot be null.");
 		}
 		this.label = label;
+		return this;
 	}
 	
 	@Override
@@ -100,8 +101,9 @@ public class NodeImpl implements Node {
 	}
 
 	@Override
-	public void setStartDate(Date startDate) {
+	public Node setStartDate(Date startDate) {
 		this.startDate = startDate;
+		return this;
 	}
 
 	@Override
@@ -110,8 +112,9 @@ public class NodeImpl implements Node {
 	}
 
 	@Override
-	public void setEndDate(Date endDate) {
+	public Node setEndDate(Date endDate) {
 		this.endDate = endDate;
+		return this;
 	}
 
 	@Override

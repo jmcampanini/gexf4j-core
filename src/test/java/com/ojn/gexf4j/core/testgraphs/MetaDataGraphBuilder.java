@@ -5,7 +5,7 @@ import java.util.Date;
 import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.Node;
 import com.ojn.gexf4j.core.impl.GraphImpl;
-import com.ojn.gexf4j.core.impl.GraphMetadataImpl;
+import com.ojn.gexf4j.core.impl.MetadataImpl;
 
 public class MetaDataGraphBuilder implements GraphBuilder {
 
@@ -23,7 +23,7 @@ public class MetaDataGraphBuilder implements GraphBuilder {
 	public Graph buildGraph() {
 		Graph g = new GraphImpl();
 		
-		GraphMetadataImpl meta = (GraphMetadataImpl) g.getMetadata();
+		MetadataImpl meta = (MetadataImpl) g.getMetadata();
 		
 		meta.setCreator("creatorString");
 		meta.setDescription("my description goes here");

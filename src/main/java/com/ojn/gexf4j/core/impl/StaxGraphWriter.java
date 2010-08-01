@@ -13,7 +13,7 @@ import javax.xml.stream.XMLStreamWriter;
 import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.GraphMetadata;
+import com.ojn.gexf4j.core.Metadata;
 import com.ojn.gexf4j.core.GraphWriter;
 import com.ojn.gexf4j.core.Node;
 import com.ojn.gexf4j.core.Slice;
@@ -57,7 +57,7 @@ public class StaxGraphWriter implements GraphWriter {
 	}
 	
 	private void writeMeta(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
-		GraphMetadata meta = graph.getMetadata();
+		Metadata meta = graph.getMetadata();
 		
 		if (meta != null) {
 			writer.writeStartElement("meta");

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.GraphMetadata;
+import com.ojn.gexf4j.core.Metadata;
 import com.ojn.gexf4j.core.GraphMode;
 import com.ojn.gexf4j.core.Node;
 import com.ojn.gexf4j.core.Slice;
@@ -19,12 +19,19 @@ public class GraphImpl implements Graph {
 
 	private EdgeType defaultEdgeType = EdgeType.DIRECTED;
 	private GraphMode graphMode = GraphMode.STATIC;
-	private List<Attribute> attributes = new ArrayList<Attribute>();
-	private Map<String, Node> nodeMap = new HashMap<String, Node>();
-	private GraphMetadata metadata = new GraphMetadataImpl();
+	private List<Attribute> attributes = null;
+	private Map<String, Node> nodeMap = null;
+	private Metadata metadata = null;
 	private Date startDate = null;
 	private Date endDate = null;
-	private List<Slice> slices = new ArrayList<Slice>();
+	private List<Slice> slices = null;
+	
+	public GraphImpl() {
+		attributes = new ArrayList<Attribute>();
+		nodeMap = new HashMap<String, Node>();
+		metadata = new MetadataImpl();
+		slices = new ArrayList<Slice>();
+	}
 	
 	@Override
 	public List<Attribute> getAttributes() {
@@ -37,11 +44,12 @@ public class GraphImpl implements Graph {
 	}
 
 	@Override
-	public void setDefaultEdgeType(EdgeType edgeType) {
+	public Graph setDefaultEdgeType(EdgeType edgeType) {
 		if (edgeType == EdgeType.NOTSET) {
 			throw new IllegalArgumentException("Cannot set a graph's default EdgeType to NotSet.");
 		}
 		defaultEdgeType = edgeType;
+		return this;
 	}
 	
 	@Override
@@ -50,8 +58,9 @@ public class GraphImpl implements Graph {
 	}
 
 	@Override
-	public void setGraphMode(GraphMode graphMode) {
+	public Graph setGraphMode(GraphMode graphMode) {
 		this.graphMode = graphMode;
+		return this;
 	}
 
 	@Override
@@ -79,7 +88,7 @@ public class GraphImpl implements Graph {
 	}
 
 	@Override
-	public GraphMetadata getMetadata() {
+	public Metadata getMetadata() {
 		return metadata;
 	}
 
@@ -89,8 +98,9 @@ public class GraphImpl implements Graph {
 	}
 
 	@Override
-	public void setStartDate(Date startDate) {
+	public Graph setStartDate(Date startDate) {
 		this.startDate = startDate;
+		return this;
 	}
 
 	@Override
@@ -99,8 +109,9 @@ public class GraphImpl implements Graph {
 	}
 
 	@Override
-	public void setEndDate(Date endDate) {
+	public Graph setEndDate(Date endDate) {
 		this.endDate = endDate;
+		return this;
 	}
 
 	@Override

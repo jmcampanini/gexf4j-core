@@ -24,12 +24,14 @@ public class SliceImpl implements Slice {
 	}
 
 	@Override
-	public void setEndDate(Date endDate) {
+	public Slice setEndDate(Date endDate) {
 		this.endDate = endDate;
+		return this;
 	}
 
 	@Override
-	public void setStartDate(Date startDate) {
+	public Slice setStartDate(Date startDate) {
 		this.startDate = startDate;
+		return this;
 	}
 }

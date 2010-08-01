@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.ojn.gexf4j.core.GraphMetadata;
+import com.ojn.gexf4j.core.Metadata;
 
-public class GraphMetadataImpl implements GraphMetadata {
+public class MetadataImpl implements Metadata {
 
 	private String creator = null;
 	private String description = null;
 	private List<String> keywords = new ArrayList<String>();
 	private Date lastModified = null;
 	
-	public GraphMetadataImpl() {
+	public MetadataImpl() {
 		
 	}
 	
@@ -23,8 +23,9 @@ public class GraphMetadataImpl implements GraphMetadata {
 	}
 	
 	@Override
-	public void setCreator(String creator) {
+	public Metadata setCreator(String creator) {
 		this.creator = creator;
+		return this;
 	}
 	
 	@Override
@@ -33,8 +34,9 @@ public class GraphMetadataImpl implements GraphMetadata {
 	}
 	
 	@Override
-	public void setDescription(String description) {
+	public Metadata setDescription(String description) {
 		this.description = description;
+		return this;
 	}
 	
 	@Override
@@ -48,7 +50,8 @@ public class GraphMetadataImpl implements GraphMetadata {
 	}
 	
 	@Override
-	public void setLastModified(Date lastModified) {
+	public Metadata setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
+		return this;
 	}	
 }

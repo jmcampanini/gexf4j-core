@@ -5,8 +5,8 @@ import java.util.Date;
 public interface Slice {
 
 	Date getStartDate();
-	void setStartDate(Date startDate);
+	Slice setStartDate(Date startDate);
 	
 	Date getEndDate();
-	void setEndDate(Date endDate);
+	Slice setEndDate(Date endDate);
 }

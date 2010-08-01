@@ -40,11 +40,12 @@ public class EdgeImpl implements Edge {
 	}
 	
 	@Override
-	public void setLabel(String label) {
+	public Edge setLabel(String label) {
 		if (label == null) {
 			throw new IllegalArgumentException("Label cannot be null.");
 		}
 		this.label = label;
+		return this;
 	}
 	
 	@Override
@@ -53,8 +54,9 @@ public class EdgeImpl implements Edge {
 	}
 	
 	@Override
-	public void setWeight(float weight) {
+	public Edge setWeight(float weight) {
 		this.weight = weight;
+		return this;
 	}
 	
 	@Override
@@ -63,8 +65,9 @@ public class EdgeImpl implements Edge {
 	}
 
 	@Override
-	public void setEdgeType(EdgeType edgeType) {
+	public Edge setEdgeType(EdgeType edgeType) {
 		this.edgeType = edgeType;
+		return this;
 	}
 
 	@Override
@@ -78,11 +81,12 @@ public class EdgeImpl implements Edge {
 	}
 
 	@Override
-	public void setTarget(Node target) {
+	public Edge setTarget(Node target) {
 		if (target == null) {
 			throw new IllegalArgumentException("Target cannot be null.");
 		}
 		this.target = target;
+		return this;
 	}
 
 	@Override
@@ -96,8 +100,9 @@ public class EdgeImpl implements Edge {
 	}
 
 	@Override
-	public void setStartDate(Date startDate) {
+	public Edge setStartDate(Date startDate) {
 		this.startDate = startDate;
+		return this;
 	}
 
 	@Override
@@ -106,8 +111,9 @@ public class EdgeImpl implements Edge {
 	}
 
 	@Override
-	public void setEndDate(Date endDate) {
+	public Edge setEndDate(Date endDate) {
 		this.endDate = endDate;
+		return this;
 	}
 
 	@Override
