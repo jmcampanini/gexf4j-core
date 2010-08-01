@@ -12,7 +12,7 @@ public class AttributeValueImpl implements AttributeValue {
 	private Date startDate = null;
 	private Date endDate = null;
 	
-	AttributeValueImpl(Attribute attribute, String value) {
+	public AttributeValueImpl(Attribute attribute, String value) {
 		this.attribute = attribute;
 		this.value = value;
 	}
