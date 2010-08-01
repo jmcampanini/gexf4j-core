@@ -4,8 +4,11 @@ import javax.xml.stream.XMLStreamReader;
 
 public class StringEntityParser extends AbstractEntityParser<String> {
 
+	private String name = "";
+	
 	public StringEntityParser(XMLStreamReader reader) {
 		super(reader);
+		name = reader.getLocalName();
 	}
 
 	@Override
@@ -18,6 +21,10 @@ public class StringEntityParser extends AbstractEntityParser<String> {
 		entity = reader.getText();
 	}
 
+	public String getName() {
+		return name;
+	}
+	
 	@Override
 	protected void onOther(XMLStreamReader reader, int eventType) {
 		// do nothing

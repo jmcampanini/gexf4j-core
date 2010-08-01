@@ -7,6 +7,7 @@ import javax.xml.stream.XMLStreamReader;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
+import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.GraphMetadata;
 import com.ojn.gexf4j.core.impl.GraphMetadataImpl;
 
@@ -16,8 +17,11 @@ public class MetaEntityParser extends AbstractEntityParser<GraphMetadata> {
 	private static final String ENTITY_KEYWORDS = "keywords";
 	private static final String ATTRIB_LASTMODIFIED = "lastmodifieddate";
 	
-	public MetaEntityParser(XMLStreamReader reader) {
+	private Graph graph = null;
+	
+	public MetaEntityParser(XMLStreamReader reader, Graph graph) {
 		super(reader);
+		this.graph = graph;
 	}
 
 	@Override
@@ -26,28 +30,21 @@ public class MetaEntityParser extends AbstractEntityParser<GraphMetadata> {
 	}
 
 	@Override
-	protected void onCharacters(XMLStreamReader reader) {
-		// do nothing
-	}
-
-	@Override
-	protected void onOther(XMLStreamReader reader, int eventType) {
-		// do nothing
-	}
-
-	@Override
 	protected void onStartElement(XMLStreamReader reader) {
-		StringEntityParser sep = new StringEntityParser(reader);
+		StringEntityParser sep = null;
 		
-		if (ENTITY_CREATOR.equalsIgnoreCase(sep.getName())) {
-			entity.setCreator(sep.getEntity());
+		if (ENTITY_CREATOR.equalsIgnoreCase(reader.getLocalName())) {
+			sep = new StringEntityParser(reader);
+			graph.getMetadata().setCreator(sep.getEntity());
+						
 			
+		} else if (ENTITY_DESCRIPTION.equalsIgnoreCase(reader.getLocalName())) {
+			sep = new StringEntityParser(reader);
+			graph.getMetadata().setDescription(sep.getEntity());
 			
-		} else if (ENTITY_DESCRIPTION.equalsIgnoreCase(sep.getName())) {
-			entity.setDescription(sep.getEntity());
-			
-		} else if (ENTITY_KEYWORDS.equalsIgnoreCase(sep.getName())) {
-			Iterables.addAll(entity.getKeywords(),
+		} else if (ENTITY_KEYWORDS.equalsIgnoreCase(reader.getLocalName())) {
+			sep = new StringEntityParser(reader);
+			Iterables.addAll(graph.getMetadata().getKeywords(),
 					Splitter
 						.on(',')
 						.trimResults()
@@ -66,5 +63,20 @@ public class MetaEntityParser extends AbstractEntityParser<GraphMetadata> {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	protected void onEndElement() {
+		// do nothing
+	}
+	
+	@Override
+	protected void onCharacters(XMLStreamReader reader) {
+		// do nothing
+	}
+
+	@Override
+	protected void onOther(XMLStreamReader reader, int eventType) {
+		// do nothing
 	}
 }

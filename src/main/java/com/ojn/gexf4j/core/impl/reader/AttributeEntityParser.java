@@ -38,7 +38,7 @@ public class AttributeEntityParser extends AbstractEntityParser<Attribute> {
 			title = value;
 			
 		} else if (ATTRIB_TYPE.equalsIgnoreCase(name)) {
-			attType = AttributeType.valueOf(value);
+			attType = AttributeType.valueOf(value.toUpperCase());
 		} 
 	}
 
@@ -59,7 +59,7 @@ public class AttributeEntityParser extends AbstractEntityParser<Attribute> {
 		
 		return rv;
 	}
-	
+
 	@Override
 	protected void onCharacters(XMLStreamReader reader) {
 		// do nothing

@@ -11,10 +11,10 @@ public abstract class AbstractEntityParser<T extends Object> {
 	private XMLStreamReader reader = null;
 	private boolean foundEnd = false;
 	protected T entity = null;
-	private String name = "";
 	
 	protected abstract T newEntity();
 	protected abstract void onStartElement(XMLStreamReader reader);
+	protected abstract void onEndElement();
 	protected abstract void onCharacters(XMLStreamReader reader);
 	protected abstract void onOther(XMLStreamReader reader, int eventType);
 	protected abstract void onAttribute(String name, String value);
@@ -24,13 +24,12 @@ public abstract class AbstractEntityParser<T extends Object> {
 		
 		this.reader = reader;
 		entity = newEntity();
-		name = reader.getLocalName();
 		parse();
 	}
 	
 	private void parse() {
 		try {
-			if (reader.getAttributeCount() > 0) {
+			if (reader.getEventType() == XMLEvent.START_ELEMENT && reader.getAttributeCount() > 0) {
 				for (int i = 0; i < reader.getAttributeCount(); i++) {
 					onAttribute(reader.getAttributeLocalName(i),reader.getAttributeValue(i));
 				}
@@ -39,18 +38,25 @@ public abstract class AbstractEntityParser<T extends Object> {
 			while (!foundEnd && reader.hasNext()) {
 				switch (reader.next()) {
 					case XMLEvent.START_ELEMENT:
+						System.out.print("START_ELEMENT\t");
+						System.out.print(reader.getLocalName() + "\t");
+						System.out.println("AttribCount: " + reader.getAttributeCount());
 						onStartElement(reader);
 						break;
 						
 					case XMLEvent.CHARACTERS:
+						System.out.print("CHARACTERS\t");
+						System.out.println("CHARS: " + reader.getText());
 						onCharacters(reader);
 						break;
 						
 					case XMLEvent.END_ELEMENT:
+						System.out.println("END ELEMENT\t");
 						foundEnd = true;
 						break;
 						
 					default:
+						System.out.println("DEFAULTED");
 						onOther(reader, reader.getEventType());
 						break;
 				}
@@ -62,9 +68,5 @@ public abstract class AbstractEntityParser<T extends Object> {
 	
 	public T getEntity() {
 		return entity;
-	}
-	
-	public String getName() {
-		return name;
 	}
 }

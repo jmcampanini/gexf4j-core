@@ -6,15 +6,31 @@ import java.io.InputStream;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.events.XMLEvent;
 
 import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.GraphMetadata;
 import com.ojn.gexf4j.core.GraphReader;
-import com.ojn.gexf4j.core.impl.reader.MetaEntityParser;
+import com.ojn.gexf4j.core.impl.reader.GexfEntityParser;
 
 public class StaxGraphReader implements GraphReader {
 
+	@Override
+	public Graph readFromStream(InputStream in) throws IOException {
+		
+		try {
+			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+			XMLStreamReader reader = inputFactory.createXMLStreamReader(in);
+			
+			GexfEntityParser gexfParser = new GexfEntityParser(reader);
+			
+			return gexfParser.getEntity();
+			
+		} catch (XMLStreamException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	/*
 	@Override
 	public Graph readFromStream(InputStream in) throws IOException {
 		
@@ -61,5 +77,5 @@ public class StaxGraphReader implements GraphReader {
 		
 		return null;
 	}
-
+	*/
 }

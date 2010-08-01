@@ -26,7 +26,7 @@ public class AttributesEntityParser extends AbstractEntityParser<List<Attribute>
 	@Override
 	protected void onAttribute(String name, String value) {
 		if (ATTRIB_CLASS.equalsIgnoreCase(name)) {
-			attClass = AttributeClass.valueOf(value);
+			attClass = AttributeClass.valueOf(value.toUpperCase());
 		}
 	}
 
@@ -36,6 +36,10 @@ public class AttributesEntityParser extends AbstractEntityParser<List<Attribute>
 			AttributeEntityParser aep = new AttributeEntityParser(reader, attClass);
 			entity.add(aep.getEntity());
 		}
+	}
+	
+	public AttributeClass getAttClass() {
+		return attClass;
 	}
 
 	@Override

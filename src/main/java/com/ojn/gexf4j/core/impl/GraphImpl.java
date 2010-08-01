@@ -19,12 +19,19 @@ public class GraphImpl implements Graph {
 
 	private EdgeType defaultEdgeType = EdgeType.DIRECTED;
 	private GraphMode graphMode = GraphMode.STATIC;
-	private List<Attribute> attributes = new ArrayList<Attribute>();
-	private Map<String, Node> nodeMap = new HashMap<String, Node>();
-	private GraphMetadata metadata = new GraphMetadataImpl();
+	private List<Attribute> attributes = null;
+	private Map<String, Node> nodeMap = null;
+	private GraphMetadata metadata = null;
 	private Date startDate = null;
 	private Date endDate = null;
-	private List<Slice> slices = new ArrayList<Slice>();
+	private List<Slice> slices = null;
+	
+	public GraphImpl() {
+		attributes = new ArrayList<Attribute>();
+		nodeMap = new HashMap<String, Node>();
+		metadata = new GraphMetadataImpl();
+		slices = new ArrayList<Slice>();
+	}
 	
 	@Override
 	public List<Attribute> getAttributes() {
