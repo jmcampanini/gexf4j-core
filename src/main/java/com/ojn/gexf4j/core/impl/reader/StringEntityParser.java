@@ -5,26 +5,27 @@ import javax.xml.stream.XMLStreamReader;
 public class StringEntityParser extends AbstractEntityParser<String> {
 
 	private String name = "";
+	private String value = "";
 	
 	public StringEntityParser(XMLStreamReader reader) {
 		super(reader);
 		name = reader.getLocalName();
-	}
-
-	@Override
-	protected String newEntity() {
-		return "";
+		parse();
 	}
 
 	@Override
 	protected void onCharacters(XMLStreamReader reader) {
-		entity = reader.getText();
+		value = reader.getText();
 	}
 
 	public String getName() {
 		return name;
 	}
 	
+	public String getValue() {
+		return value;
+	}
+
 	@Override
 	protected void onOther(XMLStreamReader reader, int eventType) {
 		// do nothing
@@ -37,6 +38,11 @@ public class StringEntityParser extends AbstractEntityParser<String> {
 
 	@Override
 	protected void onAttribute(String name, String value) {
+		// do nothing
+	}
+
+	@Override
+	protected void onEndElement() {
 		// do nothing
 	}
 }

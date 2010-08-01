@@ -18,20 +18,16 @@ public class GraphEntityParser extends AbstractEntityParser<Graph> {
 	public GraphEntityParser(XMLStreamReader reader, Graph graph) {
 		super(reader);
 		this.graph = graph;
-	}
-
-	@Override
-	protected Graph newEntity() {
-		return graph;
+		parse();
 	}
 
 	@Override
 	protected void onAttribute(String name, String value) {
 		if (ATTRIB_EDGETYPE.equalsIgnoreCase(name)) {
-			entity.setDefaultEdgeType(EdgeType.valueOf(value.toUpperCase()));
+			graph.setDefaultEdgeType(EdgeType.valueOf(value.toUpperCase()));
 			
 		} else if (ATTRIB_MODE.equalsIgnoreCase(name)) {
-			entity.setGraphMode(GraphMode.valueOf(value.toUpperCase()));
+			graph.setGraphMode(GraphMode.valueOf(value.toUpperCase()));
 		}
 	}
 
@@ -46,10 +42,10 @@ public class GraphEntityParser extends AbstractEntityParser<Graph> {
 			}*/
 			
 		} else if (ENTITY_NODES.equalsIgnoreCase(reader.getLocalName())) {
-			new NodesEntityParser(reader, entity);
+			new NodesEntityParser(reader, graph);
 			
 		} else if (ENTITY_EDGES.equalsIgnoreCase(reader.getLocalName())) {
-			new EdgesEntityParser(reader, entity);
+			new EdgesEntityParser(reader, graph);
 		}
 	}
 

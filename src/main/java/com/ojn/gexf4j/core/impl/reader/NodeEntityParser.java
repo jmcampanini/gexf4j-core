@@ -19,11 +19,7 @@ public class NodeEntityParser extends AbstractEntityParser<Node> {
 		super(reader);
 		// attributeValues = new ArrayList<AttributeValue>();
 		this.graph = graph;
-	}
-
-	@Override
-	protected Node newEntity() {
-		return null;
+		parse();
 	}
 
 	@Override

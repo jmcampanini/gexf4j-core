@@ -21,8 +21,9 @@ public class StaxGraphReader implements GraphReader {
 			XMLStreamReader reader = inputFactory.createXMLStreamReader(in);
 			
 			GexfEntityParser gexfParser = new GexfEntityParser(reader);
+			gexfParser.parse();
 			
-			return gexfParser.getEntity();
+			return gexfParser.getGraph();
 			
 		} catch (XMLStreamException e) {
 			e.printStackTrace();

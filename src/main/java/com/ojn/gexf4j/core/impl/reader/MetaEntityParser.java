@@ -9,7 +9,6 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.GraphMetadata;
-import com.ojn.gexf4j.core.impl.GraphMetadataImpl;
 
 public class MetaEntityParser extends AbstractEntityParser<GraphMetadata> {
 	private static final String ENTITY_CREATOR = "creator";
@@ -22,11 +21,7 @@ public class MetaEntityParser extends AbstractEntityParser<GraphMetadata> {
 	public MetaEntityParser(XMLStreamReader reader, Graph graph) {
 		super(reader);
 		this.graph = graph;
-	}
-
-	@Override
-	protected GraphMetadata newEntity() {
-		return new GraphMetadataImpl();
+		parse();
 	}
 
 	@Override
@@ -35,12 +30,12 @@ public class MetaEntityParser extends AbstractEntityParser<GraphMetadata> {
 		
 		if (ENTITY_CREATOR.equalsIgnoreCase(reader.getLocalName())) {
 			sep = new StringEntityParser(reader);
-			graph.getMetadata().setCreator(sep.getEntity());
+			graph.getMetadata().setCreator(sep.getValue());
 						
 			
 		} else if (ENTITY_DESCRIPTION.equalsIgnoreCase(reader.getLocalName())) {
 			sep = new StringEntityParser(reader);
-			graph.getMetadata().setDescription(sep.getEntity());
+			graph.getMetadata().setDescription(sep.getValue());
 			
 		} else if (ENTITY_KEYWORDS.equalsIgnoreCase(reader.getLocalName())) {
 			sep = new StringEntityParser(reader);
@@ -49,7 +44,7 @@ public class MetaEntityParser extends AbstractEntityParser<GraphMetadata> {
 						.on(',')
 						.trimResults()
 						.omitEmptyStrings()
-						.split(sep.getEntity()));
+						.split(sep.getValue()));
 		}
 	}
 
@@ -58,7 +53,7 @@ public class MetaEntityParser extends AbstractEntityParser<GraphMetadata> {
 		if (ATTRIB_LASTMODIFIED.equalsIgnoreCase(name)) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			try {
-				entity.setLastModified(sdf.parse(value));
+				graph.getMetadata().setLastModified(sdf.parse(value));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}

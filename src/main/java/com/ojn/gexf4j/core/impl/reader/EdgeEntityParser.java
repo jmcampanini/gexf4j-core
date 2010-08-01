@@ -27,11 +27,7 @@ public class EdgeEntityParser extends AbstractEntityParser<Edge> {
 	public EdgeEntityParser(XMLStreamReader reader, Graph graph) {
 		super(reader);
 		this.graph = graph;
-	}
-
-	@Override
-	protected Edge newEntity() {
-		return null;
+		parse();
 	}
 
 	@Override

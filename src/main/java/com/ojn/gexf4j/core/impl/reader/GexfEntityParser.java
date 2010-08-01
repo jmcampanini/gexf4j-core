@@ -10,13 +10,12 @@ public class GexfEntityParser extends AbstractEntityParser<Graph> {
 	private static final String ENTITY_META = "meta";
 	private static final String ENTITY_GRAPH = "graph";
 	
+	private Graph graph = null;
+	
 	public GexfEntityParser(XMLStreamReader reader) {
 		super(reader);
-	}
-	
-	@Override
-	protected Graph newEntity() {
-		return new GraphImpl();
+		graph = new GraphImpl();
+		parse();
 	}
 	
 	@Override
@@ -29,13 +28,17 @@ public class GexfEntityParser extends AbstractEntityParser<Graph> {
 	@Override
 	protected void onStartElement(XMLStreamReader reader) {
 		if (ENTITY_META.equalsIgnoreCase(reader.getLocalName())) {
-			new MetaEntityParser(reader, entity);
+			new MetaEntityParser(reader, graph);
 			
 		} else if (ENTITY_GRAPH.equalsIgnoreCase(reader.getLocalName())) {
-			new GraphEntityParser(reader, entity);
+			new GraphEntityParser(reader, graph);
 		}
 	}
 	
+	public Graph getGraph() {
+		return graph;
+	}
+
 	@Override
 	protected void onCharacters(XMLStreamReader reader) {
 		// do nothing

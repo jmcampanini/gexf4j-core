@@ -13,13 +13,9 @@ public class NodesEntityParser extends AbstractEntityParser<List<Node>> {
 	private Graph graph = null;
 	
 	public NodesEntityParser(XMLStreamReader reader, Graph graph) {
-		this.graph = graph;
 		super(reader);
-	}
-
-	@Override
-	protected List<Node> newEntity() {
-		return null;
+		this.graph = graph;
+		parse();
 	}
 
 	@Override

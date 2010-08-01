@@ -10,9 +10,7 @@ public abstract class AbstractEntityParser<T extends Object> {
 
 	private XMLStreamReader reader = null;
 	private boolean foundEnd = false;
-	protected T entity = null;
 	
-	protected abstract T newEntity();
 	protected abstract void onStartElement(XMLStreamReader reader);
 	protected abstract void onEndElement();
 	protected abstract void onCharacters(XMLStreamReader reader);
@@ -21,13 +19,10 @@ public abstract class AbstractEntityParser<T extends Object> {
 	
 	public AbstractEntityParser(XMLStreamReader reader) {
 		checkNotNull(reader);
-		
 		this.reader = reader;
-		entity = newEntity();
-		parse();
 	}
 	
-	private void parse() {
+	public void parse() {
 		try {
 			if (reader.getEventType() == XMLEvent.START_ELEMENT && reader.getAttributeCount() > 0) {
 				for (int i = 0; i < reader.getAttributeCount(); i++) {
@@ -64,9 +59,5 @@ public abstract class AbstractEntityParser<T extends Object> {
 		} catch (XMLStreamException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public T getEntity() {
-		return entity;
 	}
 }
