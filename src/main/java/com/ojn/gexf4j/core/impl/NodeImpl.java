@@ -20,7 +20,7 @@ public class NodeImpl implements Node {
 	private Date endDate = null;
 	private List<Slice> slices = new ArrayList<Slice>();
 	
-	NodeImpl(String id) {
+	public NodeImpl(String id) {
 		this.id = id;
 	}
 	
