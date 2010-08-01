@@ -9,7 +9,9 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 
 import com.ojn.gexf4j.core.Graph;
+import com.ojn.gexf4j.core.GraphMetadata;
 import com.ojn.gexf4j.core.GraphReader;
+import com.ojn.gexf4j.core.impl.reader.MetaEntityParser;
 
 public class StaxGraphReader implements GraphReader {
 
@@ -26,6 +28,15 @@ public class StaxGraphReader implements GraphReader {
 						System.out.print("START_ELEMENT\t");
 						System.out.print(reader.getLocalName() + "\t");
 						System.out.println("AttribCount: " + reader.getAttributeCount());
+						
+						if (reader.getLocalName().equalsIgnoreCase("meta")) {
+							GraphMetadata m = new MetaEntityParser(reader).getEntity();
+							System.out.println(m.getCreator());
+							System.out.println(m.getDescription());
+							System.out.println(m.getKeywords().size());
+							System.out.println(m.getLastModified());
+						}
+						
 						break;
 						
 					case XMLEvent.ATTRIBUTE:
