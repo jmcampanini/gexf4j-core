@@ -14,7 +14,6 @@ public class EdgeEntityParser extends AbstractEntityParser<Edge> {
 	private static final String ATTRIB_TARGET = "target";
 	private static final String ATTRIB_WEIGHT = "weight";
 	private static final String ATTRIB_TYPE = "type";
-	// private static final String ENTITY_ATTVALUES = "attvalues";
 	
 	private Graph graph = null;
 	private String id = "";
@@ -55,10 +54,7 @@ public class EdgeEntityParser extends AbstractEntityParser<Edge> {
 
 	@Override
 	protected void onStartElement(XMLStreamReader reader) {
-		/*if (ENTITY_ATTVALUES.equalsIgnoreCase(reader.getLocalName())) {
-			AttValuesEntityParser avep = new AttValuesEntityParser(reader, attributes);
-			attributeValues = avep.getEntity();
-		}*/
+		// do nothing
 	}
 
 	@Override

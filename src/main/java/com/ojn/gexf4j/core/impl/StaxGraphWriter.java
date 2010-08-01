@@ -2,38 +2,27 @@ package com.ojn.gexf4j.core.impl;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.ojn.gexf4j.core.Edge;
-import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.Metadata;
 import com.ojn.gexf4j.core.GraphWriter;
-import com.ojn.gexf4j.core.Node;
-import com.ojn.gexf4j.core.Slice;
-import com.ojn.gexf4j.core.data.Attribute;
-import com.ojn.gexf4j.core.data.AttributeValue;
+import com.ojn.gexf4j.core.impl.writer.GexfEntityWriter;
 
 public class StaxGraphWriter implements GraphWriter {
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	
 	@Override
 	public void writeToStream(Graph graph, OutputStream out) throws IOException {
-		XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 		
 		try {
+			XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
 			XMLStreamWriter writer = outputFactory.createXMLStreamWriter(out);
 			
 			writer.writeStartDocument("1.0");
 			
-			writeGexf(writer, graph);
+			new GexfEntityWriter(writer, graph);
 			
 			writer.writeEndDocument();
 			
@@ -45,78 +34,7 @@ public class StaxGraphWriter implements GraphWriter {
 		}
 	}
 	
-	private void writeGexf(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
-		writer.writeStartElement("gexf");
-		writer.writeAttribute("version", "1.1");
-		writer.writeAttribute("xmlns", "http://www.gexf.net/1.1draft");
-
-		writeMeta(writer, graph);
-		writeGraph(writer, graph);
-		
-		writer.writeEndElement();
-	}
-	
-	private void writeMeta(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
-		Metadata meta = graph.getMetadata();
-		
-		if (!meta.isEmpty()) {
-			writer.writeStartElement("meta");
-			
-			if (meta.hasLastModified()) {
-				writer.writeAttribute("lastmodifieddate", sdf.format(graph.getMetadata().getLastModified()));
-			}
-			
-			if (meta.hasCreator()) {
-				writer.writeStartElement("creator");
-				writer.writeCharacters(meta.getCreator());
-				writer.writeEndElement();
-			}
-			
-			if (meta.hasDescription()) {
-				writer.writeStartElement("description");
-				writer.writeCharacters(meta.getDescription());
-				writer.writeEndElement();
-			}
-			
-			if (meta.getKeywords() != null && meta.getKeywords().size() > 0) {
-				writer.writeStartElement("keywords");
-
-				String keywords = "";
-				for (String k : meta.getKeywords()) {
-					keywords += k + ", ";
-				}
-				
-				keywords = keywords.substring(0, keywords.length() - 2);
-
-				writer.writeCharacters(keywords);
-				writer.writeEndElement();
-			}
-			
-			writer.writeEndElement();
-		}
-	}
-	
-	private void writeGraph(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
-		writer.writeStartElement("graph");
-		writer.writeAttribute("defaultedgetype", graph.getDefaultEdgeType().toString().toLowerCase());
-		writer.writeAttribute("mode", graph.getGraphMode().toString().toLowerCase());
-		
-		if (graph.getStartDate() != null) {
-			writer.writeAttribute("start", sdf.format(graph.getStartDate()));
-		}
-		
-		if (graph.getEndDate() != null) {
-			writer.writeAttribute("end", sdf.format(graph.getEndDate()));
-		}
-		
-		writeAllSlices(writer, graph.getSlices());
-		writeAllAttributes(writer, graph);
-		writeAllNodes(writer, graph);
-		writeAllEdges(writer, graph);
-		
-		writer.writeEndElement();
-	}
-	
+	/*
 	private void writeAllSlices(XMLStreamWriter writer, List<Slice> slices) throws XMLStreamException {
 		if (slices != null && slices.size() > 0) {
 			writer.writeStartElement("slices");
@@ -201,62 +119,7 @@ public class StaxGraphWriter implements GraphWriter {
 		
 		writer.writeEndElement();
 	}
-	
-	private void writeAllNodes(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
-		writer.writeStartElement("nodes");
 		
-		for (Node n : graph.getNodeMap().values()) {
-			writeNode(writer, n);
-		}
-		
-		writer.writeEndElement();
-	}
-	
-	private void writeNode(XMLStreamWriter writer, Node node) throws XMLStreamException {
-		writer.writeStartElement("node");
-		
-		writer.writeAttribute("id", node.getId());
-		writer.writeAttribute("label", node.getLabel());
-		
-		if (node.getStartDate() != null) {
-			writer.writeAttribute("start", sdf.format(node.getStartDate()));
-		}
-		
-		if (node.getEndDate() != null) {
-			writer.writeAttribute("end", sdf.format(node.getEndDate()));
-		}
-		
-		if (node.getAttributeValues().size() > 0) {
-			writer.writeStartElement("attvalues");
-			
-			for (AttributeValue av : node.getAttributeValues()) {
-				writeAttributeValue(writer, av);
-			}
-			
-			writer.writeEndElement();
-		}
-		
-		writeAllSlices(writer, node.getSlices());
-		
-		writer.writeEndElement();
-	}
-
-	private void writeAttributeValue(XMLStreamWriter writer, AttributeValue av) throws XMLStreamException {
-		writer.writeStartElement("attvalue");
-		writer.writeAttribute("for", av.valueFor().getId());
-		writer.writeAttribute("value", av.getValue());
-		
-		if (av.getStartDate() != null) {
-			writer.writeAttribute("start", sdf.format(av.getStartDate()));
-		}
-		
-		if (av.getEndDate() != null) {
-			writer.writeAttribute("end", sdf.format(av.getEndDate()));
-		}
-		
-		writer.writeEndElement();
-	}
-	
 	private void writeAllEdges(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
 		writer.writeStartElement("edges");
 		
@@ -304,4 +167,5 @@ public class StaxGraphWriter implements GraphWriter {
 		
 		writer.writeEndElement();
 	}
+	*/
 }

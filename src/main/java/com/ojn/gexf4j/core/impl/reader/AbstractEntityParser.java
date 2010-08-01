@@ -22,7 +22,7 @@ public abstract class AbstractEntityParser<T extends Object> {
 		this.reader = reader;
 	}
 	
-	public void parse() {
+	protected void parse() {
 		try {
 			if (reader.getEventType() == XMLEvent.START_ELEMENT && reader.getAttributeCount() > 0) {
 				for (int i = 0; i < reader.getAttributeCount(); i++) {
