@@ -1,6 +1,6 @@
 package com.ojn.gexf4j.core;
 
-public interface Edge extends Dynamic<Edge>, Datum {
+public interface Edge extends DynamicDatum<Edge> {
 
 	String getId();
 	

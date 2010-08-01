@@ -7,7 +7,7 @@ import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.GraphMode;
 
-public class GraphEntityWriter extends AbstractEntityWriter<Graph> {
+public class GraphEntityWriter extends DynamicEntityWriter<Graph> {
 	private static final String ENTITY = "graph";
 	private static final String ATTRIB_EDGETYPE = "defaultedgetype";
 	private static final String ATTRIB_MODE = "mode";

@@ -3,14 +3,14 @@ package com.ojn.gexf4j.core.impl.writer;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.ojn.gexf4j.core.Node;
+import com.ojn.gexf4j.core.data.AttributeValue;
 
-public class NodeEntityWriter extends DynDatEntityWriter<Node> {
-	private static final String ENTITY = "node";
-	private static final String ATTRIB_ID = "id";
-	private static final String ATTRIB_LABEL = "label";
+public class AttValueEntityWriter extends DynamicEntityWriter<AttributeValue>{
+	private static final String ENTITY = "attvalue";
+	private static final String ATTRIB_FOR = "for";
+	private static final String ATTRIB_VALUE = "value";
 	
-	public NodeEntityWriter(XMLStreamWriter writer, Node entity) {
+	public AttValueEntityWriter(XMLStreamWriter writer, AttributeValue entity) {
 		super(writer, entity);
 		write();
 	}
@@ -23,12 +23,12 @@ public class NodeEntityWriter extends DynDatEntityWriter<Node> {
 	@Override
 	protected void writeAttributes() throws XMLStreamException {
 		writer.writeAttribute(
-				ATTRIB_ID,
-				entity.getId());
+				ATTRIB_FOR,
+				entity.getAttribute().getId());
 		
 		writer.writeAttribute(
-				ATTRIB_LABEL,
-				entity.getLabel());
+				ATTRIB_VALUE,
+				entity.getValue());
 	}
 
 	@Override

@@ -1,17 +1,11 @@
 package com.ojn.gexf4j.core.data;
 
-import java.util.Date;
+import com.ojn.gexf4j.core.Dynamic;
 
-public interface AttributeValue {
+public interface AttributeValue extends Dynamic<AttributeValue> {
 
-	Attribute valueFor();
+	Attribute getAttribute();
 	
 	String getValue();
 	void setValue(String value);
-	
-	Date getStartDate();
-	void setStartDate(Date startDate);
-	
-	Date getEndDate();
-	void setEndDate(Date endDate);
 }

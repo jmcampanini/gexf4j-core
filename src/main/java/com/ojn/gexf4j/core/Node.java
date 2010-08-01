@@ -2,7 +2,7 @@ package com.ojn.gexf4j.core;
 
 import java.util.List;
 
-public interface Node extends Dynamic<Node>, Datum {
+public interface Node extends DynamicDatum<Node> {
 
 	String getId();
 	

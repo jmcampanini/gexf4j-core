@@ -26,7 +26,7 @@ public abstract class AttributeValueTest {
 	
 	@Test
 	public void valueFor() {
-		assertThat(av.valueFor(), is(equalTo(attrib)));
+		assertThat(av.getAttribute(), is(equalTo(attrib)));
 	}
 	
 	@Test

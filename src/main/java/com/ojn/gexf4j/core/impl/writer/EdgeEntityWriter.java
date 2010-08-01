@@ -6,7 +6,7 @@ import javax.xml.stream.XMLStreamWriter;
 import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.EdgeType;
 
-public class EdgeEntityWriter extends AbstractEntityWriter<Edge> {
+public class EdgeEntityWriter extends DynDatEntityWriter<Edge> {
 	private static final String ENTITY = "edge";
 	private static final String ATTRIB_ID = "id";
 	private static final String ATTRIB_LABEL = "label";
