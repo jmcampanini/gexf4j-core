@@ -11,7 +11,7 @@ public interface Graph extends Dynamic<Graph> {
 	
 	EdgeType getDefaultEdgeType();
 	Graph setDefaultEdgeType(EdgeType edgeType);
-	
+
 	GraphMode getGraphMode();
 	Graph setGraphMode(GraphMode graphMode);
 	
@@ -19,5 +19,6 @@ public interface Graph extends Dynamic<Graph> {
 	Node createNode(String id);
 	
 	List<Attribute> getAttributes();
+	
 	Map<String, Node> getNodeMap();
 }

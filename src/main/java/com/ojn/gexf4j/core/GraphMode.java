@@ -4,4 +4,5 @@ public enum GraphMode {
 
 	STATIC,
 	DYNAMIC,
+	NOTSET,
 }

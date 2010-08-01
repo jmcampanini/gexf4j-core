@@ -59,20 +59,20 @@ public class StaxGraphWriter implements GraphWriter {
 	private void writeMeta(XMLStreamWriter writer, Graph graph) throws XMLStreamException {
 		Metadata meta = graph.getMetadata();
 		
-		if (meta != null) {
+		if (!meta.isEmpty()) {
 			writer.writeStartElement("meta");
 			
-			if (meta.getLastModified() != null) {
+			if (meta.hasLastModified()) {
 				writer.writeAttribute("lastmodifieddate", sdf.format(graph.getMetadata().getLastModified()));
 			}
 			
-			if (meta.getCreator() != null && !meta.getCreator().isEmpty()) {
+			if (meta.hasCreator()) {
 				writer.writeStartElement("creator");
 				writer.writeCharacters(meta.getCreator());
 				writer.writeEndElement();
 			}
 			
-			if (meta.getDescription() != null && !meta.getDescription().isEmpty()) {
+			if (meta.hasDescription()) {
 				writer.writeStartElement("description");
 				writer.writeCharacters(meta.getDescription());
 				writer.writeEndElement();

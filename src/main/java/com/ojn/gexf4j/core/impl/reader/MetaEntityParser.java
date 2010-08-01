@@ -8,9 +8,9 @@ import javax.xml.stream.XMLStreamReader;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.GraphMetadata;
+import com.ojn.gexf4j.core.Metadata;
 
-public class MetaEntityParser extends AbstractEntityParser<GraphMetadata> {
+public class MetaEntityParser extends AbstractEntityParser<Metadata> {
 	private static final String ENTITY_CREATOR = "creator";
 	private static final String ENTITY_DESCRIPTION = "description";
 	private static final String ENTITY_KEYWORDS = "keywords";

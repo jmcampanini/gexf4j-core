@@ -4,14 +4,18 @@ public interface Edge extends Dynamic<Edge>, Datum {
 
 	String getId();
 	
-	String getLabel();
-	Edge setLabel(String label);
-	
 	Node getSource();
 	
 	Node getTarget();
 	Edge setTarget(Node target);
 	
+	boolean hasLabel();
+	Edge clearLabel();
+	String getLabel();
+	Edge setLabel(String label);
+	
+	boolean hasWeight();
+	Edge clearWeight();
 	float getWeight();
 	Edge setWeight(float weight);
 	

@@ -21,17 +21,9 @@ public abstract class GraphTest {
 	public void defaultEdgeTypeValid() {
 		Graph g = newGraph();
 		for (EdgeType edgeType : EdgeType.values()) {
-			if (edgeType != EdgeType.NOTSET) {
-				g.setDefaultEdgeType(edgeType);
-				assertThat(g.getDefaultEdgeType(), is(equalTo(edgeType)));
-			}
+			g.setDefaultEdgeType(edgeType);
+			assertThat(g.getDefaultEdgeType(), is(equalTo(edgeType)));
 		}
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void defaultEdgeTypeNotSet() {
-		Graph g = newGraph();
-		g.setDefaultEdgeType(EdgeType.NOTSET);
 	}
 	
 	@Test
