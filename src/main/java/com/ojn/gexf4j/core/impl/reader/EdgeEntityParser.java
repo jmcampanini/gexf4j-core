@@ -1,16 +1,11 @@
 package com.ojn.gexf4j.core.impl.reader;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.xml.stream.XMLStreamReader;
 
 import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.EdgeType;
+import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.Node;
-import com.ojn.gexf4j.core.data.Attribute;
-import com.ojn.gexf4j.core.data.AttributeValue;
-import com.ojn.gexf4j.core.impl.EdgeImpl;
 
 public class EdgeEntityParser extends AbstractEntityParser<Edge> {
 	private static final String ATTRIB_ID = "id";
@@ -19,22 +14,19 @@ public class EdgeEntityParser extends AbstractEntityParser<Edge> {
 	private static final String ATTRIB_TARGET = "target";
 	private static final String ATTRIB_WEIGHT = "weight";
 	private static final String ATTRIB_TYPE = "type";
-	private static final String ENTITY_ATTVALUES = "attvalues";
+	// private static final String ENTITY_ATTVALUES = "attvalues";
 	
-	private Map<String, Node> nodeMap = null;
-	private List<Attribute> attributes = null;
-	private List<AttributeValue> attributeValues = null;
+	private Graph graph = null;
 	private String id = "";
 	private String label = "";
-	private Node source = null;
-	private Node target = null;
+	private String source = null;
+	private String target = null;
 	private float weight = 0.0f;
 	private EdgeType type = EdgeType.NOTSET;
 	
-	public EdgeEntityParser(XMLStreamReader reader, Map<String, Node> nodeMap, List<Attribute> attributes) {
+	public EdgeEntityParser(XMLStreamReader reader, Graph graph) {
 		super(reader);
-		this.nodeMap = nodeMap;
-		this.attributes = attributes;
+		this.graph = graph;
 	}
 
 	@Override
@@ -51,10 +43,10 @@ public class EdgeEntityParser extends AbstractEntityParser<Edge> {
 			label = value;
 			
 		} else if (ATTRIB_SOURCE.equalsIgnoreCase(name)) {
-			source = nodeMap.get(value);
+			source = value;
 			
 		} else if (ATTRIB_TARGET.equalsIgnoreCase(name)) {
-			target = nodeMap.get(value);
+			target = value;
 			
 		} else if (ATTRIB_WEIGHT.equalsIgnoreCase(name)) {
 			weight = Float.parseFloat(value);
@@ -67,22 +59,10 @@ public class EdgeEntityParser extends AbstractEntityParser<Edge> {
 
 	@Override
 	protected void onStartElement(XMLStreamReader reader) {
-		if (ENTITY_ATTVALUES.equalsIgnoreCase(reader.getLocalName())) {
+		/*if (ENTITY_ATTVALUES.equalsIgnoreCase(reader.getLocalName())) {
 			AttValuesEntityParser avep = new AttValuesEntityParser(reader, attributes);
 			attributeValues = avep.getEntity();
-		}
-	}
-
-	@Override
-	public Edge getEntity() {
-		Edge rv = new EdgeImpl(id, source, target);
-		
-		rv.setEdgeType(type);
-		rv.setLabel(label);
-		rv.setWeight(weight);
-		rv.getAttributeValues().addAll(attributeValues);
-		
-		return rv;
+		}*/
 	}
 
 	@Override
@@ -93,5 +73,16 @@ public class EdgeEntityParser extends AbstractEntityParser<Edge> {
 	@Override
 	protected void onOther(XMLStreamReader reader, int eventType) {
 		// do nothing
+	}
+
+	@Override
+	protected void onEndElement() {
+		Node ns = graph.getNodeMap().get(source);
+		Node nt = graph.getNodeMap().get(target);
+		
+		Edge e = ns.connectTo(id, nt);
+		e.setEdgeType(type);
+		e.setLabel(label);
+		e.setWeight(weight);
 	}
 }

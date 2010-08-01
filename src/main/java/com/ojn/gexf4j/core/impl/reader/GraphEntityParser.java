@@ -1,16 +1,10 @@
 package com.ojn.gexf4j.core.impl.reader;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.stream.XMLStreamReader;
 
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.GraphMode;
-import com.ojn.gexf4j.core.data.Attribute;
-import com.ojn.gexf4j.core.data.AttributeClass;
-import com.ojn.gexf4j.core.impl.GraphImpl;
 
 public class GraphEntityParser extends AbstractEntityParser<Graph> {
 	private static final String ATTRIB_EDGETYPE = "defaultedgetype";
@@ -19,18 +13,16 @@ public class GraphEntityParser extends AbstractEntityParser<Graph> {
 	private static final String ENTITY_NODES = "nodes";
 	private static final String ENTITY_EDGES = "edges";
 	
-	private List<Attribute> attribsNodes = null;
-	private List<Attribute> attribsEdges = null;
+	private Graph graph = null;
 	
-	public GraphEntityParser(XMLStreamReader reader) {
+	public GraphEntityParser(XMLStreamReader reader, Graph graph) {
 		super(reader);
-		attribsNodes = new ArrayList<Attribute>();
-		attribsEdges = new ArrayList<Attribute>();
+		this.graph = graph;
 	}
 
 	@Override
 	protected Graph newEntity() {
-		return new GraphImpl();
+		return graph;
 	}
 
 	@Override
@@ -46,19 +38,18 @@ public class GraphEntityParser extends AbstractEntityParser<Graph> {
 	@Override
 	protected void onStartElement(XMLStreamReader reader) {
 		if (ENTITY_ATTRIBUTES.equalsIgnoreCase(reader.getLocalName())) {
-			AttributesEntityParser aep = new AttributesEntityParser(reader);
+			/*AttributesEntityParser aep = new AttributesEntityParser(reader);
 			if (aep.getAttClass() == AttributeClass.NODE) {
 				attribsNodes = aep.getEntity();
 			} else if (aep.getAttClass() == AttributeClass.EDGE) {
 				attribsEdges = aep.getEntity();
-			}
+			}*/
 			
 		} else if (ENTITY_NODES.equalsIgnoreCase(reader.getLocalName())) {
-			new NodesEntityParser(reader, attribsNodes, entity);
+			new NodesEntityParser(reader, entity);
 			
 		} else if (ENTITY_EDGES.equalsIgnoreCase(reader.getLocalName())) {
-			EdgesEntityParser eep = new EdgesEntityParser(reader, entity.getNodeMap(), attribsEdges);
-			eep.getEntity();
+			new EdgesEntityParser(reader, entity);
 		}
 	}
 
@@ -69,6 +60,11 @@ public class GraphEntityParser extends AbstractEntityParser<Graph> {
 
 	@Override
 	protected void onOther(XMLStreamReader reader, int eventType) {
+		// do nothing
+	}
+
+	@Override
+	protected void onEndElement() {
 		// do nothing
 	}
 }

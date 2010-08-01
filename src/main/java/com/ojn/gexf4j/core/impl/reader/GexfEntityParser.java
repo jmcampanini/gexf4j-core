@@ -31,10 +31,8 @@ public class GexfEntityParser extends AbstractEntityParser<Graph> {
 		if (ENTITY_META.equalsIgnoreCase(reader.getLocalName())) {
 			new MetaEntityParser(reader, entity);
 			
-			
 		} else if (ENTITY_GRAPH.equalsIgnoreCase(reader.getLocalName())) {
-			GraphEntityParser gep = new GraphEntityParser(reader);
-			gep.getEntity();
+			new GraphEntityParser(reader, entity);
 		}
 	}
 	

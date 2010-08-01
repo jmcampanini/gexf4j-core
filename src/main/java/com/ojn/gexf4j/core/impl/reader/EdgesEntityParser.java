@@ -1,37 +1,31 @@
 package com.ojn.gexf4j.core.impl.reader;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.stream.XMLStreamReader;
 
 import com.ojn.gexf4j.core.Edge;
-import com.ojn.gexf4j.core.Node;
-import com.ojn.gexf4j.core.data.Attribute;
+import com.ojn.gexf4j.core.Graph;
 
 public class EdgesEntityParser extends AbstractEntityParser<List<Edge>> {
 	private static final String ENTITY_EDGE = "edge";
 	
-	private Map<String, Node> nodeMap = null;
-	private List<Attribute> attributes = null;
+	private Graph graph = null;
 	
-	public EdgesEntityParser(XMLStreamReader reader, Map<String, Node> nodeMap, List<Attribute> attributes) {
+	public EdgesEntityParser(XMLStreamReader reader, Graph graph) {
 		super(reader);
-		this.nodeMap = nodeMap;
-		this.attributes = attributes;
+		this.graph = graph;
 	}
 
 	@Override
 	protected List<Edge> newEntity() {
-		return new ArrayList<Edge>();
+		return null;
 	}
 
 	@Override
 	protected void onStartElement(XMLStreamReader reader) {
 		if (ENTITY_EDGE.equalsIgnoreCase(reader.getLocalName())) {
-			EdgeEntityParser eep = new EdgeEntityParser(reader, nodeMap, attributes);
-			entity.add(eep.getEntity());
+			new EdgeEntityParser(reader, graph);
 		}
 	}
 
@@ -47,6 +41,11 @@ public class EdgesEntityParser extends AbstractEntityParser<List<Edge>> {
 
 	@Override
 	protected void onOther(XMLStreamReader reader, int eventType) {
+		// do nothing
+	}
+
+	@Override
+	protected void onEndElement() {
 		// do nothing
 	}
 }
