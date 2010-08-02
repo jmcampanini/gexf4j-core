@@ -2,29 +2,24 @@ package com.ojn.gexf4j.core.impl;
 
 import static com.google.common.base.Preconditions.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Node;
-import com.ojn.gexf4j.core.data.AttributeValue;
-import com.ojn.gexf4j.core.dynamic.Slice;
+import com.ojn.gexf4j.core.viz.Color;
+import com.ojn.gexf4j.core.viz.EdgeShape;
 
-public class EdgeImpl implements Edge {
+public class EdgeImpl extends SliceableDatumBase<Edge> implements Edge {
 
 	private String id = "";
 	private String label = null;
-	private float weight = Float.MIN_VALUE;
-	private EdgeType edgeType = EdgeType.NOTSET;
 	private Node source = null;
 	private Node target = null;
-	private List<AttributeValue> attributeValues = null;
-	private Date startDate = null;
-	private Date endDate = null;
-	private List<Slice> slices = null;
-	
+	private Color color = null;
+	private EdgeShape shape = EdgeShape.NOTSET;
+	private float thickness = Float.MIN_VALUE;
+	private float weight = Float.MIN_VALUE;
+	private EdgeType edgeType = EdgeType.UNDIRECTED;
+		
 	public EdgeImpl(String id, Node source, Node target) {
 		checkArgument(id != null, "ID cannot be null.");
 		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
@@ -34,43 +29,23 @@ public class EdgeImpl implements Edge {
 		this.id = id;
 		this.source = source;
 		this.target = target;
-		
-		attributeValues = new ArrayList<AttributeValue>();
-		slices = new ArrayList<Slice>();
-	}
-	
-	@Override
-	public String getId() {
-		return id;
 	}
 
 	@Override
-	public boolean hasLabel() {
-		return (label != null);
+	protected Edge getSelf() {
+		return this;
 	}
-	
+
 	@Override
 	public Edge clearLabel() {
 		label = null;
 		return this;
 	}
-	
+
 	@Override
-	public String getLabel() {
-		checkState(hasLabel(), "Label has not been set.");
-		return label;
-	}
-	
-	@Override
-	public Edge setLabel(String label) {
-		checkArgument(label != null, "Label cannot be set to null.");
-		this.label = label;
+	public Edge clearThickness() {
+		thickness = Float.MIN_VALUE;
 		return this;
-	}
-	
-	@Override
-	public boolean hasWeight() {
-		return (weight != Float.MIN_VALUE);
 	}
 
 	@Override
@@ -78,28 +53,26 @@ public class EdgeImpl implements Edge {
 		weight = Float.MIN_VALUE;
 		return this;
 	}
-	
-	@Override
-	public float getWeight() {
-		checkState(hasWeight(), "Weight has not been set.");
-		return weight;
-	}
-	
-	@Override
-	public Edge setWeight(float weight) {
-		this.weight = weight;
-		return this;
-	}
-	
+
 	@Override
 	public EdgeType getEdgeType() {
 		return edgeType;
 	}
 
 	@Override
-	public Edge setEdgeType(EdgeType edgeType) {
-		this.edgeType = edgeType;
-		return this;
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public String getLabel() {
+		checkState(hasLabel(), "Label has not been set.");
+		return label;
+	}
+
+	@Override
+	public EdgeShape getShape() {
+		return shape;
 	}
 
 	@Override
@@ -113,67 +86,92 @@ public class EdgeImpl implements Edge {
 	}
 
 	@Override
+	public float getThickness() {
+		checkState(hasThickness(), "Thickness has not been set.");
+		return thickness;
+	}
+
+	@Override
+	public float getWeight() {
+		checkState(hasWeight(), "Weight has not been set.");
+		return weight;
+	}
+	
+	@Override
+	public boolean hasLabel() {
+		return (label != null);
+	}
+
+	@Override
+	public boolean hasThickness() {
+		return (thickness != Float.MIN_VALUE);
+	}
+
+	@Override
+	public boolean hasWeight() {
+		return (weight != Float.MIN_VALUE);
+	}
+
+	@Override
+	public Edge clearColor() {
+		color = null;
+		return this;
+	}
+	
+	@Override
+	public Color getColor() {
+		checkState(hasColor(), "Color has not been set.");
+		return color;
+	}
+	
+
+	@Override
+	public boolean hasColor() {
+		return (color != null);
+	}
+	
+	@Override
+	public Edge setColor(Color color) {
+		checkArgument(color != null, "Color cannot be null.");
+		this.color = color;
+		return this;
+	}
+
+	@Override
+	public Edge setEdgeType(EdgeType edgeType) {
+		this.edgeType = edgeType;
+		return this;
+	}
+
+	@Override
+	public Edge setLabel(String label) {
+		checkArgument(label != null, "Label cannot be null.");
+		this.label = label;
+		return this;
+	}
+
+	@Override
+	public Edge setShape(EdgeShape shape) {
+		this.shape = shape;
+		return this;
+	}
+
+	@Override
 	public Edge setTarget(Node target) {
-		checkArgument(target != null, "Target Node cannot be null.");
+		checkArgument(target != null, "Target cannot be null.");
 		this.target = target;
 		return this;
 	}
 
 	@Override
-	public List<AttributeValue> getAttributeValues() {
-		return attributeValues;
-	}
-
-	@Override
-	public List<Slice> getSlices() {
-		return slices;
-	}
-	
-	@Override
-	public boolean hasStartDate() {
-		return (startDate != null);
-	}
-	
-	@Override
-	public Edge clearStartDate() {
-		startDate = null;
-		return this;
-	}
-	
-	@Override
-	public Date getStartDate() {
-		checkState(hasStartDate(), "Start Data has not been set.");
-		return startDate;
-	}
-	
-	@Override
-	public Edge setStartDate(Date startDate) {
-		checkArgument(startDate != null, "Start Date cannot be set to null.");
-		this.startDate = startDate;
+	public Edge setThickness(float thickness) {
+		this.thickness = thickness;
 		return this;
 	}
 
 	@Override
-	public boolean hasEndDate() {
-		return (endDate != null);
-	}
-	
-	@Override
-	public Edge clearEndDate() {
-		endDate = null;
-		return this;
-	}
-	
-	@Override
-	public Date getEndDate() {
-		checkState(hasEndDate(), "End Data has not been set.");
-		return endDate;
-	}
-
-	@Override
-	public Edge setEndDate(Date endDate) {
-		checkArgument(endDate != null, "End Date cannot be set to null.");
-		this.endDate = endDate;
+	public Edge setWeight(float weight) {
+		this.weight = weight;
 		return this;
 	}
 }

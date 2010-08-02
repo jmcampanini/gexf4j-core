@@ -1,13 +1,12 @@
 package com.ojn.gexf4j.core;
 
 import java.util.List;
-import java.util.Map;
 
 import com.ojn.gexf4j.core.viz.Color;
 import com.ojn.gexf4j.core.viz.NodeShapeEntity;
 import com.ojn.gexf4j.core.viz.Position;
 
-public interface Node extends SlicableDatum<Node> {
+public interface Node extends SlicableDatum<Node>, HasNodes {
 
 	String getId();
 	
@@ -19,7 +18,7 @@ public interface Node extends SlicableDatum<Node> {
 	Edge connectTo(Node target);
 	Edge connectTo(String id, Node target);
 	
-	boolean hasEdgeTo(String nodeId);
+	boolean hasEdgeTo(String id);
 	
 	boolean hasColor();
 	Node clearColor();
@@ -42,11 +41,8 @@ public interface Node extends SlicableDatum<Node> {
 	
 	List<Node> getParentForList();
 
-	Map<String, Node> getSubNodeMap();
-	List<Edge> getSubEdges();
-	
 	boolean hasPID();
 	Node clearPID();
-	String getPID();
-	Node setPID(String pid);
+	Node getPID();
+	Node setPID(Node pid);
 }

@@ -35,8 +35,6 @@ public interface Edge extends SlicableDatum<Edge> {
 	float getThickness();
 	Edge setThickness(float thickness);
 
-	boolean hasShape();
-	Edge clearShape();
 	EdgeShape getShape();
 	Edge setShape(EdgeShape shape);	
 }

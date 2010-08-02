@@ -7,10 +7,9 @@ public interface Attribute {
 	String getId();
 	
 	String getTitle();
-	void setTitle(String title);
+	Attribute setTitle(String title);
 	
 	AttributeType getAttributeType();
-	Attribute setAttributeType(AttributeType attrType);
 	
 	boolean hasDefaultValue();
 	Attribute clearDefaultValue();

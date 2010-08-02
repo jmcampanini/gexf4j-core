@@ -7,4 +7,5 @@ public enum NodeShape {
 	TRIANGLE,
 	DIAMOND,
 	IMAGE,
+	NOTSET,
 }

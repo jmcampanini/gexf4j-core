@@ -1,26 +1,32 @@
 package com.ojn.gexf4j.core.impl;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.Node;
-import com.ojn.gexf4j.core.data.AttributeValue;
-import com.ojn.gexf4j.core.dynamic.Slice;
+import com.ojn.gexf4j.core.viz.Color;
+import com.ojn.gexf4j.core.viz.NodeShapeEntity;
+import com.ojn.gexf4j.core.viz.Position;
 
-public class NodeImpl implements Node {
+public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 
 	private String id = "";
 	private String label = "";
-	private List<AttributeValue> attributeValues = null;
+	private Color color = null;
+	private Node pid = null;
+	private Position position = null;
+	private NodeShapeEntity shape = null;
+	private float size = Float.MIN_VALUE;
 	private List<Edge> edges = null;
-	private Date startDate = null;
-	private Date endDate = null;
-	private List<Slice> slices = null;
+	private List<Node> parentForList = null;
+	private Map<String, Node> nodeMap = null;
 	
 	public NodeImpl() {
 		this(UUID.randomUUID().toString());
@@ -31,12 +37,69 @@ public class NodeImpl implements Node {
 		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
 		
 		this.id = id;
-		
-		attributeValues = new ArrayList<AttributeValue>();
-		edges = new ArrayList<Edge>();
-		slices = new ArrayList<Slice>();
+		this.edges = new ArrayList<Edge>();
+		this.parentForList = new ArrayList<Node>();
+		this.nodeMap = new HashMap<String, Node>();
 	}
 	
+	@Override
+	protected Node getSelf() {
+		return this;
+	}
+
+	@Override
+	public Node clearColor() {
+		color = null;
+		return this;
+	}
+	
+	@Override
+	public Color getColor() {
+		checkState(hasColor(), "Color has not been set.");
+		return color;
+	}
+	
+	@Override
+	public boolean hasColor() {
+		return (color != null);
+	}
+	
+	@Override
+	public Node setColor(Color color) {
+		checkArgument(color != null, "Color cannot be null.");
+		this.color = color;
+		return this;
+	}
+
+	@Override
+	public Node clearPID() {
+		pid = null;
+		return this;
+	}
+
+	@Override
+	public Node clearPosition() {
+		position = null;
+		return this;
+	}
+
+	@Override
+	public Node clearShape() {
+		shape = null;
+		return this;
+	}
+
+	@Override
+	public Node clearSize() {
+		size = Float.MIN_VALUE;
+		return this;
+	}
+
+	@Override
+	public List<Edge> getEdges() {
+		return edges;
+	}
+
 	@Override
 	public String getId() {
 		return id;
@@ -46,14 +109,83 @@ public class NodeImpl implements Node {
 	public String getLabel() {
 		return label;
 	}
-	
+
+	@Override
+	public Node getPID() {
+		checkState(hasPID(), "PID has not been set.");
+		return pid;
+	}
+
+	@Override
+	public List<Node> getParentForList() {
+		return parentForList;
+	}
+
+	@Override
+	public Position getPosition() {
+		checkState(hasPosition(), "Position has not been set.");
+		return position;
+	}
+
+	@Override
+	public NodeShapeEntity getShapeEntity() {
+		checkState(hasShape(), "Shape has not been set.");
+		return shape;
+	}
+
+	@Override
+	public float getSize() {
+		checkState(hasSize(), "Size has not been set.");
+		return size;
+	}
+
+	@Override
+	public boolean hasPID() {
+		return (pid != null);
+	}
+
+	@Override
+	public boolean hasPosition() {
+		return (position != null);
+	}
+
+	@Override
+	public boolean hasShape() {
+		return (shape != null);
+	}
+
+	@Override
+	public boolean hasSize() {
+		return (size != Float.MIN_VALUE);
+	}
+
 	@Override
 	public Node setLabel(String label) {
 		checkArgument(label != null, "Label cannot be null.");
 		this.label = label;
 		return this;
 	}
-	
+
+	@Override
+	public Node setPID(Node pid) {
+		checkArgument(pid != null, "PID cannot be null.");
+		this.pid = pid;
+		return this;
+	}
+
+	@Override
+	public Node setPosition(Position position) {
+		checkArgument(position != null, "Position cannot be null.");
+		this.position = position;
+		return this;
+	}
+
+	@Override
+	public Node setSize(float size) {
+		this.size = size;
+		return this;
+	}
+
 	@Override
 	public Edge connectTo(Node target) {
 		return connectTo(UUID.randomUUID().toString(), target);
@@ -63,91 +195,46 @@ public class NodeImpl implements Node {
 	public Edge connectTo(String id, Node target) {
 		checkArgument(id != null, "ID cannot be null.");
 		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
-		checkArgument(target != null, "Target Node cannot be null.");
-				
-		for (Edge e : edges) {
-			if (e.getId().equals(id)) {
-				throw new IllegalArgumentException("Cannot use duplicate Edge ID.");
-			}
-		}
+		checkArgument(target != null, "Target cannot be null.");
+		checkArgument(!hasEdgeTo(target.getId()), "Edge already exists.");
 		
 		Edge rv = new EdgeImpl(id, this, target);
 		edges.add(rv);
 		return rv;
 	}
-
+	
 	@Override
-	public List<AttributeValue> getAttributeValues() {
-		return attributeValues;
-	}
-
-	@Override
-	public List<Edge> getEdges() {
-		return edges;
-	}
-
-	@Override
-	public boolean hasEdgeTo(String nodeId) {
-		checkArgument(nodeId != null, "Node ID cannot be null.");
-				
+	public boolean hasEdgeTo(String id) {
+		checkArgument(id != null, "ID cannot be null.");
+		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
+		
 		for (Edge e : edges) {
-			if (e.getTarget().getId().equals(nodeId)) {
+			if (e.getTarget().getId().equals(id)) {
 				return true;
 			}
 		}
+		
 		return false;
 	}
-
-	@Override
-	public List<Slice> getSlices() {
-		return slices;
-	}
-
-	@Override
-	public boolean hasStartDate() {
-		return (startDate != null);
-	}
 	
 	@Override
-	public Node clearStartDate() {
-		startDate = null;
-		return this;
-	}
-	
-	@Override
-	public Date getStartDate() {
-		checkState(hasStartDate(), "Start Data has not been set.");
-		return startDate;
-	}
-	
-	@Override
-	public Node setStartDate(Date startDate) {
-		checkArgument(startDate != null, "Start Date cannot be set to null.");
-		this.startDate = startDate;
-		return this;
+	public Node createNode() {
+		return createNode(UUID.randomUUID().toString());
 	}
 
 	@Override
-	public boolean hasEndDate() {
-		return (endDate != null);
-	}
-	
-	@Override
-	public Node clearEndDate() {
-		endDate = null;
-		return this;
-	}
-	
-	@Override
-	public Date getEndDate() {
-		checkState(hasEndDate(), "End Data has not been set.");
-		return endDate;
+	public Node createNode(String id) {
+		checkArgument(id != null, "ID cannot be null.");
+		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
+		checkArgument(!nodeMap.containsKey(id), "Cannot use a duplicate ID.");
+		
+		Node rv = new NodeImpl(id);
+		nodeMap.put(id, rv);
+		return rv;
 	}
 
 	@Override
-	public Node setEndDate(Date endDate) {
-		checkArgument(endDate != null, "End Date cannot be set to null.");
-		this.endDate = endDate;
-		return this;
+	public Map<String, Node> getNodeMap() {
+		return nodeMap;
 	}
 }

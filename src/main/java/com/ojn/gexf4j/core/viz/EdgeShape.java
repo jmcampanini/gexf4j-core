@@ -6,4 +6,5 @@ public enum EdgeShape {
 	DOTTED,
 	DASHED,
 	DOUBLE,
+	NOTSET,
 }

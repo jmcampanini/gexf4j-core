@@ -1,70 +1,92 @@
 package com.ojn.gexf4j.core.impl.data;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ojn.gexf4j.core.data.Attribute;
-import com.ojn.gexf4j.core.data.AttributeClass;
 import com.ojn.gexf4j.core.data.AttributeType;
 import com.ojn.gexf4j.core.data.AttributeValue;
 
 public class AttributeImpl implements Attribute {
 
 	private String id = "";
-	private String title = "";
-	private AttributeType type = AttributeType.STRING;
 	private String defaultValue = null;
-	private AttributeClass attribClass = AttributeClass.NODE;
+	private AttributeType type = AttributeType.STRING;
+	private List<String> options = null;
+	private String title = "";
 	
-	public AttributeImpl(AttributeType type, String id, AttributeClass attribClass) {
-		this.type = type;
+	public AttributeImpl(String id, AttributeType type, String title) {
+		checkArgument(id != null, "ID cannot be null.");
+		checkArgument(id.trim().isEmpty(), "ID cannot be null or blank.");
+		checkArgument(title != null, "Title cannot be null.");
+		checkArgument(title.trim().isEmpty(), "Title cannot be null or blank.");
+		
 		this.id = id;
-		this.attribClass = attribClass;
+		this.type = type;
+		this.options = new ArrayList<String>();
+		this.title = title;
 	}
 	
 	@Override
-	public String getId() {
-		return id;
+	public Attribute clearDefaultValue() {
+		defaultValue = null;
+		return this;
 	}
-	
+
 	@Override
 	public AttributeType getAttributeType() {
 		return type;
 	}
-	
+
+	@Override
+	public String getDefaultValue() {
+		checkState(hasDefaultValue(), "Default Value has not been set.");
+		return defaultValue;
+	}
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public List<String> getOptions() {
+		return options;
+	}
+
 	@Override
 	public String getTitle() {
 		return title;
 	}
 
 	@Override
-	public void setTitle(String title) {
-		if (title == null) {
-			throw new IllegalArgumentException("Title cannot be null.");
-		}
-		this.title = title;
-	}
-	
-	@Override
-	public String getDefaultValue() {
-		return defaultValue;
+	public boolean hasDefaultValue() {
+		return (defaultValue != null);
 	}
 
 	@Override
-	public void setDefaultValue(String defaultValue) {
-		if (defaultValue == null) {
-			throw new IllegalArgumentException("Default Value cannot be null.");
-		}
+	public Attribute setDefaultValue(String defaultValue) {
+		checkArgument(defaultValue != null, "Default Value cannot be null.");
 		this.defaultValue = defaultValue;
+		return this;
+	}
+
+	@Override
+	public Attribute setTitle(String title) {
+		checkArgument(title != null, "Title cannot be null.");
+		checkArgument(title.trim().isEmpty(), "Title cannot be null or blank.");
+		this.title = title;
+		return this;
 	}
 	
 	@Override
 	public AttributeValue createValue(String value) {
-		if (value == null) {
-			throw new IllegalArgumentException("Value cannot be null.");
-		}
-		return new AttributeValueImpl(this, value);
-	}
-
-	@Override
-	public AttributeClass getAttributeClass() {
-		return attribClass;
+		checkArgument(value != null, "Value cannot be null.");
+		AttributeValue rv = new AttributeValueImpl(this);
+		rv.setValue(value);
+		return rv;
 	}
 }
