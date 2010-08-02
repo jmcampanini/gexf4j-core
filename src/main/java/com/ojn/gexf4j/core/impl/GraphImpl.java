@@ -13,7 +13,7 @@ import java.util.UUID;
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.Metadata;
-import com.ojn.gexf4j.core.GraphMode;
+import com.ojn.gexf4j.core.Mode;
 import com.ojn.gexf4j.core.Node;
 import com.ojn.gexf4j.core.Slice;
 import com.ojn.gexf4j.core.data.Attribute;
@@ -21,8 +21,9 @@ import com.ojn.gexf4j.core.data.Attribute;
 public class GraphImpl implements Graph {
 
 	private EdgeType defaultEdgeType = EdgeType.NOTSET;
-	private GraphMode graphMode = GraphMode.NOTSET;
-	private List<Attribute> attributes = null;
+	private Mode mode = Mode.NOTSET;
+	private List<Attribute> nodeAttributes = null;
+	private List<Attribute> edgeAttributes = null;
 	private Map<String, Node> nodeMap = null;
 	private Metadata metadata = null;
 	private Date startDate = null;
@@ -30,15 +31,21 @@ public class GraphImpl implements Graph {
 	private List<Slice> slices = null;
 	
 	public GraphImpl() {
-		attributes = new ArrayList<Attribute>();
+		nodeAttributes = new ArrayList<Attribute>();
+		edgeAttributes = new ArrayList<Attribute>();
 		nodeMap = new HashMap<String, Node>();
 		metadata = new MetadataImpl();
 		slices = new ArrayList<Slice>();
 	}
 	
 	@Override
-	public List<Attribute> getAttributes() {
-		return attributes;
+	public List<Attribute> getNodeAttributes() {
+		return nodeAttributes;
+	}
+	
+	@Override
+	public List<Attribute> getEdgeAttributes() {
+		return edgeAttributes;
 	}
 
 	@Override
@@ -53,13 +60,13 @@ public class GraphImpl implements Graph {
 	}
 	
 	@Override
-	public GraphMode getGraphMode() {
-		return graphMode;
+	public Mode getMode() {
+		return mode;
 	}
 
 	@Override
-	public Graph setGraphMode(GraphMode graphMode) {
-		this.graphMode = graphMode;
+	public Graph setMode(Mode graphMode) {
+		this.mode = graphMode;
 		return this;
 	}
 

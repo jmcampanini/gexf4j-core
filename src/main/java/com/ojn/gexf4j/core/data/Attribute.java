@@ -7,6 +7,7 @@ public interface Attribute {
 	AttributeType getAttributeType();
 	AttributeClass getAttributeClass();
 	
+	
 	String getTitle();
 	void setTitle(String title);
 	

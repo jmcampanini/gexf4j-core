@@ -39,9 +39,9 @@ public class DynamicGraphBuilder implements GraphBuilder {
 		attribInDegree.setTitle("indegree");
 		attribFrog.setTitle("frog");
 		
-		rv.getAttributes().add(attribUrl);
-		rv.getAttributes().add(attribInDegree);
-		rv.getAttributes().add(attribFrog);
+		rv.getNodeAttributes().add(attribUrl);
+		rv.getNodeAttributes().add(attribInDegree);
+		rv.getNodeAttributes().add(attribFrog);
 		
 		NodeImpl nGephi = (NodeImpl) rv.createNode("0");
 		nGephi.setLabel("Gephi");

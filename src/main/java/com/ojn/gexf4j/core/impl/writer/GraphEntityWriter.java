@@ -5,7 +5,8 @@ import javax.xml.stream.XMLStreamWriter;
 
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.GraphMode;
+import com.ojn.gexf4j.core.Mode;
+import com.ojn.gexf4j.core.data.AttributeClass;
 
 public class GraphEntityWriter extends DynamicEntityWriter<Graph> {
 	private static final String ENTITY = "graph";
@@ -30,15 +31,23 @@ public class GraphEntityWriter extends DynamicEntityWriter<Graph> {
 					entity.getDefaultEdgeType().toString().toLowerCase());
 		}
 		
-		if (entity.getGraphMode() != GraphMode.NOTSET) {
+		if (entity.getMode() != Mode.NOTSET) {
 			writer.writeAttribute(
 					ATTRIB_MODE,
-					entity.getGraphMode().toString().toLowerCase());
+					entity.getMode().toString().toLowerCase());
 		}
 	}
 
 	@Override
 	protected void writeElements() throws XMLStreamException {
+		if (!entity.getNodeAttributes().isEmpty()) {
+			new AttributesEntityWriter(writer, entity.getNodeAttributes(), AttributeClass.NODE);
+		}
+		
+		if (!entity.getEdgeAttributes().isEmpty()) {
+			new AttributesEntityWriter(writer, entity.getEdgeAttributes(), AttributeClass.EDGE);
+		}
+		
 		new NodesEntityWriter(writer, entity);
 		new EdgesEntityWriter(writer, entity);
 	}

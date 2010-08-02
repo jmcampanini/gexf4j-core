@@ -1,17 +1,14 @@
 package com.ojn.gexf4j.core;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 import java.util.Map;
 import java.util.UUID;
 
 import org.junit.Test;
-
-import com.ojn.gexf4j.core.data.Attribute;
-import com.ojn.gexf4j.core.data.AttributeClass;
-import com.ojn.gexf4j.core.data.AttributeType;
-import com.ojn.gexf4j.core.impl.data.AttributeImpl;
 
 public abstract class GraphTest {
 
@@ -27,11 +24,11 @@ public abstract class GraphTest {
 	}
 	
 	@Test
-	public void graphModeValid() {
+	public void modeValid() {
 		Graph g = newGraph();
-		for (GraphMode gm : GraphMode.values()) {
-			g.setGraphMode(gm);
-			assertThat(g.getGraphMode(), is(equalTo(gm)));
+		for (Mode gm : Mode.values()) {
+			g.setMode(gm);
+			assertThat(g.getMode(), is(equalTo(gm)));
 		}
 	}
 	
@@ -71,19 +68,6 @@ public abstract class GraphTest {
 		String id = UUID.randomUUID().toString();
 		g.createNode(id);
 		g.createNode(id);
-	}
-	
-	@Test
-	public void getAttributes() {
-		Graph g = newGraph();
-		Attribute attrib = new AttributeImpl(AttributeType.STRING, "test", AttributeClass.NODE);
-		
-		int a = g.getAttributes().size();
-		g.getAttributes().add(attrib);
-		int b = g.getAttributes().size();
-		
-		assertThat(b, is(equalTo(a+1)));
-		assertThat(g.getAttributes().contains(attrib), is(true));
 	}
 	
 	@Test

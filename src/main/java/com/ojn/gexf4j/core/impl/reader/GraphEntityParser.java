@@ -4,7 +4,7 @@ import javax.xml.stream.XMLStreamReader;
 
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.GraphMode;
+import com.ojn.gexf4j.core.Mode;
 
 public class GraphEntityParser extends AbstractEntityParser<Graph> {
 	private static final String ATTRIB_EDGETYPE = "defaultedgetype";
@@ -27,7 +27,7 @@ public class GraphEntityParser extends AbstractEntityParser<Graph> {
 			graph.setDefaultEdgeType(EdgeType.valueOf(value.toUpperCase()));
 			
 		} else if (ATTRIB_MODE.equalsIgnoreCase(name)) {
-			graph.setGraphMode(GraphMode.valueOf(value.toUpperCase()));
+			graph.setMode(Mode.valueOf(value.toUpperCase()));
 		}
 	}
 

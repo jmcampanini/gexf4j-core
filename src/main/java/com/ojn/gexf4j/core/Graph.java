@@ -12,13 +12,14 @@ public interface Graph extends Dynamic<Graph> {
 	EdgeType getDefaultEdgeType();
 	Graph setDefaultEdgeType(EdgeType edgeType);
 
-	GraphMode getGraphMode();
-	Graph setGraphMode(GraphMode graphMode);
+	Mode getMode();
+	Graph setMode(Mode graphMode);
 	
 	Node createNode();
 	Node createNode(String id);
 	
-	List<Attribute> getAttributes();
+	List<Attribute> getNodeAttributes();
+	List<Attribute> getEdgeAttributes();
 	
 	Map<String, Node> getNodeMap();
 }

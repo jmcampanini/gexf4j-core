@@ -1,6 +1,6 @@
 package com.ojn.gexf4j.core;
 
-public enum GraphMode {
+public enum Mode {
 
 	STATIC,
 	DYNAMIC,
