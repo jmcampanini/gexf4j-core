@@ -15,8 +15,8 @@ import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.Metadata;
 import com.ojn.gexf4j.core.Mode;
 import com.ojn.gexf4j.core.Node;
-import com.ojn.gexf4j.core.Slice;
 import com.ojn.gexf4j.core.data.Attribute;
+import com.ojn.gexf4j.core.dynamic.Slice;
 
 public class GraphImpl implements Graph {
 

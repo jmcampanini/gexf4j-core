@@ -1,18 +1,22 @@
 package com.ojn.gexf4j.core.data;
 
+import java.util.List;
+
 public interface Attribute {
 
 	String getId();
 	
-	AttributeType getAttributeType();
-	AttributeClass getAttributeClass();
-	
-	
 	String getTitle();
 	void setTitle(String title);
 	
-	AttributeValue createValue(String value);
+	AttributeType getAttributeType();
+	Attribute setAttributeType(AttributeType attrType);
 	
+	boolean hasDefaultValue();
 	String getDefaultValue();
-	void setDefaultValue(String defaultValue);
+	Attribute setDefaultValue(String defaultValue);
+	
+	List<String> getOptions();
+	
+	AttributeValue createValue(String value);
 }

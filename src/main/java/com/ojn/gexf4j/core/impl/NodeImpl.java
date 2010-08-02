@@ -9,8 +9,8 @@ import java.util.UUID;
 
 import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.Node;
-import com.ojn.gexf4j.core.Slice;
 import com.ojn.gexf4j.core.data.AttributeValue;
+import com.ojn.gexf4j.core.dynamic.Slice;
 
 public class NodeImpl implements Node {
 

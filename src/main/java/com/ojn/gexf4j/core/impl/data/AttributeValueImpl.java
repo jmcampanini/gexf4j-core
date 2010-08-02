@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.ojn.gexf4j.core.Slice;
 import com.ojn.gexf4j.core.data.Attribute;
 import com.ojn.gexf4j.core.data.AttributeValue;
+import com.ojn.gexf4j.core.dynamic.Slice;
 
 public class AttributeValueImpl implements AttributeValue {
 

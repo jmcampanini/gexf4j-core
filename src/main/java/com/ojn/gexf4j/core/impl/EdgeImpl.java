@@ -9,8 +9,8 @@ import java.util.List;
 import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Node;
-import com.ojn.gexf4j.core.Slice;
 import com.ojn.gexf4j.core.data.AttributeValue;
+import com.ojn.gexf4j.core.dynamic.Slice;
 
 public class EdgeImpl implements Edge {
 

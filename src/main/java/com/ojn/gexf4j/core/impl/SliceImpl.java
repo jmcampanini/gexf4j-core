@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import java.util.Date;
 
-import com.ojn.gexf4j.core.Slice;
+import com.ojn.gexf4j.core.dynamic.Slice;
 
 public class SliceImpl implements Slice {
 

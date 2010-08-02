@@ -3,7 +3,7 @@ package com.ojn.gexf4j.core.impl.writer;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.ojn.gexf4j.core.Slice;
+import com.ojn.gexf4j.core.dynamic.Slice;
 
 public class SliceEntityWriter extends AbstractEntityWriter<Slice> {
 	private static final String ENTITY = "slice";

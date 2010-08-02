@@ -1,6 +1,9 @@
 package com.ojn.gexf4j.core;
 
-public interface Edge extends DynamicDatum<Edge> {
+import com.ojn.gexf4j.core.viz.Color;
+import com.ojn.gexf4j.core.viz.EdgeShape;
+
+public interface Edge extends SlicableDatum<Edge> {
 
 	String getId();
 	
@@ -18,7 +21,22 @@ public interface Edge extends DynamicDatum<Edge> {
 	Edge clearWeight();
 	float getWeight();
 	Edge setWeight(float weight);
-	
+
 	EdgeType getEdgeType();
 	Edge setEdgeType(EdgeType edgeType);
+
+	boolean hasColor();
+	Edge clearColor();
+	Color getColor();
+	Edge setColor(Color color);
+
+	boolean hasThickness();
+	Edge clearThickness();
+	float getThickness();
+	Edge setThickness(float thickness);
+
+	boolean hasShape();
+	Edge clearShape();
+	EdgeShape getShape();
+	Edge setShape(EdgeShape shape);	
 }

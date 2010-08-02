@@ -1,8 +1,7 @@
-package com.ojn.gexf4j.core;
+package com.ojn.gexf4j.core.data;
 
 import java.util.List;
 
-import com.ojn.gexf4j.core.data.AttributeValue;
 
 public interface Datum {
 

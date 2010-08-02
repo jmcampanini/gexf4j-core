@@ -1,7 +1,7 @@
-package com.ojn.gexf4j.core;
+package com.ojn.gexf4j.core.dynamic;
 
 import java.util.Date;
-import java.util.List;
+
 
 public interface Dynamic<T extends Object> {
 
@@ -14,6 +14,4 @@ public interface Dynamic<T extends Object> {
 	T clearEndDate();
 	Date getEndDate();
 	T setEndDate(Date endDate);
-	
-	List<Slice> getSlices();
 }

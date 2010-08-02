@@ -5,7 +5,7 @@ import java.util.List;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.ojn.gexf4j.core.Slice;
+import com.ojn.gexf4j.core.dynamic.Slice;
 
 public class SlicesEntityWriter extends AbstractEntityWriter<List<Slice>> {
 	private static final String ENTITY = "slices";
