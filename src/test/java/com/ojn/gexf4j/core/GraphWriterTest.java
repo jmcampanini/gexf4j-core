@@ -30,7 +30,7 @@ import com.ojn.gexf4j.core.testgraphs.MetaDataGraphBuilder;
 public abstract class GraphWriterTest {
 
 	protected abstract String getFileNamePrefix();
-	protected abstract GraphWriter newGraphWriter();
+	protected abstract GexfWriter newGraphWriter();
 
 	protected GraphBuilder builder = null;
 	
@@ -53,7 +53,7 @@ public abstract class GraphWriterTest {
 	@Test
 	public void writeToStream() throws SAXException, IOException {
 		Graph g = builder.buildGraph();
-		GraphWriter gw = newGraphWriter();
+		GexfWriter gw = newGraphWriter();
 		String fileName = "target/" + getFileNamePrefix() + "_" + builder.getSuffix() + ".gexf";
 		File f = new File(fileName);
 		FileOutputStream fos = new FileOutputStream(f);

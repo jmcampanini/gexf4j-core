@@ -13,6 +13,7 @@ public interface Attribute {
 	Attribute setAttributeType(AttributeType attrType);
 	
 	boolean hasDefaultValue();
+	Attribute clearDefaultValue();
 	String getDefaultValue();
 	Attribute setDefaultValue(String defaultValue);
 	

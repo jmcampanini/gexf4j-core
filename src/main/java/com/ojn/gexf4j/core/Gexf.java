@@ -4,6 +4,8 @@ public interface Gexf {
 
 	String getVersion();
 	
+	boolean hasVariant();
+	Gexf clearVariant();
 	String getVariant();
 	Gexf setVariant(String variant);
 	

@@ -3,7 +3,6 @@ package com.ojn.gexf4j.core;
 import java.util.List;
 import java.util.Map;
 
-import com.ojn.gexf4j.core.phylogenic.Parent;
 import com.ojn.gexf4j.core.viz.Color;
 import com.ojn.gexf4j.core.viz.NodeShapeEntity;
 import com.ojn.gexf4j.core.viz.Position;
@@ -41,7 +40,7 @@ public interface Node extends SlicableDatum<Node> {
 	Node clearShape();
 	NodeShapeEntity getShapeEntity();
 	
-	List<Parent> getParents();
+	List<Node> getParentForList();
 
 	Map<String, Node> getSubNodeMap();
 	List<Edge> getSubEdges();

@@ -6,7 +6,7 @@ public interface NodeShapeEntity {
 	NodeShapeEntity setNodeShape(NodeShape shape);
 	
 	boolean hasUri();
-	void clearUri();
+	NodeShapeEntity clearUri();
 	String getUri();
 	NodeShapeEntity setUri(String uri);
 }

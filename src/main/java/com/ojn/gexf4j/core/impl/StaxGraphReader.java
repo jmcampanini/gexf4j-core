@@ -8,10 +8,10 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.GraphReader;
+import com.ojn.gexf4j.core.GexfReader;
 import com.ojn.gexf4j.core.impl.reader.GexfEntityParser;
 
-public class StaxGraphReader implements GraphReader {
+public class StaxGraphReader implements GexfReader {
 
 	@Override
 	public Graph readFromStream(InputStream in) throws IOException {

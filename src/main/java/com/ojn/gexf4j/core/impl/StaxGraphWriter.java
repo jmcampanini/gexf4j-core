@@ -8,10 +8,10 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.GraphWriter;
+import com.ojn.gexf4j.core.GexfWriter;
 import com.ojn.gexf4j.core.impl.writer.GexfEntityWriter;
 
-public class StaxGraphWriter implements GraphWriter {
+public class StaxGraphWriter implements GexfWriter {
 
 	@Override
 	public void writeToStream(Graph graph, OutputStream out) throws IOException {

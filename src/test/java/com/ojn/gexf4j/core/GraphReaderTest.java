@@ -15,7 +15,7 @@ public class GraphReaderTest {
 
 	@Test
 	public void quickTest() throws XMLStreamException, IOException {
-		GraphReader gr = new StaxGraphReader();
+		GexfReader gr = new StaxGraphReader();
 		
 		InputStream in = new FileInputStream(new File("target/stax_basic.gexf"));
         

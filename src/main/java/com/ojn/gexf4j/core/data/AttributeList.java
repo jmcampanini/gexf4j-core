@@ -12,5 +12,4 @@ public interface AttributeList extends List<Attribute>, Dynamic<AttributeList> {
 	
 	Mode getMode();
 	AttributeList setMode(Mode mode);
-	
 }

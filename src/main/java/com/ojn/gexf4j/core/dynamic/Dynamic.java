@@ -2,7 +2,6 @@ package com.ojn.gexf4j.core.dynamic;
 
 import java.util.Date;
 
-
 public interface Dynamic<T extends Object> {
 
 	boolean hasStartDate();
