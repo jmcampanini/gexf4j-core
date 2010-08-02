@@ -4,5 +4,4 @@ public enum Mode {
 
 	STATIC,
 	DYNAMIC,
-	NOTSET,
 }
