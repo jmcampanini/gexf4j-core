@@ -1,17 +1,22 @@
 package com.ojn.gexf4j.core.impl.writer;
 
+import java.util.List;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.Node;
 
-public class NodesEntityWriter extends AbstractEntityWriter<Graph> {
+public class NodesEntityWriter extends AbstractEntityWriter<List<Node>> {
 	private static final String ENTITY = "nodes";
+	private static final String ATTRIB_COUNT = "count";
 	
-	public NodesEntityWriter(XMLStreamWriter writer, Graph entity) {
+	public NodesEntityWriter(XMLStreamWriter writer, List<Node> entity) {
 		super(writer, entity);
-		write();
+		
+		if (!entity.isEmpty()) {
+			write();
+		}
 	}
 
 	@Override
@@ -21,13 +26,15 @@ public class NodesEntityWriter extends AbstractEntityWriter<Graph> {
 
 	@Override
 	protected void writeElements() throws XMLStreamException {
-		for (Node n : entity.getNodeMap().values()) {
+		for (Node n : entity) {
 			new NodeEntityWriter(writer, n);
 		}
 	}
 
 	@Override
 	protected void writeAttributes() throws XMLStreamException {
-		// do nothing
+		writer.writeAttribute(
+				ATTRIB_COUNT,
+				Integer.toString(entity.size()));
 	}
 }

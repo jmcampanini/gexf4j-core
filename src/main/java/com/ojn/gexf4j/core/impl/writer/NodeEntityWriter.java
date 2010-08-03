@@ -5,16 +5,17 @@ import javax.xml.stream.XMLStreamWriter;
 
 import com.ojn.gexf4j.core.Node;
 
-public class NodeEntityWriter extends DynDatEntityWriter<Node> {
+public class NodeEntityWriter extends SlicableDatumEntityWriter<Node> {
 	private static final String ENTITY = "node";
 	private static final String ATTRIB_ID = "id";
 	private static final String ATTRIB_LABEL = "label";
+	private static final String ATTRIB_PID = "pid";
 	
 	public NodeEntityWriter(XMLStreamWriter writer, Node entity) {
 		super(writer, entity);
 		write();
 	}
-
+	
 	@Override
 	protected String getElementName() {
 		return ENTITY;
@@ -22,6 +23,8 @@ public class NodeEntityWriter extends DynDatEntityWriter<Node> {
 
 	@Override
 	protected void writeAttributes() throws XMLStreamException {
+		super.writeAttributes();
+		
 		writer.writeAttribute(
 				ATTRIB_ID,
 				entity.getId());
@@ -29,10 +32,47 @@ public class NodeEntityWriter extends DynDatEntityWriter<Node> {
 		writer.writeAttribute(
 				ATTRIB_LABEL,
 				entity.getLabel());
+		
+		if (entity.hasPID()) {
+			writer.writeAttribute(
+					ATTRIB_PID,
+					entity.getPID().getId());
+		}
 	}
-
+	
 	@Override
 	protected void writeElements() throws XMLStreamException {
-		// do nothing
+		super.writeElements();
+		
+		if (entity.hasColor()) {
+			new ColorEntityWriter(writer, entity.getColor());
+		}
+		
+		if (entity.hasPosition()) {
+			new PositionEntityWriter(writer, entity.getPosition());
+		}
+		
+		if (entity.hasSize()) {
+			new ValueEntityWriter<Object>(writer,
+					"viz:size",
+					entity.getSize());
+		}
+		
+		if (entity.hasShape()) {
+			new NodeShapeEntityWriter(writer, entity.getShapeEntity());
+		}
+		
+		new ParentsEntityWriter(writer, entity.getParentForList());
+		
+		new NodesEntityWriter(writer, entity.getNodes());
+		new EdgesEntityWriter(writer, entity.getAllEdges());
 	}
 }
+
+
+
+/*
+edge
+viz:thickness ???
+viz:shape [viz:edge-shape] ???
+*/

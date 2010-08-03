@@ -1,18 +1,22 @@
 package com.ojn.gexf4j.core.impl.writer;
 
+import java.util.List;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import com.ojn.gexf4j.core.Edge;
-import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.Node;
 
-public class EdgesEntityWriter extends AbstractEntityWriter<Graph> {
+public class EdgesEntityWriter extends AbstractEntityWriter<List<Edge>> {
 	private static final String ENTITY = "edges";
+	private static final String ATTRIB_COUNT = "count";
 	
-	public EdgesEntityWriter(XMLStreamWriter writer, Graph entity) {
+	public EdgesEntityWriter(XMLStreamWriter writer, List<Edge> entity) {
 		super(writer, entity);
-		write();
+		
+		if (!entity.isEmpty()) {
+			write();
+		}
 	}
 
 	@Override
@@ -22,15 +26,15 @@ public class EdgesEntityWriter extends AbstractEntityWriter<Graph> {
 
 	@Override
 	protected void writeElements() throws XMLStreamException {
-		for (Node n : entity.getNodeMap().values()) {
-			for (Edge e : n.getEdges()) {
-				new EdgeEntityWriter(writer, e);
-			}
+		for (Edge e : entity) {
+			new EdgeEntityWriter(writer, e);
 		}
 	}
 
 	@Override
 	protected void writeAttributes() throws XMLStreamException {
-		// do nothing
+		writer.writeAttribute(
+				ATTRIB_COUNT,
+				Integer.toString(entity.size()));
 	}
 }

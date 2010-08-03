@@ -30,7 +30,7 @@ public class MetadataEntityWriter extends AbstractEntityWriter<Metadata> {
 		if (entity.hasLastModified()) {
 			writer.writeAttribute(
 					ATTRIB_LASTMODIFIED,
-					sdf.format(entity.getLastModified()));
+					AbstractEntityWriter.toDateString(entity.getLastModified()));
 		}
 	}
 
@@ -44,8 +44,8 @@ public class MetadataEntityWriter extends AbstractEntityWriter<Metadata> {
 			new StringEntityWriter(writer, ENTITY_DESCRIPTION, entity.getDescription());
 		}
 		
-		if (entity.getKeywords().isEmpty()) {
-			String keywords = Joiner.on(",").skipNulls().join(entity.getKeywords());
+		if (!entity.getKeywords().isEmpty()) {
+			String keywords = Joiner.on(',').skipNulls().join(entity.getKeywords());
 			new StringEntityWriter(writer, ENTITY_KEYWORDS, keywords);
 		}
 	}

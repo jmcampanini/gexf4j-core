@@ -29,10 +29,7 @@ public class AttValueEntityWriter extends DynamicEntityWriter<AttributeValue>{
 		writer.writeAttribute(
 				ATTRIB_VALUE,
 				entity.getValue());
-	}
-
-	@Override
-	protected void writeElements() throws XMLStreamException {
-		// do nothing
+		
+		super.writeAttributes();
 	}
 }

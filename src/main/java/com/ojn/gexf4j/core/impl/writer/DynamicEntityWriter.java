@@ -14,40 +14,22 @@ public abstract class DynamicEntityWriter<T extends Dynamic<?>> extends Abstract
 	}
 
 	@Override
-	protected void write() {
-		try {
-			writer.writeStartElement(getElementName());
-			
-			writeAttributes();
-			writeDynamicAttributes();
-			
-			writeElements();
-			writeDynamicElements();
-			
-			writer.writeEndElement();
-			
-		} catch (XMLStreamException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	protected void writeDynamicAttributes() throws XMLStreamException {
+	protected void writeAttributes() throws XMLStreamException {
 		if (entity.hasStartDate()) {
 			writer.writeAttribute(
 					ATTRIB_START,
-					sdf.format(entity.getStartDate()));
+					AbstractEntityWriter.toDateString(entity.getStartDate()));
 		}
 		
 		if (entity.hasEndDate()) {
 			writer.writeAttribute(
 					ATTRIB_END,
-					sdf.format(entity.getEndDate()));
+					AbstractEntityWriter.toDateString(entity.getEndDate()));
 		}
 	}
-	
-	protected void writeDynamicElements() throws XMLStreamException {
-		if (!entity.getSlices().isEmpty()) {
-			new SlicesEntityWriter(writer, entity.getSlices());
-		}
+
+	@Override
+	protected void writeElements() throws XMLStreamException {
+		// do nothing
 	}
 }

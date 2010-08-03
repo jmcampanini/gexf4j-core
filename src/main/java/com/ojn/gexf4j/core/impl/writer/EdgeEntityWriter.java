@@ -4,9 +4,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import com.ojn.gexf4j.core.Edge;
-import com.ojn.gexf4j.core.EdgeType;
+import com.ojn.gexf4j.core.viz.EdgeShape;
 
-public class EdgeEntityWriter extends DynDatEntityWriter<Edge> {
+public class EdgeEntityWriter extends SlicableDatumEntityWriter<Edge> {
 	private static final String ENTITY = "edge";
 	private static final String ATTRIB_ID = "id";
 	private static final String ATTRIB_LABEL = "label";
@@ -19,14 +19,37 @@ public class EdgeEntityWriter extends DynDatEntityWriter<Edge> {
 		super(writer, entity);
 		write();
 	}
-
+	
 	@Override
 	protected String getElementName() {
 		return ENTITY;
 	}
 
 	@Override
+	protected void writeElements() throws XMLStreamException {
+		super.writeElements();
+		
+		if (entity.hasColor()) {
+			new ColorEntityWriter(writer, entity.getColor());
+		}
+		
+		if (entity.hasThickness()) {
+			new ValueEntityWriter<Float>(writer,
+					"viz:thickness",
+					entity.getThickness());
+		}
+		
+		if (entity.getShape() != EdgeShape.NOTSET) {
+			new ValueEntityWriter<String>(writer,
+					"viz:shape",
+					entity.getShape().toString().toLowerCase());
+		}
+	}
+
+	@Override
 	protected void writeAttributes() throws XMLStreamException {
+		super.writeAttributes();
+		
 		writer.writeAttribute(
 				ATTRIB_ID,
 				entity.getId());
@@ -39,6 +62,10 @@ public class EdgeEntityWriter extends DynDatEntityWriter<Edge> {
 				ATTRIB_TARGET,
 				entity.getTarget().getId());
 		
+		writer.writeAttribute(
+				ATTRIB_TYPE,
+				entity.getEdgeType().toString().toLowerCase());
+		
 		if (entity.hasLabel()) {
 			writer.writeAttribute(
 					ATTRIB_LABEL,
@@ -50,16 +77,5 @@ public class EdgeEntityWriter extends DynDatEntityWriter<Edge> {
 					ATTRIB_WEIGHT,
 					Float.toString(entity.getWeight()));
 		}
-		
-		if (entity.getEdgeType() != EdgeType.NOTSET) {
-			writer.writeAttribute(
-					ATTRIB_TYPE,
-					entity.getEdgeType().toString().toLowerCase());
-		}
-	}
-
-	@Override
-	protected void writeElements() throws XMLStreamException {
-		// do nothing
 	}
 }

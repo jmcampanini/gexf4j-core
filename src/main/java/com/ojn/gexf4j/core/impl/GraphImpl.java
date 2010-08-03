@@ -2,10 +2,11 @@ package com.ojn.gexf4j.core.impl;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.EdgeType;
 import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.IDType;
@@ -24,13 +25,13 @@ public class GraphImpl extends DynamicBase<Graph> implements Graph {
 	private AttributeList nodeAttributeList = null;
 	private IDType idType = IDType.STRING;
 	private Mode mode = Mode.STATIC;
-	private Map<String, Node> nodeMap = null;
+	private List<Node> nodes = null;
 	private TimeType timeType = TimeType.DATE;
 	
 	public GraphImpl() {
 		edgeAttributeList = new AttributeListImpl(AttributeClass.EDGE);
 		nodeAttributeList = new AttributeListImpl(AttributeClass.NODE);
-		nodeMap = new HashMap<String, Node>();
+		nodes = new ArrayList<Node>();
 	}
 	
 	@Override
@@ -61,11 +62,6 @@ public class GraphImpl extends DynamicBase<Graph> implements Graph {
 	@Override
 	public AttributeList getNodeAttributes() {
 		return nodeAttributeList;
-	}
-
-	@Override
-	public Map<String, Node> getNodeMap() {
-		return nodeMap;
 	}
 
 	@Override
@@ -106,10 +102,25 @@ public class GraphImpl extends DynamicBase<Graph> implements Graph {
 	public Node createNode(String id) {
 		checkArgument(id != null, "ID cannot be null.");
 		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
-		checkArgument(!nodeMap.containsKey(id), "Cannot use a duplicate ID.");
-		
+				
 		Node rv = new NodeImpl(id);
-		nodeMap.put(id, rv);
+		nodes.add(rv);
 		return rv;
+	}
+
+	@Override
+	public List<Edge> getAllEdges() {
+		List<Edge> rv = new ArrayList<Edge>();
+		
+		for (Node n : nodes) {
+			rv.addAll(n.getEdges());
+		}
+		
+		return rv;
+	}
+
+	@Override
+	public List<Node> getNodes() {
+		return nodes;
 	}
 }

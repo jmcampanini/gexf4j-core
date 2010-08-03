@@ -4,9 +4,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import com.ojn.gexf4j.core.Edge;
@@ -24,9 +22,9 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 	private Position position = null;
 	private NodeShapeEntity shape = null;
 	private float size = Float.MIN_VALUE;
+	private List<Node> nodes = null;
 	private List<Edge> edges = null;
 	private List<Node> parentForList = null;
-	private Map<String, Node> nodeMap = null;
 	
 	public NodeImpl() {
 		this(UUID.randomUUID().toString());
@@ -37,9 +35,9 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
 		
 		this.id = id;
+		this.nodes = new ArrayList<Node>();
 		this.edges = new ArrayList<Edge>();
 		this.parentForList = new ArrayList<Node>();
-		this.nodeMap = new HashMap<String, Node>();
 	}
 	
 	@Override
@@ -226,15 +224,25 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 	public Node createNode(String id) {
 		checkArgument(id != null, "ID cannot be null.");
 		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
-		checkArgument(!nodeMap.containsKey(id), "Cannot use a duplicate ID.");
 		
 		Node rv = new NodeImpl(id);
-		nodeMap.put(id, rv);
+		nodes.add(rv);
 		return rv;
 	}
 
 	@Override
-	public Map<String, Node> getNodeMap() {
-		return nodeMap;
+	public List<Node> getNodes() {
+		return nodes;
+	}
+
+	@Override
+	public List<Edge> getAllEdges() {
+		List<Edge> rv = new ArrayList<Edge>();
+		
+		for (Node n : getNodes()) {
+			rv.addAll(n.getEdges());
+		}
+		
+		return rv;
 	}
 }

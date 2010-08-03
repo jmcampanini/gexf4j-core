@@ -5,13 +5,12 @@ import java.util.List;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.ojn.gexf4j.core.data.AttributeValue;
+import com.ojn.gexf4j.core.Node;
 
-public class AttValuesEntityWriter extends AbstractEntityWriter<List<AttributeValue>>{
-	private static final String ENTITY = "attvalues";
+public class ParentsEntityWriter extends AbstractEntityWriter<List<Node>>{
+	private static final String ENTITY = "parents";
 	
-	public AttValuesEntityWriter(XMLStreamWriter writer,
-			List<AttributeValue> entity) {
+	public ParentsEntityWriter(XMLStreamWriter writer, List<Node> entity) {
 		super(writer, entity);
 		
 		if (!entity.isEmpty()) {
@@ -26,8 +25,8 @@ public class AttValuesEntityWriter extends AbstractEntityWriter<List<AttributeVa
 
 	@Override
 	protected void writeElements() throws XMLStreamException {
-		for (AttributeValue attval : entity) {
-			new AttValueEntityWriter(writer, attval);
+		for (Node n : entity) {
+			new ParentEntityWriter(writer, n);
 		}
 	}
 

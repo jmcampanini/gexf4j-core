@@ -12,6 +12,10 @@ public class SlicesEntityWriter extends AbstractEntityWriter<List<Slice>> {
 	
 	public SlicesEntityWriter(XMLStreamWriter writer, List<Slice> entity) {
 		super(writer, entity);
+		
+		if (!entity.isEmpty()) {
+			write();
+		}
 	}
 
 	@Override
