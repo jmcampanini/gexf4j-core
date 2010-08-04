@@ -2,11 +2,11 @@ package com.ojn.gexf4j.core.impl;
 
 import com.ojn.gexf4j.core.GexfWriter;
 import com.ojn.gexf4j.core.GraphWriterTest;
-import com.ojn.gexf4j.core.testgraphs.GraphBuilder;
+import com.ojn.gexf4j.core.testgraphs.GexfBuilder;
 
 public class StaxGraphWriterTest extends GraphWriterTest {
 
-	public StaxGraphWriterTest(GraphBuilder builder) {
+	public StaxGraphWriterTest(GexfBuilder builder) {
 		super(builder);
 	}
 

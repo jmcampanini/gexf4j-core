@@ -34,6 +34,7 @@ public class AttributeValueImpl extends DynamicBase<AttributeValue> implements A
 	@Override
 	public AttributeValue setValue(String value) {
 		checkArgument(value != null, "Value cannot be null.");
+		this.value = value;
 		return this;
 	}
 }

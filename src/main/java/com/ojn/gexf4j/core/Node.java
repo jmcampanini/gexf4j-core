@@ -43,6 +43,6 @@ public interface Node extends SlicableDatum<Node>, HasNodes {
 
 	boolean hasPID();
 	Node clearPID();
-	Node getPID();
-	Node setPID(Node pid);
+	String getPID();
+	Node setPID(String pid);
 }

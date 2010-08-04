@@ -12,4 +12,7 @@ public interface Gexf {
 	Metadata getMetadata();
 	
 	Graph getGraph();
+	
+	boolean hasVisualization();
+	Gexf setVisualization(boolean viz);
 }

@@ -1,13 +1,7 @@
 package com.ojn.gexf4j.core.impl.reader;
 
-import javax.xml.stream.XMLStreamReader;
 
-import com.ojn.gexf4j.core.Edge;
-import com.ojn.gexf4j.core.EdgeType;
-import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.Node;
-
-public class EdgeEntityParser extends AbstractEntityParser<Edge> {
+public class EdgeEntityParser { /*extends AbstractEntityParser<Edge> {
 	private static final String ATTRIB_ID = "id";
 	private static final String ATTRIB_LABEL = "label";
 	private static final String ATTRIB_SOURCE = "source";
@@ -76,5 +70,5 @@ public class EdgeEntityParser extends AbstractEntityParser<Edge> {
 		e.setEdgeType(type);
 		e.setLabel(label);
 		e.setWeight(weight);
-	}
+	}*/
 }

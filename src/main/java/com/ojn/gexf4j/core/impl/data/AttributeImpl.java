@@ -20,9 +20,9 @@ public class AttributeImpl implements Attribute {
 	
 	public AttributeImpl(String id, AttributeType type, String title) {
 		checkArgument(id != null, "ID cannot be null.");
-		checkArgument(id.trim().isEmpty(), "ID cannot be null or blank.");
+		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
 		checkArgument(title != null, "Title cannot be null.");
-		checkArgument(title.trim().isEmpty(), "Title cannot be null or blank.");
+		checkArgument(!title.trim().isEmpty(), "Title cannot be null or blank.");
 		
 		this.id = id;
 		this.type = type;

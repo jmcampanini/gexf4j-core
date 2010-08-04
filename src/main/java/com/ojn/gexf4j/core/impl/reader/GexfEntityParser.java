@@ -1,11 +1,7 @@
 package com.ojn.gexf4j.core.impl.reader;
 
-import javax.xml.stream.XMLStreamReader;
 
-import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.impl.GraphImpl;
-
-public class GexfEntityParser extends AbstractEntityParser<Graph> {
+public class GexfEntityParser { /*extends AbstractEntityParser<Graph> {
 	private static final String ATTRIB_VERSION = "version";
 	private static final String ENTITY_META = "meta";
 	private static final String ENTITY_GRAPH = "graph";
@@ -52,5 +48,5 @@ public class GexfEntityParser extends AbstractEntityParser<Graph> {
 	@Override
 	protected void onEndElement() {
 		// do nothing
-	}
+	} */
 }

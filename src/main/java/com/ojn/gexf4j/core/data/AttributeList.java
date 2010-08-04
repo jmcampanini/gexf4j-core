@@ -11,4 +11,10 @@ public interface AttributeList extends List<Attribute>, Dynamic<AttributeList> {
 	
 	Mode getMode();
 	AttributeList setMode(Mode mode);
+	
+	Attribute createAttribute(AttributeType type, String title);
+	Attribute createAttribute(String id, AttributeType type, String title);
+	
+	AttributeList addAttribute(AttributeType type, String title);
+	AttributeList addAttribute(String id, AttributeType type, String title);
 }

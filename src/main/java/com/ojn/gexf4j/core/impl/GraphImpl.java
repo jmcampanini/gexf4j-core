@@ -12,25 +12,21 @@ import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.IDType;
 import com.ojn.gexf4j.core.Mode;
 import com.ojn.gexf4j.core.Node;
-import com.ojn.gexf4j.core.data.AttributeClass;
 import com.ojn.gexf4j.core.data.AttributeList;
 import com.ojn.gexf4j.core.dynamic.TimeType;
-import com.ojn.gexf4j.core.impl.data.AttributeListImpl;
 import com.ojn.gexf4j.core.impl.dynamic.DynamicBase;
 
 public class GraphImpl extends DynamicBase<Graph> implements Graph {
 
 	private EdgeType edgeType = EdgeType.UNDIRECTED;
-	private AttributeList edgeAttributeList = null;
-	private AttributeList nodeAttributeList = null;
+	private List<AttributeList> attributeLists = null;
 	private IDType idType = IDType.STRING;
 	private Mode mode = Mode.STATIC;
 	private List<Node> nodes = null;
 	private TimeType timeType = TimeType.DATE;
 	
 	public GraphImpl() {
-		edgeAttributeList = new AttributeListImpl(AttributeClass.EDGE);
-		nodeAttributeList = new AttributeListImpl(AttributeClass.NODE);
+		attributeLists = new ArrayList<AttributeList>();
 		nodes = new ArrayList<Node>();
 	}
 	
@@ -45,11 +41,6 @@ public class GraphImpl extends DynamicBase<Graph> implements Graph {
 	}
 
 	@Override
-	public AttributeList getEdgeAttributes() {
-		return edgeAttributeList;
-	}
-
-	@Override
 	public IDType getIDType() {
 		return idType;
 	}
@@ -57,11 +48,6 @@ public class GraphImpl extends DynamicBase<Graph> implements Graph {
 	@Override
 	public Mode getMode() {
 		return mode;
-	}
-
-	@Override
-	public AttributeList getNodeAttributes() {
-		return nodeAttributeList;
 	}
 
 	@Override
@@ -114,6 +100,7 @@ public class GraphImpl extends DynamicBase<Graph> implements Graph {
 		
 		for (Node n : nodes) {
 			rv.addAll(n.getEdges());
+			rv.addAll(n.getAllEdges());
 		}
 		
 		return rv;
@@ -122,5 +109,10 @@ public class GraphImpl extends DynamicBase<Graph> implements Graph {
 	@Override
 	public List<Node> getNodes() {
 		return nodes;
+	}
+
+	@Override
+	public List<AttributeList> getAttributeLists() {
+		return attributeLists;
 	}
 }

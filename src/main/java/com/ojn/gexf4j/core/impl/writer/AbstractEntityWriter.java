@@ -35,7 +35,7 @@ public abstract class AbstractEntityWriter<T extends Object> {
 	
 	protected void write() {
 		try {
-			writer.writeStartElement(getElementName());
+			writeStartElement();
 			
 			writeAttributes();
 			writeElements();
@@ -45,5 +45,9 @@ public abstract class AbstractEntityWriter<T extends Object> {
 		} catch (XMLStreamException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	protected void writeStartElement() throws XMLStreamException {
+		writer.writeStartElement(getElementName());
 	}
 }

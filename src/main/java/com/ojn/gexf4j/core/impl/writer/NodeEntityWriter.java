@@ -36,7 +36,7 @@ public class NodeEntityWriter extends SlicableDatumEntityWriter<Node> {
 		if (entity.hasPID()) {
 			writer.writeAttribute(
 					ATTRIB_PID,
-					entity.getPID().getId());
+					entity.getPID());
 		}
 	}
 	
@@ -65,14 +65,7 @@ public class NodeEntityWriter extends SlicableDatumEntityWriter<Node> {
 		new ParentsEntityWriter(writer, entity.getParentForList());
 		
 		new NodesEntityWriter(writer, entity.getNodes());
-		new EdgesEntityWriter(writer, entity.getAllEdges());
+		// TODO: Verify this is supposed to be commented out.
+		// new EdgesEntityWriter(writer, entity.getAllEdges());
 	}
 }
-
-
-
-/*
-edge
-viz:thickness ???
-viz:shape [viz:edge-shape] ???
-*/

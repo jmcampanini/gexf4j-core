@@ -1,13 +1,7 @@
 package com.ojn.gexf4j.core.impl.reader;
 
-import java.util.List;
 
-import javax.xml.stream.XMLStreamReader;
-
-import com.ojn.gexf4j.core.Edge;
-import com.ojn.gexf4j.core.Graph;
-
-public class EdgesEntityParser extends AbstractEntityParser<List<Edge>> {
+public class EdgesEntityParser { /*extends AbstractEntityParser<List<Edge>> {
 	private static final String ENTITY_EDGE = "edge";
 	
 	private Graph graph = null;
@@ -43,5 +37,5 @@ public class EdgesEntityParser extends AbstractEntityParser<List<Edge>> {
 	@Override
 	protected void onEndElement() {
 		// do nothing
-	}
+	}*/
 }

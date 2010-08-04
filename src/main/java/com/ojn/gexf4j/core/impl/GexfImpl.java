@@ -13,6 +13,7 @@ public class GexfImpl implements Gexf {
 	private String variant = null;
 	private Graph graph = null;
 	private Metadata meta = null;
+	private boolean viz = false;
 	
 	public GexfImpl() {
 		graph = new GraphImpl();
@@ -56,6 +57,17 @@ public class GexfImpl implements Gexf {
 		checkArgument(variant != null, "Variant cannot be null.");
 		checkArgument(!variant.trim().isEmpty(), "Variant cannot be empty or blank.");
 		this.variant = variant;
+		return this;
+	}
+
+	@Override
+	public boolean hasVisualization() {
+		return viz;
+	}
+
+	@Override
+	public Gexf setVisualization(boolean viz) {
+		this.viz = viz;
 		return this;
 	}
 }

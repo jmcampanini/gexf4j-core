@@ -9,7 +9,9 @@ import java.util.UUID;
 
 import com.ojn.gexf4j.core.Edge;
 import com.ojn.gexf4j.core.Node;
+import com.ojn.gexf4j.core.impl.viz.NodeShapeImpl;
 import com.ojn.gexf4j.core.viz.Color;
+import com.ojn.gexf4j.core.viz.NodeShape;
 import com.ojn.gexf4j.core.viz.NodeShapeEntity;
 import com.ojn.gexf4j.core.viz.Position;
 
@@ -18,7 +20,7 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 	private String id = "";
 	private String label = "";
 	private Color color = null;
-	private Node pid = null;
+	private String pid = null;
 	private Position position = null;
 	private NodeShapeEntity shape = null;
 	private float size = Float.MIN_VALUE;
@@ -38,6 +40,7 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 		this.nodes = new ArrayList<Node>();
 		this.edges = new ArrayList<Edge>();
 		this.parentForList = new ArrayList<Node>();
+		this.shape = new NodeShapeImpl();
 	}
 	
 	@Override
@@ -109,7 +112,7 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 	}
 
 	@Override
-	public Node getPID() {
+	public String getPID() {
 		checkState(hasPID(), "PID has not been set.");
 		return pid;
 	}
@@ -127,7 +130,6 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 
 	@Override
 	public NodeShapeEntity getShapeEntity() {
-		checkState(hasShape(), "Shape has not been set.");
 		return shape;
 	}
 
@@ -149,7 +151,7 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 
 	@Override
 	public boolean hasShape() {
-		return (shape != null);
+		return (shape.getNodeShape() != NodeShape.NOTSET);
 	}
 
 	@Override
@@ -165,8 +167,9 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 	}
 
 	@Override
-	public Node setPID(Node pid) {
+	public Node setPID(String pid) {
 		checkArgument(pid != null, "PID cannot be null.");
+		checkArgument(!pid.trim().isEmpty(), "PID cannot be empty or blank.");
 		this.pid = pid;
 		return this;
 	}
@@ -240,9 +243,21 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 		List<Edge> rv = new ArrayList<Edge>();
 		
 		for (Node n : getNodes()) {
-			rv.addAll(n.getEdges());
+			_getEdges(rv, n);
 		}
 		
 		return rv;
+	}
+	
+	private List<Edge> _getEdges(List<Edge> soFar, Node n) {
+		// add the nodes' edges
+		soFar.addAll(n.getEdges());
+		
+		// call this function on all of the sub nodes
+		for (Node subNode : n.getNodes()) {
+			_getEdges(soFar, subNode);
+		}
+		
+		return soFar;
 	}
 }

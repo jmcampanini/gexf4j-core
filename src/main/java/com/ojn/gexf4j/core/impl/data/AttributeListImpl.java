@@ -5,11 +5,13 @@ import static com.google.common.base.Preconditions.checkState;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import com.ojn.gexf4j.core.Mode;
 import com.ojn.gexf4j.core.data.Attribute;
 import com.ojn.gexf4j.core.data.AttributeClass;
 import com.ojn.gexf4j.core.data.AttributeList;
+import com.ojn.gexf4j.core.data.AttributeType;
 
 public class AttributeListImpl extends ArrayList<Attribute> implements AttributeList {
 	private static final long serialVersionUID = 8240096318919688740L;
@@ -88,6 +90,34 @@ public class AttributeListImpl extends ArrayList<Attribute> implements Attribute
 	public AttributeList setStartDate(Date startDate) {
 		checkArgument(startDate != null, "Start Date cannot be null.");
 		this.endDate = startDate;
+		return this;
+	}
+
+	@Override
+	public Attribute createAttribute(AttributeType type, String title) {
+		return createAttribute(UUID.randomUUID().toString(), type, title);
+	}
+
+	@Override
+	public Attribute createAttribute(String id, AttributeType type, String title) {
+		checkArgument(id != null, "ID cannot be null.");
+		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
+		checkArgument(title != null, "Title cannot be null.");
+		checkArgument(!title.trim().isEmpty(), "Title cannot be empty or blank.");
+		
+		Attribute rv = new AttributeImpl(id, type, title);
+		this.add(rv);
+		return rv;
+	}
+
+	@Override
+	public AttributeList addAttribute(AttributeType type, String title) {
+		return addAttribute(UUID.randomUUID().toString(), type, title);
+	}
+
+	@Override
+	public AttributeList addAttribute(String id, AttributeType type, String title) {
+		createAttribute(id, type, title);
 		return this;
 	}
 }

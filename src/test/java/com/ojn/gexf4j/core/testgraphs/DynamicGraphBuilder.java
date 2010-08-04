@@ -1,19 +1,17 @@
 package com.ojn.gexf4j.core.testgraphs;
 
-import java.util.Date;
-
-import com.ojn.gexf4j.core.Graph;
+import com.ojn.gexf4j.core.Gexf;
+import com.ojn.gexf4j.core.Mode;
 import com.ojn.gexf4j.core.Node;
 import com.ojn.gexf4j.core.data.Attribute;
 import com.ojn.gexf4j.core.data.AttributeClass;
+import com.ojn.gexf4j.core.data.AttributeList;
 import com.ojn.gexf4j.core.data.AttributeType;
-import com.ojn.gexf4j.core.impl.EdgeImpl;
-import com.ojn.gexf4j.core.impl.GraphImpl;
-import com.ojn.gexf4j.core.impl.NodeImpl;
-import com.ojn.gexf4j.core.impl.data.AttributeImpl;
-import com.ojn.gexf4j.core.impl.data.AttributeValueImpl;
+import com.ojn.gexf4j.core.impl.GexfImpl;
+import com.ojn.gexf4j.core.impl.data.AttributeListImpl;
+import com.ojn.gexf4j.core.impl.dynamic.SliceImpl;
 
-public class DynamicGraphBuilder implements GraphBuilder {
+public class DynamicGraphBuilder extends GexfBuilder {
 
 	@Override
 	public String getSuffix() {
@@ -21,67 +19,98 @@ public class DynamicGraphBuilder implements GraphBuilder {
 	}
 	
 	@Override
-	public String getXsdUrl() {
-		return "http://gexf.net/1.1draft/gexf.xsd";
-	}
-	
-	@Override
-	public Graph buildGraph() {
-		GraphImpl rv = new GraphImpl();
+	public Gexf buildGexf() {
+		Gexf gexf = new GexfImpl();
 		
-		rv.setStartDate(new Date());
+		gexf.getMetadata()
+			.setLastModified(toDate("2009-03-20"))
+			.setCreator("Gexf.net")
+			.setDescription("A Web network changing over time");
 		
-		Attribute attribUrl = new AttributeImpl(AttributeType.STRING, "0", AttributeClass.NODE);
-		Attribute attribInDegree = new AttributeImpl(AttributeType.STRING, "1", AttributeClass.NODE);
-		Attribute attribFrog = new AttributeImpl(AttributeType.STRING, "2", AttributeClass.NODE);
+		gexf.getGraph()
+			.setStartDate(toDate("2009-01-01"))
+			.setEndDate(toDate("2009-03-20"));
 		
-		attribUrl.setTitle("url");
-		attribInDegree.setTitle("indegree");
-		attribFrog.setTitle("frog");
+		AttributeList attrListStatic = new AttributeListImpl(AttributeClass.NODE);
+		gexf.getGraph().getAttributeLists().add(attrListStatic);
 		
-		rv.getNodeAttributes().add(attribUrl);
-		rv.getNodeAttributes().add(attribInDegree);
-		rv.getNodeAttributes().add(attribFrog);
+		AttributeList attrListDynamic = new AttributeListImpl(AttributeClass.NODE)
+			.setMode(Mode.DYNAMIC);
+		gexf.getGraph().getAttributeLists().add(attrListDynamic);
 		
-		NodeImpl nGephi = (NodeImpl) rv.createNode("0");
-		nGephi.setLabel("Gephi");
-		nGephi.getAttributeValues().add(attribUrl.createValue("http://gephi.org"));
-		nGephi.getAttributeValues().add(attribInDegree.createValue("1"));
+		Attribute attUrl = attrListStatic.createAttribute("0", AttributeType.STRING, "url");
+		Attribute attFrog = attrListStatic.createAttribute("1", AttributeType.BOOLEAN, "frog")
+			.setDefaultValue("true");
 		
-		nGephi.setStartDate(new Date());
-		nGephi.setEndDate(new Date());
+		Attribute attIndegree = attrListDynamic.createAttribute("2", AttributeType.FLOAT, "indegree");
 		
-		Node nWebatlas = rv.createNode("1");
-		nWebatlas.setLabel("Webatlas");
-		nWebatlas.getAttributeValues().add(attribUrl.createValue("http://webatlas.fr"));
-		nWebatlas.getAttributeValues().add(attribInDegree.createValue("2"));
+		Node gephi = gexf.getGraph().createNode("0");
+		gephi
+			.setLabel("Gephi")
+			.setStartDate(toDate("2009-03-01"))
+			.getAttributeValues()
+				.addValue(attUrl, "http://gephi.org")
+				.addValue(attIndegree, "1");
 		
-		Node nRTGI = rv.createNode("2");
-		nRTGI.setLabel("RTGI");
-		nRTGI.getAttributeValues().add(attribUrl.createValue("http://rtgi.fr"));
-		nRTGI.getAttributeValues().add(attribInDegree.createValue("1"));
+		Node webatlas = gexf.getGraph().createNode("1");
+		webatlas
+			.setLabel("Webatlas")
+			.getAttributeValues()
+				.addValue(attUrl, "http://webatlas.fr");
+			
+		webatlas.getAttributeValues().createValue(attIndegree, "1")
+			.setEndDate(toDate("2009-03-01"));
+		webatlas.getAttributeValues().createValue(attIndegree, "2")
+			.setStartDate(toDate("2009-03-01"))
+			.setEndDate(toDate("2009-03-10"));
+		webatlas.getAttributeValues().createValue(attIndegree, "1")
+			.setStartDate(toDate("2009-03-10"));
+	    
+		Node rtgi = gexf.getGraph().createNode("2");
+		rtgi
+			.setLabel("RTGI")
+			.getAttributeValues()
+				.addValue(attUrl, "http://rtgi.fr");
 		
-		Node nBar = rv.createNode("3");
-		nBar.setLabel("BarabasiLab");
-		nBar.getAttributeValues().add(attribUrl.createValue("http://barabasilab.com"));
-		nBar.getAttributeValues().add(attribInDegree.createValue("1"));
-		nBar.getAttributeValues().add(attribFrog.createValue("false"));
+		rtgi.getAttributeValues().createValue(attIndegree, "0")
+			.setEndDate(toDate("2009-03-01"));
+		rtgi.getAttributeValues().createValue(attIndegree, "1")
+			.setStartDate(toDate("2009-03-01"));
 		
-		AttributeValueImpl avi = (AttributeValueImpl) nBar.getAttributeValues().get(0);
-		avi.setStartDate(new Date());
-		avi.setEndDate(new Date());
+		rtgi.getSlices().add(new SliceImpl()
+			.setEndDate(toDate("2009-03-01")));
+		rtgi.getSlices().add(new SliceImpl()
+			.setStartDate(toDate("2009-03-05"))
+			.setEndDate(toDate("2009-03-10")));
 		
-		nGephi.connectTo("0", nWebatlas);
-		nGephi.connectTo("1", nRTGI);
-		nWebatlas.connectTo("2", nGephi);
-		nRTGI.connectTo("3", nWebatlas);
-		nGephi.connectTo("4", nBar);
+		Node blab = gexf.getGraph().createNode("3");
+		blab
+			.setLabel("BarabasiLab")
+			.getAttributeValues()
+				.addValue(attUrl, "http://barabasilab.com")
+				.addValue(attFrog, "false");
+				
+		blab.getAttributeValues().createValue(attIndegree, "0")
+			.setEndDate(toDate("2009-03-01"));
+		blab.getAttributeValues().createValue(attIndegree, "1")
+			.setStartDate(toDate("2009-03-01"));
 		
-		nGephi.getEdges().get(0).getAttributeValues().add(attribFrog.createValue("true"));
-		EdgeImpl ei = (EdgeImpl) nGephi.getEdges().get(0);
-		ei.setStartDate(new Date());
-		ei.setEndDate(new Date());
+		gephi.connectTo("0", webatlas)
+			.setStartDate(toDate("2009-03-01"));
 		
-		return rv;
+		gephi.connectTo("1", rtgi)
+			.setStartDate(toDate("2009-03-01"))
+			.setEndDate(toDate("2009-03-10"));
+		
+		webatlas.connectTo("2", gephi)
+			.setStartDate(toDate("2009-03-01"));
+		
+		rtgi.connectTo("3", webatlas)
+			.setEndDate(toDate("2009-03-10"));
+		
+		gephi.connectTo("4",blab)
+			.setStartDate(toDate("2009-03-01"));
+		
+		return gexf;
 	}
 }

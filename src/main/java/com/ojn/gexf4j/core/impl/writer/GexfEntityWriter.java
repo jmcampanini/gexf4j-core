@@ -9,9 +9,10 @@ public class GexfEntityWriter extends AbstractEntityWriter<Gexf> {
 	private static final String ENTITY = "gexf";
 	private static final String ATTRIBUTE_VERSION = "version";
 	private static final String ATTRIBUTE_VARIANT = "variant";
-	private static final String ATTRIBUTE_XMLNS = "xmlns";
-	private static final String VALUE_XMLNS = "http://www.gexf.net/1.1draft";
-	
+	private static final String XMLNS_URL = "http://www.gexf.net/1.1draft";
+	private static final String XMLNS_VIZ = "viz";
+	private static final String XMLNS_VIZ_URL = "http://www.gexf.net/1.1draft/viz";
+    
 	public GexfEntityWriter(XMLStreamWriter writer, Gexf entity) {
 		super(writer, entity);
 		write();
@@ -28,14 +29,20 @@ public class GexfEntityWriter extends AbstractEntityWriter<Gexf> {
 				ATTRIBUTE_VERSION,
 				entity.getVersion());
 		
-		writer.writeAttribute(
-				ATTRIBUTE_XMLNS,
-				VALUE_XMLNS);
-		
 		if (entity.hasVariant()) {
 			writer.writeAttribute(
 					ATTRIBUTE_VARIANT,
 					entity.getVariant());
+		}
+	}
+
+	@Override
+	protected void writeStartElement() throws XMLStreamException {
+		writer.writeStartElement(getElementName());
+		writer.writeDefaultNamespace(XMLNS_URL);
+		
+		if (entity.hasVisualization()) {
+			writer.writeNamespace(XMLNS_VIZ, XMLNS_VIZ_URL);
 		}
 	}
 

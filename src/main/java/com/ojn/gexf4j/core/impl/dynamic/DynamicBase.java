@@ -61,7 +61,7 @@ public abstract class DynamicBase<T extends Object> implements Dynamic<T> {
 	@Override
 	public T setStartDate(Date startDate) {
 		checkArgument(startDate != null, "Start Date cannot be null.");
-		this.endDate = startDate;
+		this.startDate = startDate;
 		return getSelf();
 	}
 }

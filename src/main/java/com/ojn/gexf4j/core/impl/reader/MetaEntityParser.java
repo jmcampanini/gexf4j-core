@@ -1,16 +1,7 @@
 package com.ojn.gexf4j.core.impl.reader;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
-import javax.xml.stream.XMLStreamReader;
-
-import com.google.common.base.Splitter;
-import com.google.common.collect.Iterables;
-import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.Metadata;
-
-public class MetaEntityParser extends AbstractEntityParser<Metadata> {
+public class MetaEntityParser { /*extends AbstractEntityParser<Metadata> {
 	private static final String ENTITY_CREATOR = "creator";
 	private static final String ENTITY_DESCRIPTION = "description";
 	private static final String ENTITY_KEYWORDS = "keywords";
@@ -73,5 +64,5 @@ public class MetaEntityParser extends AbstractEntityParser<Metadata> {
 	@Override
 	protected void onOther(XMLStreamReader reader, int eventType) {
 		// do nothing
-	}
+	} */
 }

@@ -7,7 +7,7 @@ import com.ojn.gexf4j.core.viz.NodeShapeEntity;
 
 public class NodeShapeImpl implements NodeShapeEntity {
 
-	private NodeShape shape = NodeShape.DISC;
+	private NodeShape shape = NodeShape.NOTSET;
 	private String uri = null;
 	
 	public NodeShapeImpl() {

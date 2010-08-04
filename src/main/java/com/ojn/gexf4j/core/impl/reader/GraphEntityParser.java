@@ -1,12 +1,7 @@
 package com.ojn.gexf4j.core.impl.reader;
 
-import javax.xml.stream.XMLStreamReader;
 
-import com.ojn.gexf4j.core.EdgeType;
-import com.ojn.gexf4j.core.Graph;
-import com.ojn.gexf4j.core.Mode;
-
-public class GraphEntityParser extends AbstractEntityParser<Graph> {
+public class GraphEntityParser { /*extends AbstractEntityParser<Graph> {
 	private static final String ATTRIB_EDGETYPE = "defaultedgetype";
 	private static final String ATTRIB_MODE = "mode";
 	private static final String ENTITY_ATTRIBUTES = "attributes";
@@ -34,12 +29,12 @@ public class GraphEntityParser extends AbstractEntityParser<Graph> {
 	@Override
 	protected void onStartElement(XMLStreamReader reader) {
 		if (ENTITY_ATTRIBUTES.equalsIgnoreCase(reader.getLocalName())) {
-			/*AttributesEntityParser aep = new AttributesEntityParser(reader);
+			AttributesEntityParser aep = new AttributesEntityParser(reader);
 			if (aep.getAttClass() == AttributeClass.NODE) {
 				attribsNodes = aep.getEntity();
 			} else if (aep.getAttClass() == AttributeClass.EDGE) {
 				attribsEdges = aep.getEntity();
-			}*/
+			}
 			
 		} else if (ENTITY_NODES.equalsIgnoreCase(reader.getLocalName())) {
 			new NodesEntityParser(reader, graph);
@@ -62,5 +57,5 @@ public class GraphEntityParser extends AbstractEntityParser<Graph> {
 	@Override
 	protected void onEndElement() {
 		// do nothing
-	}
+	} */
 }

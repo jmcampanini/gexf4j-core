@@ -4,6 +4,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import com.ojn.gexf4j.core.Graph;
+import com.ojn.gexf4j.core.data.AttributeList;
 
 public class GraphEntityWriter extends DynamicEntityWriter<Graph> {
 	private static final String ENTITY = "graph";
@@ -41,13 +42,17 @@ public class GraphEntityWriter extends DynamicEntityWriter<Graph> {
 				entity.getTimeType().toString().toLowerCase());
 		
 		AbstractEntityWriter.writerTimeType = entity.getTimeType();
+		super.writeAttributes();
 	}
 
 	@Override
 	protected void writeElements() throws XMLStreamException {
-		new AttributesEntityWriter(writer, entity.getNodeAttributes());
-		new AttributesEntityWriter(writer, entity.getEdgeAttributes());
+		for (AttributeList attList : entity.getAttributeLists()) {
+			new AttributesEntityWriter(writer, attList);
+		}
+		
 		new NodesEntityWriter(writer, entity.getNodes());
 		new EdgesEntityWriter(writer, entity.getAllEdges());
+		super.writeElements();
 	}
 }
