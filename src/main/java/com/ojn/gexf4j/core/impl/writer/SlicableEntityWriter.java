@@ -12,16 +12,11 @@ public abstract class SlicableEntityWriter<T extends Slicable<?>> extends Dynami
 	}
 
 	@Override
-	protected void writeAttributes() throws XMLStreamException {
-		// do nothing
-		super.writeAttributes();
-	}
-
-	@Override
 	protected void writeElements() throws XMLStreamException {
+		super.writeElements();
+		
 		if (!entity.getSlices().isEmpty()) {
 			new SlicesEntityWriter(writer, entity.getSlices());
 		}
-		super.writeElements();
-	}	
+	}
 }

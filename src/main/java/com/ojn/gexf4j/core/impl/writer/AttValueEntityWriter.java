@@ -22,6 +22,8 @@ public class AttValueEntityWriter extends DynamicEntityWriter<AttributeValue>{
 
 	@Override
 	protected void writeAttributes() throws XMLStreamException {
+		super.writeAttributes();
+		
 		writer.writeAttribute(
 				ATTRIB_FOR,
 				entity.getAttribute().getId());
@@ -29,7 +31,5 @@ public class AttValueEntityWriter extends DynamicEntityWriter<AttributeValue>{
 		writer.writeAttribute(
 				ATTRIB_VALUE,
 				entity.getValue());
-		
-		super.writeAttributes();
 	}
 }

@@ -13,7 +13,6 @@ import com.ojn.gexf4j.core.dynamic.TimeType;
 public abstract class AbstractEntityWriter<T extends Object> {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	protected static TimeType writerTimeType = TimeType.DATE;
-	
 	protected static String toDateString(Date d) {
 		return sdf.format(d);
 	}
