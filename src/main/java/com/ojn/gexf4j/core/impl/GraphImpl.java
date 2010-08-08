@@ -12,6 +12,7 @@ import com.ojn.gexf4j.core.Graph;
 import com.ojn.gexf4j.core.IDType;
 import com.ojn.gexf4j.core.Mode;
 import com.ojn.gexf4j.core.Node;
+import com.ojn.gexf4j.core.data.Attribute;
 import com.ojn.gexf4j.core.data.AttributeList;
 import com.ojn.gexf4j.core.dynamic.TimeType;
 import com.ojn.gexf4j.core.impl.dynamic.DynamicBase;
@@ -114,5 +115,21 @@ public class GraphImpl extends DynamicBase<Graph> implements Graph {
 	@Override
 	public List<AttributeList> getAttributeLists() {
 		return attributeLists;
+	}
+
+	@Override
+	public Attribute getAttributeById(String id) {
+		checkArgument(id != null, "ID cannot be null.");
+		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
+		
+		for (AttributeList al : getAttributeLists()) {
+			for (Attribute attrib : al) {
+				if (attrib.getId().equalsIgnoreCase(id)) {
+					return attrib;
+				}
+			}
+		}
+		
+		return null;
 	}
 }

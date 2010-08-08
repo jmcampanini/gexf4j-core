@@ -1,17 +1,15 @@
 package com.ojn.gexf4j.core.impl.writer;
 
-import java.util.List;
-
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import com.ojn.gexf4j.core.data.AttributeValue;
+import com.ojn.gexf4j.core.data.AttributeValueList;
 
-public class AttValuesEntityWriter extends AbstractEntityWriter<List<AttributeValue>>{
+public class AttValuesEntityWriter extends AbstractEntityWriter<AttributeValueList>{
 	private static final String ENTITY = "attvalues";
 	
-	public AttValuesEntityWriter(XMLStreamWriter writer,
-			List<AttributeValue> entity) {
+	public AttValuesEntityWriter(XMLStreamWriter writer, AttributeValueList entity) {
 		super(writer, entity);
 		
 		if (!entity.isEmpty()) {

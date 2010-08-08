@@ -4,45 +4,23 @@ import javax.xml.stream.XMLStreamReader;
 
 public class StringEntityParser extends AbstractEntityParser<String> {
 
-	private String name = "";
-	private String value = "";
-	
 	public StringEntityParser(XMLStreamReader reader) {
-		super(reader);
-		name = reader.getLocalName();
+		super(reader, "");
 		parse();
 	}
 
 	@Override
 	protected void onCharacters(XMLStreamReader reader) {
-		value = reader.getText();
-	}
-
-	public String getName() {
-		return name;
-	}
-	
-	public String getValue() {
-		return value;
-	}
-
-	@Override
-	protected void onOther(XMLStreamReader reader, int eventType) {
-		// do nothing
-	}
-
-	@Override
-	protected void onStartElement(XMLStreamReader reader) {
-		// do nothing
+		entity = reader.getText();
 	}
 
 	@Override
 	protected void onAttribute(String name, String value) {
 		// do nothing
 	}
-
+	
 	@Override
-	protected void onEndElement() {
+	protected void onStartElement(String name, XMLStreamReader reader) {
 		// do nothing
 	}
 }
