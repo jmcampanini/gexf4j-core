@@ -2,21 +2,16 @@ package com.ojn.gexf4j.core.impl.writer;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.ojn.gexf4j.core.dynamic.TimeType;
-
 public abstract class AbstractEntityWriter<T extends Object> {
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	protected static TimeType writerTimeType = TimeType.DATE;
+	// private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	// protected static TimeType writerTimeType = TimeType.DATE;
 	
-	protected static String toDateString(Date d) {
-		return sdf.format(d);
-	}
+	// protected static String toDateString(Date d) {
+		// return sdf.format(d);
+	// }
 	
 	protected XMLStreamWriter writer = null;
 	protected T entity = null;

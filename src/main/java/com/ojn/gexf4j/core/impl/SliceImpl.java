@@ -3,14 +3,13 @@ package com.ojn.gexf4j.core.impl;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
-import java.util.Date;
-
+import com.ojn.gexf4j.core.dynamic.GexfTime;
 import com.ojn.gexf4j.core.dynamic.Slice;
 
 public class SliceImpl implements Slice {
 
-	private Date startDate = null;
-	private Date endDate = null;
+	private GexfTime startDate = null;
+	private GexfTime endDate = null;
 
 	public SliceImpl() {
 		// empty constructor
@@ -28,13 +27,13 @@ public class SliceImpl implements Slice {
 	}
 	
 	@Override
-	public Date getStartDate() {
+	public GexfTime getStartDate() {
 		checkState(hasStartDate(), "Start Data has not been set.");
 		return startDate;
 	}
 	
 	@Override
-	public Slice setStartDate(Date startDate) {
+	public Slice setStartDate(GexfTime startDate) {
 		checkArgument(startDate != null, "Start Date cannot be set to null.");
 		this.startDate = startDate;
 		return this;
@@ -52,13 +51,13 @@ public class SliceImpl implements Slice {
 	}
 	
 	@Override
-	public Date getEndDate() {
+	public GexfTime getEndDate() {
 		checkState(hasEndDate(), "End Data has not been set.");
 		return endDate;
 	}
 
 	@Override
-	public Slice setEndDate(Date endDate) {
+	public Slice setEndDate(GexfTime endDate) {
 		checkArgument(endDate != null, "End Date cannot be set to null.");
 		this.endDate = endDate;
 		return this;

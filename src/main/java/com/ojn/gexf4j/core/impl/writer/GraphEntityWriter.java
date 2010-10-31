@@ -41,7 +41,7 @@ public class GraphEntityWriter extends DynamicEntityWriter<Graph> {
 				ATTRIB_TIMETYPE,
 				entity.getTimeType().toString().toLowerCase());
 		
-		AbstractEntityWriter.writerTimeType = entity.getTimeType();
+		// AbstractEntityWriter.writerTimeType = entity.getTimeType();
 		super.writeAttributes();
 	}
 

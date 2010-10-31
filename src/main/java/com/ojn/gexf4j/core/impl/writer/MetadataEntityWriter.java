@@ -1,5 +1,7 @@
 package com.ojn.gexf4j.core.impl.writer;
 
+import java.text.SimpleDateFormat;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
@@ -30,7 +32,7 @@ public class MetadataEntityWriter extends AbstractEntityWriter<Metadata> {
 		if (entity.hasLastModified()) {
 			writer.writeAttribute(
 					ATTRIB_LASTMODIFIED,
-					AbstractEntityWriter.toDateString(entity.getLastModified()));
+					new SimpleDateFormat("yyyy-MM-dd").format(entity.getLastModified()));
 		}
 	}
 

@@ -1,15 +1,15 @@
 package com.ojn.gexf4j.core.impl.dynamic;
 
-import static com.google.common.base.Preconditions.*;
-
-import java.util.Date;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.ojn.gexf4j.core.dynamic.Dynamic;
+import com.ojn.gexf4j.core.dynamic.GexfTime;
 
 public abstract class DynamicBase<T extends Object> implements Dynamic<T> {
 
-	private Date endDate = null;
-	private Date startDate = null;
+	private GexfTime endDate = null;
+	private GexfTime startDate = null;
 
 	protected abstract T getSelf();
 	
@@ -30,13 +30,13 @@ public abstract class DynamicBase<T extends Object> implements Dynamic<T> {
 	}
 
 	@Override
-	public Date getEndDate() {
+	public GexfTime getEndDate() {
 		checkState(hasEndDate(), "End Date has not been set.");
 		return endDate;
 	}
 
 	@Override
-	public Date getStartDate() {
+	public GexfTime getStartDate() {
 		checkState(hasStartDate(), "Start Date has not been set.");
 		return startDate;
 	}
@@ -52,14 +52,14 @@ public abstract class DynamicBase<T extends Object> implements Dynamic<T> {
 	}
 
 	@Override
-	public T setEndDate(Date endDate) {
+	public T setEndDate(GexfTime endDate) {
 		checkArgument(endDate != null, "End Date cannot be null.");
 		this.endDate = endDate;
 		return getSelf();
 	}
 
 	@Override
-	public T setStartDate(Date startDate) {
+	public T setStartDate(GexfTime startDate) {
 		checkArgument(startDate != null, "Start Date cannot be null.");
 		this.startDate = startDate;
 		return getSelf();

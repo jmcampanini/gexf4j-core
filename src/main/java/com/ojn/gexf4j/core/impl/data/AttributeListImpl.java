@@ -4,7 +4,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 import com.ojn.gexf4j.core.Mode;
@@ -12,12 +11,13 @@ import com.ojn.gexf4j.core.data.Attribute;
 import com.ojn.gexf4j.core.data.AttributeClass;
 import com.ojn.gexf4j.core.data.AttributeList;
 import com.ojn.gexf4j.core.data.AttributeType;
+import com.ojn.gexf4j.core.dynamic.GexfTime;
 
 public class AttributeListImpl extends ArrayList<Attribute> implements AttributeList {
 	private static final long serialVersionUID = 8240096318919688740L;
 	
-	private Date endDate = null;
-	private Date startDate = null;
+	private GexfTime endDate = null;
+	private GexfTime startDate = null;
 	private AttributeClass attrClass = AttributeClass.NODE;
 	private Mode mode = Mode.STATIC;
 	
@@ -58,13 +58,13 @@ public class AttributeListImpl extends ArrayList<Attribute> implements Attribute
 	}
 
 	@Override
-	public Date getEndDate() {
+	public GexfTime getEndDate() {
 		checkState(endDate != null, "End Date has not been set.");
 		return endDate;
 	}
 
 	@Override
-	public Date getStartDate() {
+	public GexfTime getStartDate() {
 		checkState(startDate != null, "Start Date has not been set.");
 		return startDate;
 	}
@@ -80,14 +80,14 @@ public class AttributeListImpl extends ArrayList<Attribute> implements Attribute
 	}
 
 	@Override
-	public AttributeList setEndDate(Date endDate) {
+	public AttributeList setEndDate(GexfTime endDate) {
 		checkArgument(endDate != null, "End Date cannot be null.");
 		this.endDate = endDate;
 		return this;
 	}
 
 	@Override
-	public AttributeList setStartDate(Date startDate) {
+	public AttributeList setStartDate(GexfTime startDate) {
 		checkArgument(startDate != null, "Start Date cannot be null.");
 		this.endDate = startDate;
 		return this;

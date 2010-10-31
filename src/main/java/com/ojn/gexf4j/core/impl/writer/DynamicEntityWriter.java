@@ -18,13 +18,13 @@ public abstract class DynamicEntityWriter<T extends Dynamic<?>> extends Abstract
 		if (entity.hasStartDate()) {
 			writer.writeAttribute(
 					ATTRIB_START,
-					AbstractEntityWriter.toDateString(entity.getStartDate()));
+					entity.getStartDate().toTimeString());
 		}
 		
 		if (entity.hasEndDate()) {
 			writer.writeAttribute(
 					ATTRIB_END,
-					AbstractEntityWriter.toDateString(entity.getEndDate()));
+					entity.getEndDate().toTimeString());
 		}
 	}
 
