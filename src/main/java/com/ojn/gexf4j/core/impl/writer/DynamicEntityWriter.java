@@ -26,11 +26,11 @@ public abstract class DynamicEntityWriter<T extends Dynamic<?>> extends Abstract
 					ATTRIB_END,
 					AbstractEntityWriter.toDateString(entity.getEndDate()));
 		}
-		if (entity.hasEndDateint()){
-			writer.writeAttribute(ATTRIB_START, Integer.toString(entity.getEndDateint()));
+		if (entity.hasStartDatedouble()){
+			writer.writeAttribute(ATTRIB_START, AbstractEntityWriter.toDoubleString(entity.getEndDatedouble()));
 		}
-		if (entity.hasStartDateint()){
-			writer.writeAttribute(ATTRIB_START, Integer.toString(entity.getStartDateint()));
+		if (entity.hasEndDatedouble()){
+			writer.writeAttribute(ATTRIB_START, AbstractEntityWriter.toDoubleString(entity.getEndDatedouble()));
 		}
 	}
 

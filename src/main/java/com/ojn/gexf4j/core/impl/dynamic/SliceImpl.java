@@ -4,24 +4,41 @@ import com.ojn.gexf4j.core.dynamic.Slice;
 
 public class SliceImpl extends DynamicBase<Slice> implements Slice {
 
-	public SliceImpl() {
-		// do nothing
-	}
+	
 	
 	@Override
 	protected Slice getSelf() {
 		return this;
 	}
 
-	@Override
-	public Slice setStartDate(int startDate) {
+
+
+	public Slice setEndDate(double endDate) {
 		// TODO Auto-generated method stub
-		return null;
+		this.setEndDatedouble(endDate);
+		return this;
+	}
+
+
+	@Override
+	public boolean hasEndDatedouble() {
+		// TODO Auto-generated method stub
+		return this.hasEndDatedouble();
 	}
 
 	@Override
-	public Slice setEndDate(int endDate) {
+	public boolean hasStartDatedouble() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.hasEndDatedouble();
 	}
+
+
+
+	@Override
+	public Slice setStartDatedouble(double startDate) {
+		this.startDatedouble = startDate;
+		return this;
+	}
+
+	
 }

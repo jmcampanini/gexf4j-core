@@ -176,16 +176,16 @@ public class EdgeImpl extends SliceableDatumBase<Edge> implements Edge {
 	}
 
 	@Override
-	public Edge setStartDate(int startDate) {
-		this.startDateint = startDate;
+	public Edge setStartDatedouble(double startDate) {
+		this.startDatedouble = startDate;
 		// TODO Auto-generated method stub
 		return this;
 	}
 
 	@Override
-	public Edge setEndDate(int endDate) {
+	public Edge setEndDatedouble(double endDate) {
 		// TODO Auto-generated method stub
-		this.endDateint = endDate;
+		this.endDatedouble = endDate;
 		return this;
 	}
 

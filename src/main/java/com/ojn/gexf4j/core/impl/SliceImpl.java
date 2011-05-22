@@ -11,11 +11,9 @@ public class SliceImpl implements Slice {
 
 	private Date startDate = null;
 	private Date endDate = null;
-	private int startDateint;
-	private int endDateint;
-	public SliceImpl() {
-		// empty constructor
-	}
+	protected double startDatedouble;
+	protected double endDatedouble;
+	
 
 	@Override
 	public boolean hasStartDate() {
@@ -67,47 +65,46 @@ public class SliceImpl implements Slice {
 
 	
 
-	@Override
-	public boolean hasEndDateint() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	@Override
-	public boolean hasStartDateint() {
+	public boolean hasEndDatedouble() {
 		// TODO Auto-generated method stub
-		return false;
+		//checkState(hasEndDatedouble() , "End date hasn't been set");
+		return (endDatedouble != 0.0);
 	}
 
 	@Override
-	public int getStartDateint() {
+	public boolean hasStartDatedouble() {
 		// TODO Auto-generated method stub
-		return startDateint;
+		return (startDatedouble != 0.0) ;
 	}
 
 	@Override
-	public int getEndDateint() {
+	public Slice setStartDatedouble(double startDate) {
 		// TODO Auto-generated method stub
-		return endDateint;
-	}
-
-	public void setStartDateint(int startDateint) {
-		this.startDateint = startDateint;
-	}
-
-	public void setEndDateint(int endDateint) {
-		this.endDateint = endDateint;
+		return this;
 	}
 
 	@Override
-	public Slice setStartDate(int startDate) {
+	public Slice setEndDatedouble(double endDate) {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	@Override
-	public Slice setEndDate(int endDate) {
+	public double getStartDatedouble() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.startDatedouble;
 	}
+
+	@Override
+	public double getEndDatedouble() {
+		// TODO Auto-generated method stub
+		return this.endDatedouble;
+	}
+
+
+
+
 }

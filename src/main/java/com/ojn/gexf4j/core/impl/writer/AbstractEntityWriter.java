@@ -20,6 +20,9 @@ public abstract class AbstractEntityWriter<T extends Object> {
 	protected static String toIntString(int i){
 		return Integer.toString(i);
 	}
+	protected static String toDoubleString(Double d){
+		return Double.toString(d);
+	}
 	
 	protected XMLStreamWriter writer = null;
 	protected T entity = null;

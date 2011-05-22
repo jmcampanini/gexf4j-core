@@ -20,8 +20,8 @@ public class AttributeListImpl extends ArrayList<Attribute> implements Attribute
 	private Date startDate = null;
 	private AttributeClass attrClass = AttributeClass.NODE;
 	private Mode mode = Mode.STATIC;
-	private int startDateint = -1;
-	private int endDateint = -1;
+	private double startDatedouble = -1.0;
+	private double endDatedouble = -1.0;
 	
 	public AttributeListImpl(AttributeClass attrClass) {
 		this.attrClass = attrClass;
@@ -123,41 +123,45 @@ public class AttributeListImpl extends ArrayList<Attribute> implements Attribute
 		return this;
 	}
 
+
+
 	@Override
-	public AttributeList setStartDate(int startDate) {
+	public boolean hasEndDatedouble() {
 		// TODO Auto-generated method stub
-		this.startDateint = startDate;
+		return (endDatedouble != -1);
+	}
+
+	@Override
+	public boolean hasStartDatedouble() {
+		// TODO Auto-generated method stub
+		return (this.startDatedouble != -1);
+	}
+
+	@Override
+	public AttributeList setStartDatedouble(double startDate) {
+		// TODO Auto-generated method stub
+		this.startDatedouble = startDate;
 		return this;
 	}
 
 	@Override
-	public AttributeList setEndDate(int endDate) {
+	public AttributeList setEndDatedouble(double endDate) {
 		// TODO Auto-generated method stub
-		this.endDateint = endDate;
+		this.endDatedouble = endDate;
 		return this;
 	}
 
 	@Override
-	public boolean hasEndDateint() {
+	public double getStartDatedouble() {
 		// TODO Auto-generated method stub
-		return (endDateint != -1);
+		return this.startDatedouble;
 	}
 
 	@Override
-	public boolean hasStartDateint() {
+	public double getEndDatedouble() {
 		// TODO Auto-generated method stub
-		return (startDateint != -1);
+		return this.endDatedouble;
 	}
 
-	@Override
-	public int getStartDateint() {
-		// TODO Auto-generated method stub
-		return startDateint;
-	}
-
-	@Override
-	public int getEndDateint() {
-		// TODO Auto-generated method stub
-		return endDateint;
-	}
+	
 }

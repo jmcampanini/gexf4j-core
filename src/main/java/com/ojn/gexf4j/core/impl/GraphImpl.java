@@ -117,15 +117,15 @@ public class GraphImpl extends DynamicBase<Graph> implements Graph {
 	}
 
 	@Override
-	public Graph setStartDate(int startDate) {
+	public Graph setStartDatedouble(double startDate) {
 		// TODO Auto-generated method stub
-		this.startDateint = startDate;
+		this.startDatedouble = startDate;
 		return this;
 	}
 
 	@Override
-	public Graph setEndDate(int endDate) {
-		this.endDateint = endDate;
+	public Graph setEndDatedouble(double endDate) {
+		this.endDatedouble = endDate;
 		return this;
 	}
 }

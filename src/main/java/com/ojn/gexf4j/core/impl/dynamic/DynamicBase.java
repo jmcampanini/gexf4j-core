@@ -10,15 +10,12 @@ public abstract class DynamicBase<T extends Object> implements Dynamic<T> {
 
 	private Date endDate = null;
 	private Date startDate = null;
-	protected int startDateint = - 1;
-	protected int endDateint = -1 ;
+	protected double startDatedouble;
+	protected double endDatedouble ;
 
 	protected abstract T getSelf();
 	
-	public DynamicBase() {
-		// empty
-	}
-
+	
 	@Override
 	public T clearEndDate() {
 		endDate = null;
@@ -52,12 +49,12 @@ public abstract class DynamicBase<T extends Object> implements Dynamic<T> {
 	public boolean hasStartDate() {
 		return (startDate != null);
 	}
-	public boolean hasEndDateint() {
-		return (endDateint != -1);
+	public boolean hasEndDatedouble() {
+		return (endDatedouble != 0.0);
 	}
 
-	public boolean hasStartDateint() {
-		return (startDateint != -1);
+	public boolean hasStartDatedouble() {
+		return (startDatedouble != 0.0);
 	}
 
 	@Override
@@ -75,19 +72,23 @@ public abstract class DynamicBase<T extends Object> implements Dynamic<T> {
 	}
 
 	public void setStartDateint(int startDateint) {
-		this.startDateint = startDateint;
+		this.startDatedouble = startDateint;
 	}
 
-	public int getStartDateint() {
-		return startDateint;
+	public double getStartDatedouble() {
+		return startDatedouble;
+	}
+	public T setStartDatedouble(double startDatedouble) {
+		this.startDatedouble = startDatedouble;
+		return getSelf();
+	}
+	public T setEndDatedouble(double endDateint) {
+		this.endDatedouble = endDateint;
+		return getSelf();
 	}
 
-	public void setEndDateint(int endDateint) {
-		this.endDateint = endDateint;
-	}
-
-	public int getEndDateint() {
-		return endDateint;
+	public double getEndDatedouble() {
+		return endDatedouble;
 	}
 	
 }
