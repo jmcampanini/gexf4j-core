@@ -260,4 +260,18 @@ public class NodeImpl extends SliceableDatumBase<Node> implements Node {
 		
 		return soFar;
 	}
+
+	@Override
+	public Node setStartDate(int startDate) {
+		// TODO Auto-generated method stub
+		this.startDateint = startDate;
+		return this;
+	}
+
+	@Override
+	public Node setEndDate(int endDate) {
+		// TODO Auto-generated method stub
+		this.endDateint = endDate;
+		return this;
+	}
 }

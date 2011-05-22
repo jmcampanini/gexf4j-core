@@ -12,4 +12,16 @@ public class SliceImpl extends DynamicBase<Slice> implements Slice {
 	protected Slice getSelf() {
 		return this;
 	}
+
+	@Override
+	public Slice setStartDate(int startDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Slice setEndDate(int endDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

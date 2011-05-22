@@ -37,4 +37,16 @@ public class AttributeValueImpl extends DynamicBase<AttributeValue> implements A
 		this.value = value;
 		return this;
 	}
+
+	@Override
+	public AttributeValue setStartDate(int startDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AttributeValue setEndDate(int endDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

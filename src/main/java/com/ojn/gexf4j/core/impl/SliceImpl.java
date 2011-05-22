@@ -11,7 +11,8 @@ public class SliceImpl implements Slice {
 
 	private Date startDate = null;
 	private Date endDate = null;
-
+	private int startDateint;
+	private int endDateint;
 	public SliceImpl() {
 		// empty constructor
 	}
@@ -62,5 +63,51 @@ public class SliceImpl implements Slice {
 		checkArgument(endDate != null, "End Date cannot be set to null.");
 		this.endDate = endDate;
 		return this;
+	}
+
+	
+
+	@Override
+	public boolean hasEndDateint() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasStartDateint() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getStartDateint() {
+		// TODO Auto-generated method stub
+		return startDateint;
+	}
+
+	@Override
+	public int getEndDateint() {
+		// TODO Auto-generated method stub
+		return endDateint;
+	}
+
+	public void setStartDateint(int startDateint) {
+		this.startDateint = startDateint;
+	}
+
+	public void setEndDateint(int endDateint) {
+		this.endDateint = endDateint;
+	}
+
+	@Override
+	public Slice setStartDate(int startDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Slice setEndDate(int endDate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -19,7 +19,7 @@ public class EdgeImpl extends SliceableDatumBase<Edge> implements Edge {
 	private float thickness = Float.MIN_VALUE;
 	private float weight = Float.MIN_VALUE;
 	private EdgeType edgeType = EdgeType.UNDIRECTED;
-		
+ 
 	public EdgeImpl(String id, Node source, Node target) {
 		checkArgument(id != null, "ID cannot be null.");
 		checkArgument(!id.trim().isEmpty(), "ID cannot be empty or blank.");
@@ -174,4 +174,20 @@ public class EdgeImpl extends SliceableDatumBase<Edge> implements Edge {
 		this.weight = weight;
 		return this;
 	}
+
+	@Override
+	public Edge setStartDate(int startDate) {
+		this.startDateint = startDate;
+		// TODO Auto-generated method stub
+		return this;
+	}
+
+	@Override
+	public Edge setEndDate(int endDate) {
+		// TODO Auto-generated method stub
+		this.endDateint = endDate;
+		return this;
+	}
+
+	
 }

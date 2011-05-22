@@ -20,6 +20,8 @@ public class AttributeListImpl extends ArrayList<Attribute> implements Attribute
 	private Date startDate = null;
 	private AttributeClass attrClass = AttributeClass.NODE;
 	private Mode mode = Mode.STATIC;
+	private int startDateint = -1;
+	private int endDateint = -1;
 	
 	public AttributeListImpl(AttributeClass attrClass) {
 		this.attrClass = attrClass;
@@ -119,5 +121,43 @@ public class AttributeListImpl extends ArrayList<Attribute> implements Attribute
 	public AttributeList addAttribute(String id, AttributeType type, String title) {
 		createAttribute(id, type, title);
 		return this;
+	}
+
+	@Override
+	public AttributeList setStartDate(int startDate) {
+		// TODO Auto-generated method stub
+		this.startDateint = startDate;
+		return this;
+	}
+
+	@Override
+	public AttributeList setEndDate(int endDate) {
+		// TODO Auto-generated method stub
+		this.endDateint = endDate;
+		return this;
+	}
+
+	@Override
+	public boolean hasEndDateint() {
+		// TODO Auto-generated method stub
+		return (endDateint != -1);
+	}
+
+	@Override
+	public boolean hasStartDateint() {
+		// TODO Auto-generated method stub
+		return (startDateint != -1);
+	}
+
+	@Override
+	public int getStartDateint() {
+		// TODO Auto-generated method stub
+		return startDateint;
+	}
+
+	@Override
+	public int getEndDateint() {
+		// TODO Auto-generated method stub
+		return endDateint;
 	}
 }

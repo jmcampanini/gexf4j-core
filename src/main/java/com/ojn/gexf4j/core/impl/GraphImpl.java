@@ -115,4 +115,17 @@ public class GraphImpl extends DynamicBase<Graph> implements Graph {
 	public List<AttributeList> getAttributeLists() {
 		return attributeLists;
 	}
+
+	@Override
+	public Graph setStartDate(int startDate) {
+		// TODO Auto-generated method stub
+		this.startDateint = startDate;
+		return this;
+	}
+
+	@Override
+	public Graph setEndDate(int endDate) {
+		this.endDateint = endDate;
+		return this;
+	}
 }

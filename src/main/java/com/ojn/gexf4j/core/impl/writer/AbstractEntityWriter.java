@@ -17,6 +17,9 @@ public abstract class AbstractEntityWriter<T extends Object> {
 	protected static String toDateString(Date d) {
 		return sdf.format(d);
 	}
+	protected static String toIntString(int i){
+		return Integer.toString(i);
+	}
 	
 	protected XMLStreamWriter writer = null;
 	protected T entity = null;

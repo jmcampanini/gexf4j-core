@@ -26,6 +26,12 @@ public abstract class DynamicEntityWriter<T extends Dynamic<?>> extends Abstract
 					ATTRIB_END,
 					AbstractEntityWriter.toDateString(entity.getEndDate()));
 		}
+		if (entity.hasEndDateint()){
+			writer.writeAttribute(ATTRIB_START, Integer.toString(entity.getEndDateint()));
+		}
+		if (entity.hasStartDateint()){
+			writer.writeAttribute(ATTRIB_START, Integer.toString(entity.getStartDateint()));
+		}
 	}
 
 	@Override
