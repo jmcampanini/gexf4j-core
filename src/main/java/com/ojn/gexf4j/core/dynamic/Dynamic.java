@@ -8,9 +8,15 @@ public interface Dynamic<T extends Object> {
 	T clearStartDate();
 	Date getStartDate();
 	T setStartDate(Date startDate);
+	T setStartDatedouble(double startDate);
 	
 	boolean hasEndDate();
 	T clearEndDate();
 	Date getEndDate();
 	T setEndDate(Date endDate);
+	T setEndDatedouble(double endDate);
+	boolean hasEndDatedouble();
+	boolean hasStartDatedouble();
+	double getStartDatedouble();
+	double getEndDatedouble();
 }

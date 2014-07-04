@@ -11,10 +11,9 @@ public class SliceImpl implements Slice {
 
 	private Date startDate = null;
 	private Date endDate = null;
-
-	public SliceImpl() {
-		// empty constructor
-	}
+	protected double startDatedouble;
+	protected double endDatedouble;
+	
 
 	@Override
 	public boolean hasStartDate() {
@@ -63,4 +62,49 @@ public class SliceImpl implements Slice {
 		this.endDate = endDate;
 		return this;
 	}
+
+	
+
+
+
+	@Override
+	public boolean hasEndDatedouble() {
+		// TODO Auto-generated method stub
+		//checkState(hasEndDatedouble() , "End date hasn't been set");
+		return (endDatedouble != 0.0);
+	}
+
+	@Override
+	public boolean hasStartDatedouble() {
+		// TODO Auto-generated method stub
+		return (startDatedouble != 0.0) ;
+	}
+
+	@Override
+	public Slice setStartDatedouble(double startDate) {
+		// TODO Auto-generated method stub
+		return this;
+	}
+
+	@Override
+	public Slice setEndDatedouble(double endDate) {
+		// TODO Auto-generated method stub
+		return this;
+	}
+
+	@Override
+	public double getStartDatedouble() {
+		// TODO Auto-generated method stub
+		return this.startDatedouble;
+	}
+
+	@Override
+	public double getEndDatedouble() {
+		// TODO Auto-generated method stub
+		return this.endDatedouble;
+	}
+
+
+
+
 }
